@@ -17,13 +17,13 @@ const menuData = [
         name: "Chaat",
         icon: "🥟",
         items: [
-            { id: "chaat-1", name: "Papadi Chaat", price: 70, isVeg: true, tag: null },
-            { id: "chaat-2", name: "Papadi Bhalla Chaat", price: 80, isVeg: true, tag: null },
-            { id: "chaat-3", name: "Dahi Patasi", price: 60, isVeg: true, tag: "Bestseller" },
-            { id: "chaat-4", name: "Dahi Bhalla", price: 50, isVeg: true, tag: null },
-            { id: "chaat-5", name: "Kaji Vada", price: 30, isVeg: true, tag: null },
-            { id: "chaat-6", name: "Raj Kachori", price: 90, isVeg: true, tag: "Chef's Special" },
-            { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null }
+            { id: "chaat-1", name: "Papadi Chaat", price: 70, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=400&auto=format&fit=crop" },
+            { id: "chaat-2", name: "Papadi Bhalla Chaat", price: 80, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1599813589999-90606fbfd14d?q=80&w=400&auto=format&fit=crop" },
+            { id: "chaat-3", name: "Dahi Patasi", price: 60, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=400&auto=format&fit=crop" },
+            { id: "chaat-4", name: "Dahi Bhalla", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=80&w=400&auto=format&fit=crop" },
+            { id: "chaat-5", name: "Kaji Vada", price: 30, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?q=80&w=400&auto=format&fit=crop" },
+            { id: "chaat-6", name: "Raj Kachori", price: 90, isVeg: true, tag: "Chef's Special", image: "https://plus.unsplash.com/premium_photo-1694141253763-201b17b62fe1?q=80&w=400&auto=format&fit=crop" },
+            { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1589301773099-23ce56f571de?q=80&w=400&auto=format&fit=crop" }
         ]
     },
     {
@@ -31,22 +31,22 @@ const menuData = [
         name: "Indian Street Delights",
         icon: "🥙",
         items: [
-            { id: "str-1", name: "Puri Bhaji", price: 60, isVeg: true, tag: null },
-            { id: "str-2", name: "Poha", price: 40, isVeg: true, tag: null },
-            { id: "str-3", name: "Bhel Puri", price: 50, isVeg: true, tag: null },
-            { id: "str-4", name: "Pav Bhaji", price: 70, isVeg: true, tag: "Bestseller" },
-            { id: "str-5", name: "Vada Pav", price: 50, isVeg: true, tag: "Must Try" },
-            { id: "str-6", name: "Dabeli", price: 30, isVeg: true, tag: null },
-            { id: "str-7", name: "Veg Pakoda", price: 60, isVeg: true, tag: null },
-            { id: "str-8", name: "Cheela Besan", price: 40, isVeg: true, tag: null },
-            { id: "str-9", name: "Cheela Suji", price: 40, isVeg: true, tag: null },
-            { id: "str-10", name: "Popcorn", price: 50, isVeg: true, tag: null },
-            { id: "str-11", name: "Chhole Bhature", price: 70, isVeg: true, tag: "Bestseller" },
-            { id: "str-12", name: "Burger", price: 80, isVeg: true, tag: null },
-            { id: "str-13", name: "Pizza", price: 99, isVeg: true, tag: null },
-            { id: "str-14", name: "Samosa Chaat", price: 60, isVeg: true, tag: null },
-            { id: "str-15", name: "Fruit Salad", price: 120, isVeg: true, tag: "Healthy" },
-            { id: "str-16", name: "Fruit Salad Chaat", price: 130, isVeg: true, tag: null }
+            { id: "str-1", name: "Puri Bhaji", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1626545244583-ce534fdf68e5?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-2", name: "Poha", price: 40, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-3", name: "Bhel Puri", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1599813589999-90606fbfd14d?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-4", name: "Pav Bhaji", price: 70, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-5", name: "Vada Pav", price: 50, isVeg: true, tag: "Must Try", image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-6", name: "Dabeli", price: 30, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-7", name: "Veg Pakoda", price: 60, isVeg: true, tag: null, image: "https://plus.unsplash.com/premium_photo-1694141253763-201b17b62fe1?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-8", name: "Cheela Besan", price: 40, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1589301773099-23ce56f571de?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-9", name: "Cheela Suji", price: 40, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-10", name: "Popcorn", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1572016393526-9f3bba7d6852?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-11", name: "Chhole Bhature", price: 70, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-12", name: "Burger", price: 80, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-13", name: "Pizza", price: 99, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-14", name: "Samosa Chaat", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-15", name: "Fruit Salad", price: 120, isVeg: true, tag: "Healthy", image: "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-16", name: "Fruit Salad Chaat", price: 130, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1543227419-db359df3ba1b?q=80&w=400&auto=format&fit=crop" }
         ]
     },
     {
@@ -54,13 +54,13 @@ const menuData = [
         name: "Paratha",
         icon: "🫓",
         items: [
-            { id: "par-1", name: "Aloo Paratha", price: 40, isVeg: true, tag: "Bestseller" },
-            { id: "par-2", name: "Gobhi Paratha", price: 50, isVeg: true, tag: null },
-            { id: "par-3", name: "Mooli Paratha", price: 50, isVeg: true, tag: null },
-            { id: "par-4", name: "Paneer Paratha", price: 60, isVeg: true, tag: null },
-            { id: "par-5", name: "Paneer Mawa Sweer Paratha", price: 70, isVeg: true, tag: "Sweet" },
-            { id: "par-6", name: "Mater Paratha", price: 50, isVeg: true, tag: null },
-            { id: "par-7", name: "Plain Paratha", price: 20, isVeg: true, tag: null }
+            { id: "par-1", name: "Aloo Paratha", price: 40, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?q=80&w=400&auto=format&fit=crop" },
+            { id: "par-2", name: "Gobhi Paratha", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?q=80&w=400&auto=format&fit=crop" },
+            { id: "par-3", name: "Mooli Paratha", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?q=80&w=400&auto=format&fit=crop" },
+            { id: "par-4", name: "Paneer Paratha", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?q=80&w=400&auto=format&fit=crop" },
+            { id: "par-5", name: "Paneer Mawa Sweer Paratha", price: 70, isVeg: true, tag: "Sweet", image: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?q=80&w=400&auto=format&fit=crop" },
+            { id: "par-6", name: "Mater Paratha", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?q=80&w=400&auto=format&fit=crop" },
+            { id: "par-7", name: "Plain Paratha", price: 20, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?q=80&w=400&auto=format&fit=crop" }
         ]
     },
     {
@@ -68,10 +68,10 @@ const menuData = [
         name: "South Indian",
         icon: "🌮",
         items: [
-            { id: "sid-1", name: "Idli Sambher", price: 40, isVeg: true, tag: null },
-            { id: "sid-2", name: "Dosa Masala", price: 80, isVeg: true, tag: "Bestseller" },
-            { id: "sid-3", name: "Utpam", price: 60, isVeg: true, tag: null },
-            { id: "sid-4", name: "Upama", price: 60, isVeg: true, tag: null }
+            { id: "sid-1", name: "Idli Sambhar", price: 40, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1589301760014-d929f39ce9b1?q=80&w=400&auto=format&fit=crop" },
+            { id: "sid-2", name: "Dosa Masala", price: 80, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?q=80&w=400&auto=format&fit=crop" },
+            { id: "sid-3", name: "Utpam", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1589301760014-d929f39ce9b1?q=80&w=400&auto=format&fit=crop" },
+            { id: "sid-4", name: "Upama", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1589301760014-d929f39ce9b1?q=80&w=400&auto=format&fit=crop" }
         ]
     },
     {
@@ -79,10 +79,10 @@ const menuData = [
         name: "Soup",
         icon: "🥣",
         items: [
-            { id: "soup-1", name: "Tomatto Soup", price: 50, isVeg: true, tag: null },
-            { id: "soup-2", name: "Sweetcorn Soup", price: 50, isVeg: true, tag: null },
-            { id: "soup-3", name: "Hot Sure", price: 50, isVeg: true, tag: null },
-            { id: "soup-4", name: "Mix Veg Soup", price: 50, isVeg: true, tag: "Healthy" }
+            { id: "soup-1", name: "Tomatto Soup", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=400&auto=format&fit=crop" },
+            { id: "soup-2", name: "Sweetcorn Soup", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=400&auto=format&fit=crop" },
+            { id: "soup-3", name: "Hot Sure", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=400&auto=format&fit=crop" },
+            { id: "soup-4", name: "Mix Veg Soup", price: 50, isVeg: true, tag: "Healthy", image: "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=400&auto=format&fit=crop" }
         ]
     },
     {
@@ -90,11 +90,11 @@ const menuData = [
         name: "Bread",
         icon: "🍞",
         items: [
-            { id: "brd-1", name: "Bread Jem", price: 50, isVeg: true, tag: null },
-            { id: "brd-2", name: "Bread Butter", price: 30, isVeg: true, tag: null },
-            { id: "brd-3", name: "Aloo Sandwich", price: 40, isVeg: true, tag: null },
-            { id: "brd-4", name: "Veg. Sandwich", price: 50, isVeg: true, tag: null },
-            { id: "brd-5", name: "Veg Cheese Sandwich", price: 60, isVeg: true, tag: "Bestseller" }
+            { id: "brd-1", name: "Bread Jem", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1525385133512-2f3bdd039054?q=80&w=400&auto=format&fit=crop" },
+            { id: "brd-2", name: "Bread Butter", price: 30, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1525385133512-2f3bdd039054?q=80&w=400&auto=format&fit=crop" },
+            { id: "brd-3", name: "Aloo Sandwich", price: 40, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=400&auto=format&fit=crop" },
+            { id: "brd-4", name: "Veg. Sandwich", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=400&auto=format&fit=crop" },
+            { id: "brd-5", name: "Veg Cheese Sandwich", price: 60, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=400&auto=format&fit=crop" }
         ]
     },
     {
@@ -102,10 +102,10 @@ const menuData = [
         name: "Quick Bites",
         icon: "🍜",
         items: [
-            { id: "qb-1", name: "Maggi", price: 30, isVeg: true, tag: null },
-            { id: "qb-2", name: "Veg. Maggi", price: 40, isVeg: true, tag: null },
-            { id: "qb-3", name: "Cheese Maggi", price: 60, isVeg: true, tag: "Must Try" },
-            { id: "qb-4", name: "Chowmein", price: 60, isVeg: true, tag: "Bestseller" }
+            { id: "qb-1", name: "Maggi", price: 30, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80&w=400&auto=format&fit=crop" },
+            { id: "qb-2", name: "Veg. Maggi", price: 40, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80&w=400&auto=format&fit=crop" },
+            { id: "qb-3", name: "Cheese Maggi", price: 60, isVeg: true, tag: "Must Try", image: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80&w=400&auto=format&fit=crop" },
+            { id: "qb-4", name: "Chowmein", price: 60, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=400&auto=format&fit=crop" }
         ]
     },
     {
@@ -113,10 +113,10 @@ const menuData = [
         name: "Combos & Thali",
         icon: "🍱",
         items: [
-            { id: "cmb-1", name: "Regular thali", price: 100, isVeg: true, tag: "Daily Need", desc: "Veg Seasonal, Daal, Rice, 4 Roti" },
-            { id: "cmb-2", name: "Special Thali", price: 130, isVeg: true, tag: "Must Try", desc: "Paneer Veg, Daal, Rice, 4 Roti, Salad" },
-            { id: "cmb-3", name: "Dall Bati (2 Pic)", price: 60, isVeg: true, tag: "Traditional" },
-            { id: "cmb-4", name: "Dall Bati With Ghee (2 Pic)", price: 80, isVeg: true, tag: "Rich" }
+            { id: "cmb-1", name: "Regular thali", price: 100, isVeg: true, tag: "Daily Need", desc: "Veg Seasonal, Daal, Rice, 4 Roti", image: "https://images.unsplash.com/photo-1626776876729-bab43bfe0e70?q=80&w=400&auto=format&fit=crop" },
+            { id: "cmb-2", name: "Special Thali", price: 130, isVeg: true, tag: "Must Try", desc: "Paneer Veg, Daal, Rice, 4 Roti, Salad", image: "https://plus.unsplash.com/premium_photo-1683617301662-7204dc6630f9?q=80&w=400&auto=format&fit=crop" },
+            { id: "cmb-3", name: "Dall Bati (2 Pic)", price: 60, isVeg: true, tag: "Traditional", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=80&w=400&auto=format&fit=crop" },
+            { id: "cmb-4", name: "Dall Bati With Ghee (2 Pic)", price: 80, isVeg: true, tag: "Rich", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=80&w=400&auto=format&fit=crop" }
         ]
     }
 ];
