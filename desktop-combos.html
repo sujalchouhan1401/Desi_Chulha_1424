@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desi Chulha | Desktop Combos</title>
+    <!-- Google Fonts: Inter/Poppins -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="desktop-home.css">
+</head>
+
+<body>
+
+    <!-- Top Sticky Navigation Bar -->
+    <nav class="desktop-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo"></div>
+                <span class="brand-name">Desi Chulha</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="desktop-home.html">Home</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="desktop-combos.html" class="active">Combos</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+
+            <div class="nav-profile">
+                <div class="avatar-wrap">
+                    <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=40&font-size=0.4"
+                        alt="Profile avatar">
+                </div>
+                <!-- Simple Dropdown Arrow Indicator -->
+                <span class="dropdown-arrow">▼</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Container Wrapper for 1200px Max-Width -->
+    <main class="desktop-container">
+
+        <!-- Page Header -->
+        <section class="section-block">
+            <h1 class="hero-title" style="margin-bottom: 8px;">Combos & Thalis 🍽</h1>
+            <p class="hero-subtext" style="font-size: 20px;">Best value meals, made for sharing. Save big on every bite!
+            </p>
+        </section>
+
+        <!-- Daily Thali Combos -->
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Daily Thali Combos</h2>
+            </div>
+            <div class="combo-grid">
+                <!-- Highlight Card 1 -->
+                <div class="combo-wide-card">
+                    <div class="combo-photo">
+                        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=500&auto=format&fit=crop"
+                            alt="Regular Veg Thali">
+                        <div class="premium-tag" style="background:#FFB020; color:#000;">🏆 Best Seller</div>
+                    </div>
+                    <div class="combo-details">
+                        <div class="combo-header">
+                            <div>
+                                <h3>Regular Veg Thali</h3>
+                                <p class="serves">Serves 1</p>
+                            </div>
+                            <div class="combo-price">
+                                <span
+                                    style="font-size: 14px; text-decoration: line-through; color: #999; margin-right: 8px;">₹189</span>₹149
+                            </div>
+                        </div>
+                        <ul class="combo-includes">
+                            <li>✓ Seasonal Veg Sabzi</li>
+                            <li>✓ Dal Tadka</li>
+                            <li>✓ Steamed Rice</li>
+                            <li>✓ 4 Butter Roti</li>
+                        </ul>
+                        <button class="btn-combo-add" data-price="149">Add Combo</button>
+                    </div>
+                </div>
+
+                <!-- Highlight Card 2 -->
+                <div class="combo-wide-card special-card">
+                    <div class="combo-photo">
+                        <img src="https://images.unsplash.com/photo-1626776876729-bab43bfe0e70?q=80&w=500&auto=format&fit=crop"
+                            alt="Special Paneer Thali">
+                        <div class="premium-tag" style="background:#F07A5D;">🔥 Popular</div>
+                    </div>
+                    <div class="combo-details">
+                        <div class="combo-header">
+                            <div>
+                                <h3>Special Paneer Thali</h3>
+                                <p class="serves">Serves 1-2</p>
+                            </div>
+                            <div class="combo-price">
+                                <span
+                                    style="font-size: 14px; text-decoration: line-through; color: #999; margin-right: 8px;">₹294</span>₹229
+                            </div>
+                        </div>
+                        <ul class="combo-includes">
+                            <li>✓ Paneer Butter Masala</li>
+                            <li>✓ Dal Makhani</li>
+                            <li>✓ Jeera Rice & Salad</li>
+                            <li>✓ 4 Butter Naan</li>
+                        </ul>
+                        <button class="btn-combo-add" data-price="229">Add Combo</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Family / Value Combos -->
+        <section class="section-block bg-slight">
+            <div class="section-header">
+                <h2>Family / Value Combos</h2>
+            </div>
+            <div class="bestsellers-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <!-- Value Item 1 -->
+                <div class="food-card">
+                    <div class="badge-ribbon">Best for 2</div>
+                    <div class="food-img-wrap"
+                        style="background: #FFF5F2; display: flex; justify-content: center; align-items: center; font-size: 60px;">
+                        🍔🥤
+                    </div>
+                    <div class="food-info">
+                        <h3>Pav Bhaji + Cold Drink</h3>
+                        <p class="desc">2 Plates pure amul butter Pav Bhaji with a 500ml beverage.</p>
+                        <div class="food-footer">
+                            <span class="price">₹180</span>
+                            <button class="btn-add-cart" data-price="180">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Value Item 2 -->
+                <div class="food-card">
+                    <div class="badge-ribbon must-try">Best for 2</div>
+                    <div class="food-img-wrap"
+                        style="background: #FFF5F2; display: flex; justify-content: center; align-items: center; font-size: 60px;">
+                        🫓🥛
+                    </div>
+                    <div class="food-info">
+                        <h3>Chole Bhature + Lassi</h3>
+                        <p class="desc">2 Plates Delhi style Chole Bhature with 2 Sweet Punjabi Lassi.</p>
+                        <div class="food-footer">
+                            <span class="price">₹210</span>
+                            <button class="btn-add-cart" data-price="210">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Value Item 3 -->
+                <div class="food-card">
+                    <div class="badge-ribbon veg-healthy">Solo Value</div>
+                    <div class="food-img-wrap"
+                        style="background: #FFF5F2; display: flex; justify-content: center; align-items: center; font-size: 60px;">
+                        🥙🥣
+                    </div>
+                    <div class="food-info">
+                        <h3>2 Paratha + Sabzi + Curd</h3>
+                        <p class="desc">Aloo Parathas with homestyle Mix Veg and fresh thick curd.</p>
+                        <div class="food-footer">
+                            <span class="price">₹120</span>
+                            <button class="btn-add-cart" data-price="120">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Snacks & Quick Bites -->
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Quick Bites & Student Budget</h2>
+            </div>
+            <div class="bestsellers-grid" style="grid-template-columns: repeat(4, 1fr);">
+                <!-- Snack 1 -->
+                <div class="food-card">
+                    <div class="food-info pb-0">
+                        <h3>Samosa + Tea</h3>
+                    </div>
+                    <div class="food-img-wrap"
+                        style="background: #F9F9F9; display: flex; justify-content: center; align-items: center; font-size: 60px; height: 120px;">
+                        ☕🥟
+                    </div>
+                    <div class="food-info">
+                        <div class="food-footer" style="margin-top:auto;">
+                            <span class="price">₹45</span>
+                            <button class="btn-add-cart" data-price="45">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snack 2 -->
+                <div class="food-card">
+                    <div class="badge-ribbon">Pocket Friendly</div>
+                    <div class="food-info pb-0">
+                        <h3>Maggi + Tea</h3>
+                    </div>
+                    <div class="food-img-wrap"
+                        style="background: #F9F9F9; display: flex; justify-content: center; align-items: center; font-size: 60px; height: 120px;">
+                        🍜☕
+                    </div>
+                    <div class="food-info">
+                        <div class="food-footer" style="margin-top:auto;">
+                            <span class="price">₹50</span>
+                            <button class="btn-add-cart" data-price="50">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snack 3 -->
+                <div class="food-card">
+                    <div class="food-info pb-0">
+                        <h3>Sandwich + Coffee</h3>
+                    </div>
+                    <div class="food-img-wrap"
+                        style="background: #F9F9F9; display: flex; justify-content: center; align-items: center; font-size: 60px; height: 120px;">
+                        🥪☕
+                    </div>
+                    <div class="food-info">
+                        <div class="food-footer" style="margin-top:auto;">
+                            <span class="price">₹85</span>
+                            <button class="btn-add-cart" data-price="85">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snack 4 -->
+                <div class="food-card">
+                    <div class="badge-ribbon must-try">Pocket Friendly</div>
+                    <div class="food-info pb-0">
+                        <h3>Chowmein + Drink</h3>
+                    </div>
+                    <div class="food-img-wrap"
+                        style="background: #F9F9F9; display: flex; justify-content: center; align-items: center; font-size: 60px; height: 120px;">
+                        🍝🥤
+                    </div>
+                    <div class="food-info">
+                        <div class="food-footer" style="margin-top:auto;">
+                            <span class="price">₹70</span>
+                            <button class="btn-add-cart" data-price="70">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Desktop-Rich Footer -->
+    <footer class="desktop-footer">
+        <div class="footer-grid">
+
+            <!-- Brand & Socials -->
+            <div class="footer-col brand-col">
+                <div class="f-brand">
+                    <span class="logo">🔥</span> Desi Chulha
+                </div>
+                <p class="f-desc">Bringing the authentic taste of Indian homes right to your table. Experience joy in
+                    every bite.</p>
+                <div class="social-links">
+                    <a href="#" class="social-btn">IG</a>
+                    <a href="#" class="social-btn">FB</a>
+                    <a href="#" class="social-btn">X</a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Menu</a></li>
+                    <li><a href="#">Book a Table</a></li>
+                    <li><a href="#">Catering Services</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="contact-list">
+                    <li>📞 +91 98765 43210</li>
+                    <li><span style="color:#25D366">💬</span> WhatsApp available</li>
+                    <li>🕒 Open Everyday: 11 AM - 11 PM</li>
+                </ul>
+            </div>
+
+            <!-- Location / Maps Mock -->
+            <div class="footer-col map-col">
+                <h4>Our Location</h4>
+                <p>123 Spicewood Drive, Food City, Mumbai, 400001</p>
+                <div class="map-placeholder">
+                    <div class="map-marker">📍</div>
+                    <span>Google Maps Integration</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Desi Chulha. All rights reserved.</p>
+            <div class="bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Right Sticky Cart Widget -->
+    <div id="desktop-cart-widget" class="desktop-cart-widget hidden">
+        <div class="widget-header">
+            <h4>Your Cart</h4>
+            <span class="item-count badge-circle">0</span>
+        </div>
+        <div class="widget-body">
+            <div class="subtotal-row">
+                <span>Subtotal</span>
+                <span class="amt" id="widget-total">₹0</span>
+            </div>
+            <button class="btn-checkout-full">Checkout</button>
+        </div>
+    </div>
+
+    <script src="desktop-home.js"></script>
+</body>
+
+</html>
