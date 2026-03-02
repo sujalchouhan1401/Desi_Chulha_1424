@@ -29,16 +29,16 @@
                 <li><a href="desktop-home.html">Home</a></li>
                 <li><a href="desktop-menu.html">Menu</a></li>
                 <li><a href="desktop-combos.html">Combos</a></li>
-                <li><a href="#" class="active">Orders & Cart</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="javascript:void(0)" onclick="openOrdersModal()">Orders</a></li>
+                <li><a href="javascript:void(0)" onclick="openContactModal()">Contact</a></li>
             </ul>
 
             <div class="nav-profile">
                 <div class="avatar-wrap">
-                    <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=40&font-size=0.4"
+                    <img src="https://ui-avatars.com/api/?name=Sujal+Chouhan&background=F07A5D&color=fff&size=40&font-size=0.4"
                         alt="Profile avatar">
                 </div>
-                <!-- Simple Dropdown Arrow Indicator -->
+                <span class="user-name">Sujal Chouhan</span>
                 <span class="dropdown-arrow">▼</span>
             </div>
         </div>
@@ -55,8 +55,27 @@
         <div class="cart-grid">
             <!-- Left Side: Order Details -->
             <div class="cart-left">
-                <!-- Delivery Info -->
+                <!-- Order Type Selection -->
                 <div class="cart-card">
+                    <h3>🍱 Select Order Type</h3>
+                    <div class="order-types" id="order-type-selector">
+                        <div class="order-type active" data-type="delivery">
+                            <span class="type-icon">🛵</span>
+                            <span class="type-name">Delivery</span>
+                        </div>
+                        <div class="order-type" data-type="dinein">
+                            <span class="type-icon">🍽️</span>
+                            <span class="type-name">Dine In</span>
+                        </div>
+                        <div class="order-type" data-type="pickup">
+                            <span class="type-icon">🛍️</span>
+                            <span class="type-name">Pickup</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Info / Address (Only show for delivery) -->
+                <div class="cart-card" id="address-card">
                     <h3>📍 Delivery Address</h3>
                     <div class="address-info">
                         <h4>Home</h4>
@@ -67,7 +86,13 @@
 
                 <!-- Items in Cart -->
                 <div class="cart-card">
-                    <h3>🛒 Order Summary</h3>
+                    <div
+                        style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                        <h3 style="margin-bottom: 0;">🛒 Order Summary</h3>
+                        <button class="btn-outline"
+                            style="font-size: 12px; padding: 6px 16px; border-color: #666; color: #666;"
+                            onclick="clearCartPageHandler()">Clear Cart</button>
+                    </div>
 
                     <div class="cart-items-list">
                         <!-- Item 1 -->
@@ -115,10 +140,30 @@
             <div class="cart-right">
                 <!-- Offers -->
                 <div class="cart-card">
-                    <div class="coupon-box">
-                        <div class="coupon-icon">%</div>
-                        <div class="coupon-text">Apply Coupon Code</div>
-                        <span class="arrow">›</span>
+                    <div id="promo-section">
+                        <div class="coupon-box" id="coupon-trigger">
+                            <div class="coupon-icon">%</div>
+                            <div class="coupon-text">Apply Coupon Code</div>
+                            <span class="arrow">›</span>
+                        </div>
+                        <div id="promo-input-group" style="display: none; margin-top: 15px;">
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" id="promo-code-input" placeholder="Enter code (e.g. SUJAL1401)"
+                                    style="flex: 1; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; text-transform: uppercase;">
+                                <button class="btn-primary" id="apply-promo-btn"
+                                    style="padding: 10px 20px; font-size: 14px; box-shadow: none;">Apply</button>
+                            </div>
+                            <p id="promo-message" style="font-size: 12px; margin-top: 8px; display: none;"></p>
+                        </div>
+                        <div id="active-promo-banner"
+                            style="display: none; margin-top: 10px; background: var(--success-light); padding: 12px; border-radius: 8px; border: 1px dashed var(--success-val);">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: 600; color: var(--success-val); font-size: 14px;">🎁 Promo
+                                    SUJAL1401 Applied!</span>
+                                <button onclick="window.cartManager.removePromoCode(); renderCartPage()"
+                                    style="background: none; border: none; color: #666; cursor: pointer; font-size: 12px; text-decoration: underline;">Remove</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -236,6 +281,40 @@
 
     <script src="cart-manager.js"></script>
     <script>
+        let currentOrderType = window.cartManager ? window.cartManager.getOrderType() : 'delivery';
+
+        window.syncOrderTypeUI = function () {
+            currentOrderType = window.cartManager ? window.cartManager.getOrderType() : 'delivery';
+
+            // Update UI classes
+            document.querySelectorAll('.order-type').forEach(t => {
+                if (t.getAttribute('data-type') === currentOrderType) {
+                    t.classList.add('active');
+                } else {
+                    t.classList.remove('active');
+                }
+            });
+
+            // Show/Hide address card based on type
+            const addressCard = document.getElementById('address-card');
+            if (addressCard) {
+                addressCard.style.display = currentOrderType === 'delivery' ? 'block' : 'none';
+            }
+
+            if (typeof renderCartPage === 'function') {
+                renderCartPage();
+            }
+        };
+
+        document.querySelectorAll('.order-type').forEach(type => {
+            type.addEventListener('click', () => {
+                const typeVal = type.getAttribute('data-type');
+                if (window.cartManager) {
+                    window.cartManager.setOrderType(typeVal);
+                }
+            });
+        });
+
         document.querySelectorAll('.payment-method').forEach(method => {
             method.addEventListener('click', () => {
                 document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
@@ -286,10 +365,26 @@
 
         function updateCartTotals(totals) {
             const itemTotal = totals.itemTotal;
-            const deliveryFee = itemTotal > 0 ? 40 : 0;
-            const discount = itemTotal > 0 ? Math.floor(itemTotal * 0.2) : 0; // 20% discount mock
+            // No delivery fee for Dine In or Pickup
+            const deliveryFee = (itemTotal > 0 && currentOrderType === 'delivery') ? 40 : 0;
+            const discount = totals.discount || 0;
             const taxes = itemTotal > 0 ? 35 : 0;
             const grandTotal = itemTotal + deliveryFee - discount + taxes;
+
+            // Update UI
+            const promoSection = document.getElementById('promo-section');
+            const activePromoBanner = document.getElementById('active-promo-banner');
+            const couponTrigger = document.getElementById('coupon-trigger');
+            const promoInputGroup = document.getElementById('promo-input-group');
+
+            if (totals.promo === 'sujal1401') {
+                activePromoBanner.style.display = 'block';
+                couponTrigger.style.display = 'none';
+                promoInputGroup.style.display = 'none';
+            } else {
+                activePromoBanner.style.display = 'none';
+                couponTrigger.style.display = 'flex';
+            }
 
             const billRows = document.querySelectorAll('.bill-details .bill-row span:last-child');
             if (billRows.length >= 5) {
@@ -307,20 +402,190 @@
             }
         }
 
-        function placeOrder() {
-            if (!window.cartManager) return;
-            const items = window.cartManager.getCart();
-            if (items.length === 0) return;
-
-            alert('Order placed successfully! Redirecting to home...');
-            window.cartManager.clearCart();
-            window.location.href = 'desktop-home.html';
-        }
-
+        // Setup Promo Event Listeners
         document.addEventListener('DOMContentLoaded', () => {
             renderCartPage();
+
+            const couponTrigger = document.getElementById('coupon-trigger');
+            const promoInputGroup = document.getElementById('promo-input-group');
+            const applyBtn = document.getElementById('apply-promo-btn');
+            const promoInput = document.getElementById('promo-code-input');
+            const promoMsg = document.getElementById('promo-message');
+
+            if (couponTrigger) {
+                couponTrigger.addEventListener('click', () => {
+                    promoInputGroup.style.display = promoInputGroup.style.display === 'none' ? 'block' : 'none';
+                });
+            }
+
+            if (applyBtn) {
+                applyBtn.addEventListener('click', () => {
+                    const code = promoInput.value.trim();
+                    const result = window.cartManager.applyPromoCode(code);
+
+                    promoMsg.textContent = result.message;
+                    promoMsg.style.display = 'block';
+                    promoMsg.style.color = result.success ? 'var(--success-val)' : 'red';
+
+                    if (result.success) {
+                        promoInput.value = '';
+                        setTimeout(() => { promoMsg.style.display = 'none'; }, 2000);
+                    }
+                });
+            }
+        });
+
+        // ---------------------------------
+        // Global Modal Logic for Cart Page
+        // ---------------------------------
+        window.openOrdersModal = function () {
+            const modal = document.getElementById('orders-modal');
+            const body = document.getElementById('orders-modal-body');
+            const cart = window.cartManager ? window.cartManager.getCart() : [];
+            const currentType = window.cartManager ? window.cartManager.getOrderType() : 'delivery';
+
+            modal.classList.add('active');
+
+            let html = '';
+
+            // Add Order Type Switcher at the top of modal
+            html += `
+                <div class="cart-card" style="padding: 15px; margin-bottom: 20px; box-shadow: none; border: 1px solid #fdf2f0;">
+                    <h3 style="font-size: 16px; margin-bottom: 15px;">🍱 Select Order Type</h3>
+                    <div class="order-types" id="modal-order-type-selector" style="display: flex; gap: 10px;">
+                        <div class="order-type ${currentType === 'delivery' ? 'active' : ''}" data-type="delivery" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
+                            <span class="type-icon">🛵</span>
+                            <div class="type-name" style="font-size: 12px; font-weight: 600;">Delivery</div>
+                        </div>
+                        <div class="order-type ${currentType === 'dinein' ? 'active' : ''}" data-type="dinein" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
+                            <span class="type-icon">🍽️</span>
+                            <div class="type-name" style="font-size: 12px; font-weight: 600;">Dine In</div>
+                        </div>
+                        <div class="order-type ${currentType === 'pickup' ? 'active' : ''}" data-type="pickup" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
+                            <span class="type-icon">🛍️</span>
+                            <div class="type-name" style="font-size: 12px; font-weight: 600;">Pickup</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            if (cart.length === 0) {
+                html += `
+                    <div class="empty-orders" style="text-align: center; padding: 40px 0;">
+                        <span class="icon" style="font-size: 48px; display: block; margin-bottom: 10px;">🍱</span>
+                        <p>Nothing selected yet!</p>
+                        <p style="font-size: 14px; margin-top: 10px; color: #666;">Select something delicious from the menu.</p>
+                    </div>
+                `;
+            } else {
+                html += '<div class="orders-list" style="margin-top: 20px;">';
+                cart.forEach(item => {
+                    html += `
+                        <div class="order-modal-item" style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #fdf2f0;">
+                            <div class="item-info">
+                                <strong>${item.name}</strong> x ${item.qty}
+                            </div>
+                            <div class="item-total">₹${item.price * item.qty}</div>
+                        </div>
+                    `;
+                });
+                const totals = window.cartManager.getTotals();
+                html += `
+                    <div class="modal-footer" style="margin-top: 20px; border-top: 2px solid #fdf2f0; padding-top: 15px;">
+                        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 18px;">
+                            <span>Grand Total</span>
+                            <span>₹${totals.itemTotal}</span>
+                        </div>
+                        <div style="display: flex; gap: 10px; margin-top: 20px;">
+                            <button class="btn-outline" style="flex: 1; border-color: #666; color: #666; padding: 12px; border-radius: 12px; cursor: pointer;" onclick="clearCartHandlerByModal()">Clear Cart</button>
+                            <button class="btn-primary" style="flex: 2; border-radius: 12px; padding: 12px; box-shadow: none;" onclick="closeModal('orders-modal')">Close</button>
+                        </div>
+                    </div>
+                `;
+                html += '</div>';
+            }
+
+            body.innerHTML = html;
+
+            // Attach listeners to modal order types
+            const modalTypeBtns = body.querySelectorAll('.order-type');
+            modalTypeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const type = btn.getAttribute('data-type');
+                    if (window.cartManager) {
+                        window.cartManager.setOrderType(type);
+                        openOrdersModal(); // Refresh modal view
+                    }
+                });
+            });
+        };
+
+        window.openContactModal = function () {
+            document.getElementById('contact-modal').classList.add('active');
+        };
+
+        window.closeModal = function (id) {
+            document.getElementById(id).classList.remove('active');
+        };
+
+        window.clearCartHandlerByModal = function () {
+            if (confirm('Are you sure you want to clear your entire cart?')) {
+                if (window.cartManager) {
+                    window.cartManager.clearCart();
+                    openOrdersModal();
+                    renderCartPage(); // Sync main page
+                }
+            }
+        };
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                e.target.classList.remove('active');
+            }
         });
     </script>
+
+    <!-- Modals HTML Structure -->
+    <div id="orders-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('orders-modal')">&times;</button>
+            <div class="modal-header">
+                <h2>Your Orders</h2>
+            </div>
+            <div class="modal-body" id="orders-modal-body">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('contact-modal')">&times;</button>
+            <div class="modal-header">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="modal-body">
+                <div class="contact-info-card">
+                    <div class="contact-info-row"
+                        style="display: flex; gap: 15px; margin-bottom: 15px; background: #fdf2f0; padding: 15px; border-radius: 12px;">
+                        <div class="icon">👤</div>
+                        <div class="contact-val">Sujal Chouhan</div>
+                    </div>
+                    <div class="contact-info-row"
+                        style="display: flex; gap: 15px; margin-bottom: 15px; background: #fdf2f0; padding: 15px; border-radius: 12px;">
+                        <div class="icon">📞</div>
+                        <div class="contact-val">+91 8233595881</div>
+                    </div>
+                    <div class="contact-info-row"
+                        style="display: flex; gap: 15px; background: #fdf2f0; padding: 15px; border-radius: 12px;">
+                        <div class="icon">📍</div>
+                        <div class="contact-val">Near JK Lakshmipat University, Ajmer Rd, Jaipur</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

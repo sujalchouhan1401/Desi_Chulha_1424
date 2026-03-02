@@ -24,18 +24,18 @@
 
             <ul class="nav-links">
                 <li><a href="#" class="active">Home</a></li>
-                <li><a href="#explore-categories">Menu</a></li>
-                <li><a href="#combos-section">Combos</a></li>
-                <li><a href="#">Orders</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="desktop-menu.html">Menu</a></li>
+                <li><a href="desktop-combos.html">Combos</a></li>
+                <li><a href="javascript:void(0)" onclick="openOrdersModal()">Orders</a></li>
+                <li><a href="javascript:void(0)" onclick="openContactModal()">Contact</a></li>
             </ul>
 
             <div class="nav-profile">
                 <div class="avatar-wrap">
-                    <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=40&font-size=0.4"
+                    <img src="https://ui-avatars.com/api/?name=Sujal+Chouhan&background=F07A5D&color=fff&size=40&font-size=0.4"
                         alt="Profile avatar">
                 </div>
-                <!-- Simple Dropdown Arrow Indicator -->
+                <span class="user-name">Sujal Chouhan</span>
                 <span class="dropdown-arrow">▼</span>
             </div>
         </div>
@@ -60,35 +60,22 @@
             </div>
         </section>
 
-        <!-- Order Type Selector -->
-        <section class="order-type-section">
-            <div class="order-tabs">
-                <button class="type-pill active" data-type="delivery">
-                    <span class="icon">🚚</span> Delivery
-                </button>
-                <button class="type-pill" data-type="pickup">
-                    <span class="icon">🏃</span> Pickup
-                </button>
-                <button class="type-pill" data-type="dinein">
-                    <span class="icon">🍽</span> Dine-In
-                </button>
-            </div>
-        </section>
 
         <!-- Highlights Slider Section (New Arrivals, Latest Offers) -->
         <section class="highlights-slider-section">
             <div class="slider-wrapper" id="highlights-slider">
-                <!-- Slide 1: Combo Offer -->
-                <div class="slide">
+                <!-- Slide 1: Inaugural Offer -->
+                <div class="slide inaugural-slide">
                     <img src="https://images.unsplash.com/photo-1626776876729-bab43bfe0e70?q=80&w=1200&auto=format&fit=crop"
-                        alt="Combo Offer">
+                        alt="Inaugural Offer">
                     <div class="slide-content">
-                        <span class="slide-badge">⚡ Flat 20% Off</span>
-                        <h2 class="slide-title">Mega Thali Festival is Live!</h2>
-                        <p class="slide-desc">Order our Special Maharaja Thali today and save big on authentic Indian
-                            flavors.</p>
-                        <button class="btn-slide" onclick="window.location.href='desktop-combos.html'">View
-                            Combos</button>
+                        <span class="slide-badge">🎊 Inauguration Special</span>
+                        <h2 class="slide-title">FLAT 20% OFF!</h2>
+                        <p class="slide-desc">Celebrate the launch of our website. Get 20% off on your entire order
+                            today only.</p>
+                        <div class="promo-pill-slider">Use Code: <strong>SUJAL1401</strong></div>
+                        <button class="btn-slide" onclick="window.location.href='desktop-menu.html'"
+                            style="margin-top: 20px;">Order Now</button>
                     </div>
                 </div>
 
@@ -141,9 +128,9 @@
             <div class="offer-card bg-orange">
                 <div class="offer-text">
                     <h3>FLAT 20% OFF</h3>
-                    <p>On all Tandoor items today only</p>
+                    <p>Inauguration Special - On all items</p>
                 </div>
-                <div class="offer-badge">Use Code: TANDOOR20</div>
+                <div class="offer-badge">Use Code: SUJAL1401</div>
             </div>
             <div class="offer-card bg-brown">
                 <div class="offer-text">
@@ -407,6 +394,44 @@
 
     <script src="cart-manager.js"></script>
     <script src="desktop-home.js"></script>
+
+    <!-- Modals -->
+    <div id="orders-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('orders-modal')">&times;</button>
+            <div class="modal-header">
+                <h2>Your Orders</h2>
+            </div>
+            <div class="modal-body" id="orders-modal-body">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('contact-modal')">&times;</button>
+            <div class="modal-header">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="modal-body">
+                <div class="contact-info-card">
+                    <div class="contact-info-row">
+                        <div class="icon">👤</div>
+                        <div class="contact-val">Sujal Chouhan</div>
+                    </div>
+                    <div class="contact-info-row">
+                        <div class="icon">📞</div>
+                        <div class="contact-val">+91 8233595881</div>
+                    </div>
+                    <div class="contact-info-row">
+                        <div class="icon">📍</div>
+                        <div class="contact-val">Near JK Lakshmipat University, Ajmer Rd, Jaipur</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

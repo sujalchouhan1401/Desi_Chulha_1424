@@ -368,3 +368,202 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Quantity Selector on Dish Cards */
+.qty-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fdf2f0;
+    border: 1px solid #f07a5d;
+    border-radius: 8px;
+    padding: 2px;
+    z-index: 2;
+    position: relative;
+}
+
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #f07a5d;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.qty-btn:hover {
+    background: #e06d52;
+}
+
+.qty-val {
+    min-width: 20px;
+    text-align: center;
+    font-weight: 600;
+    color: #2d2d2d;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-header {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #fdf2f0;
+    padding-bottom: 15px;
+}
+
+.modal-header h2 {
+    color: #2d2d2d;
+    font-size: 24px;
+}
+
+.modal-body {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.order-modal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.order-modal-item:last-child {
+    border-bottom: none;
+}
+
+.empty-orders {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.empty-orders .icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.contact-info-card {
+    background: #fdf2f0;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.contact-info-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.contact-info-row:last-child {
+    margin-bottom: 0;
+}
+
+.contact-info-row .icon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.contact-val {
+    font-weight: 500;
+    color: #2d2d2d;
+}
+
+/* Order Type Switcher inside Modal */
+.order-types {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.order-type {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.order-type.active {
+    border-color: var(--primary-color);
+    background: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.order-type .type-icon {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.order-type .type-name {
+    font-size: 12px;
+    font-weight: 600;
+}

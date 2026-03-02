@@ -26,16 +26,16 @@
                 <li><a href="desktop-home.html">Home</a></li>
                 <li><a href="desktop-menu.html">Menu</a></li>
                 <li><a href="desktop-combos.html" class="active">Combos</a></li>
-                <li><a href="#">Orders</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="javascript:void(0)" onclick="openOrdersModal()">Orders</a></li>
+                <li><a href="javascript:void(0)" onclick="openContactModal()">Contact</a></li>
             </ul>
 
             <div class="nav-profile">
                 <div class="avatar-wrap">
-                    <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=40&font-size=0.4"
+                    <img src="https://ui-avatars.com/api/?name=Sujal+Chouhan&background=F07A5D&color=fff&size=40&font-size=0.4"
                         alt="Profile avatar">
                 </div>
-                <!-- Simple Dropdown Arrow Indicator -->
+                <span class="user-name">Sujal Chouhan</span>
                 <span class="dropdown-arrow">▼</span>
             </div>
         </div>
@@ -288,16 +288,16 @@
             <div class="footer-col">
                 <h4>Contact Us</h4>
                 <ul class="contact-list">
-                    <li>📞 +91 98765 43210</li>
+                    <li>📞 +91 8233595881</li>
                     <li><span style="color:#25D366">💬</span> WhatsApp available</li>
-                    <li>🕒 Open Everyday: 11 AM - 11 PM</li>
+                    <li>🕒 Open Everyday: 10 AM - 10 PM</li>
                 </ul>
             </div>
 
             <!-- Location / Maps Mock -->
             <div class="footer-col map-col">
                 <h4>Our Location</h4>
-                <p>123 Spicewood Drive, Food City, Mumbai, 400001</p>
+                <p>Near JK Lakshmipat University, Ajmer Rd, near Mahindra SEZ, Mahapura, Rajasthan 302026</p>
                 <div class="map-placeholder">
                     <div class="map-marker">📍</div>
                     <span>Google Maps Integration</span>
@@ -332,6 +332,44 @@
 
     <script src="cart-manager.js"></script>
     <script src="desktop-home.js"></script>
+
+    <!-- Modals -->
+    <div id="orders-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('orders-modal')">&times;</button>
+            <div class="modal-header">
+                <h2>Your Orders</h2>
+            </div>
+            <div class="modal-body" id="orders-modal-body">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('contact-modal')">&times;</button>
+            <div class="modal-header">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="modal-body">
+                <div class="contact-info-card">
+                    <div class="contact-info-row">
+                        <div class="icon">👤</div>
+                        <div class="contact-val">Sujal Chouhan</div>
+                    </div>
+                    <div class="contact-info-row">
+                        <div class="icon">📞</div>
+                        <div class="contact-val">+91 8233595881</div>
+                    </div>
+                    <div class="contact-info-row">
+                        <div class="icon">📍</div>
+                        <div class="contact-val">Near JK Lakshmipat University, Ajmer Rd, Jaipur</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
