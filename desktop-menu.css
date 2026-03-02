@@ -259,6 +259,15 @@
     gap: 0;
 }
 
+.dish-image {
+    width: 120px;
+    height: 120px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    margin-bottom: -16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
 .dish-visual-placeholder {
     width: 120px;
     height: 120px;

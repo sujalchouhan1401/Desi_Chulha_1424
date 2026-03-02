@@ -4,10 +4,10 @@ const menuData = [
         name: "Beverage",
         icon: "☕",
         items: [
-            { id: "bev-1", name: "Tea", price: 10, isVeg: true, tag: null },
-            { id: "bev-2", name: "Kulhad Tea", price: 15, isVeg: true, tag: "Must Try" },
-            { id: "bev-3", name: "Hot Coffee", price: 30, isVeg: true, tag: null },
-            { id: "bev-4", name: "Cold Coffee", price: 50, isVeg: true, tag: "Bestseller" },
+            { id: "bev-1", name: "Tea", price: 10, isVeg: true, tag: null, image: "images/menu/tea.jpg" },
+            { id: "bev-2", name: "Kulhad Tea", price: 15, isVeg: true, tag: "Must Try", image: "images/menu/kulhad-tea.jpg" },
+            { id: "bev-3", name: "Hot Coffee", price: 30, isVeg: true, tag: null, image: "images/menu/hot-coffee.jpg" },
+            { id: "bev-4", name: "Cold Coffee", price: 50, isVeg: true, tag: "Bestseller", image: "images/menu/cold-coffee.jpg" },
             { id: "bev-5", name: "Lassi Sweet", price: 50, isVeg: true, tag: null },
             { id: "bev-6", name: "Lassi Salty", price: 30, isVeg: true, tag: null }
         ]
@@ -203,7 +203,10 @@ function renderMenu() {
                             ${item.tag ? `<div class="dish-tags"><span class="dish-tag">${item.tag}</span></div>` : ''}
                         </div>
                         <div class="dish-visual">
-                            <div class="dish-visual-placeholder">${cat.icon}</div>
+                            ${item.image
+                        ? `<img src="${item.image}" alt="${item.name}" class="dish-image">`
+                        : `<div class="dish-visual-placeholder">${cat.icon}</div>`
+                    }
                             <button class="btn-add-item" data-price="${item.price}" data-name="${item.name}">+ Add</button>
                         </div>
                     </div>
