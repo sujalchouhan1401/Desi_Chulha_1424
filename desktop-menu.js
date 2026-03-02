@@ -21,8 +21,8 @@ const menuData = [
             { id: "chaat-2", name: "Papadi Bhalla Chaat", price: 80, isVeg: true, tag: null, image: "images/menu/papdi-bhalla-chaat.jpg", desc: "soft bhalla, crispy papdi aur chatpata swaad ka perfect combo." },
             { id: "chaat-3", name: "Dahi Patasi", price: 60, isVeg: true, tag: "Bestseller", image: "images/menu/dahi-patasi.jpg", desc: "Diet kal se… aaj toh Dahi Patasi hi sahi." },
             { id: "chaat-4", name: "Dahi Bhalla", price: 50, isVeg: true, tag: null, image: "images/menu/dahi-bhalla.jpg", desc: "Itna soft, bas dil bhi pighal jaye." },
-            { id: "chaat-5", name: "Kaji Vada", price: 30, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?q=80&w=400&auto=format&fit=crop" },
-            { id: "chaat-6", name: "Raj Kachori", price: 90, isVeg: true, tag: "Chef's Special", image: "https://plus.unsplash.com/premium_photo-1694141253763-201b17b62fe1?q=80&w=400&auto=format&fit=crop" },
+            { id: "chaat-5", name: "Kaji Vada", price: 30, isVeg: true, tag: null, image: "images/menu/kaji-vada.jpg", desc: "Marwadi rasoi ka mashhoor swaad – Kaji Vada lajawab." },
+            { id: "chaat-6", name: "Raj Kachori", price: 90, isVeg: true, tag: "Chef's Special", image: "images/menu/raj-kachori.jpg", desc: "Ye snack nahi, full-size surprise hai." },
             { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1589301773099-23ce56f571de?q=80&w=400&auto=format&fit=crop" }
         ]
     },
