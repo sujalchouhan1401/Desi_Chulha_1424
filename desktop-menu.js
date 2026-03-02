@@ -23,10 +23,10 @@ const menuData = [
             { id: "chaat-4", name: "Dahi Bhalla", price: 50, isVeg: true, tag: null, image: "images/menu/dahi-bhalla.jpg", desc: "Itna soft, bas dil bhi pighal jaye." },
             { id: "chaat-5", name: "Kaji Vada", price: 30, isVeg: true, tag: null, image: "images/menu/kaji-vada.jpg", desc: "Marwadi rasoi ka mashhoor swaad – Kaji Vada lajawab." },
             { id: "chaat-6", name: "Raj Kachori", price: 90, isVeg: true, tag: "Chef's Special", image: "images/menu/raj-kachori.jpg", desc: "Ye snack nahi, full-size surprise hai." },
-            { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1589301773099-23ce56f571de?q=80&w=400&auto=format&fit=crop" },
-            { id: "chaat-8", name: "Samosa Chaat", price: 60, isVeg: true, tag: null },
-            { id: "chaat-9", name: "Fruit Salad", price: 120, isVeg: true, tag: "Healthy" },
-            { id: "chaat-10", name: "Fruit Salad Chaat", price: 130, isVeg: true, tag: null }
+            { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null, image: "images/menu/aloo-tikki-chaat.jpg", desc: "Aloo Tikki – control system permanently fail." },
+            { id: "chaat-8", name: "Samosa Chaat", price: 60, isVeg: true, tag: null, image: "images/menu/samosa-chaat.png", desc: "Teen sides ka snack, par bhookh chaar guna." },
+            { id: "chaat-9", name: "Fruit Salad", price: 120, isVeg: true, tag: "Healthy", image: "images/menu/fruit-salad.jpg", desc: "Colorful bowl, powerful soul." },
+            { id: "chaat-10", name: "Fruit Salad Chaat", price: 130, isVeg: true, tag: null, image: "images/menu/fruit-salad.jpg", desc: "Vitamin ka bomb, taste ka storm." }
         ]
     },
     {
@@ -34,12 +34,12 @@ const menuData = [
         name: "Indian Street Delights",
         icon: "🥙",
         items: [
-            { id: "str-1", name: "Puri Bhaji", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1626545244583-ce534fdf68e5?q=80&w=400&auto=format&fit=crop" },
-            { id: "str-2", name: "Poha", price: 40, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=400&auto=format&fit=crop" },
-            { id: "str-3", name: "Bhel Puri", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1599813589999-90606fbfd14d?q=80&w=400&auto=format&fit=crop" },
-            { id: "str-4", name: "Pav Bhaji", price: 70, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=80&w=400&auto=format&fit=crop" },
-            { id: "str-5", name: "Vada Pav", price: 50, isVeg: true, tag: "Must Try", image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=400&auto=format&fit=crop" },
-            { id: "str-6", name: "Dabeli", price: 30, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?q=80&w=400&auto=format&fit=crop" },
+            { id: "str-1", name: "Puri Bhaji", price: 60, isVeg: true, tag: null, image: "images/menu/puri-bhaji.png", desc: "Puri Bhaji – pet bhi happy, dil bhi happy." },
+            { id: "str-2", name: "Poha", price: 40, isVeg: true, tag: null, image: "images/menu/poha.jpg", desc: "Haldi ka rang, sehat ke sang." },
+            { id: "str-3", name: "Bhel Puri", price: 50, isVeg: true, tag: null, image: "images/menu/bhel-puri.jpg", desc: "Ek mutthi bhel, aur mood ho jaye swell." },
+            { id: "str-4", name: "Pav Bhaji", price: 70, isVeg: true, tag: "Bestseller", image: "images/menu/pav-bhaji.png", desc: "taste ka asli Mumbaiya blast." },
+            { id: "str-5", name: "Vada Pav", price: 50, isVeg: true, tag: "Must Try", image: "images/menu/vada-pav.png", desc: "snack itna famous ki log bhi brand ban gaye." },
+            { id: "str-6", name: "Dabeli", price: 30, isVeg: true, tag: null, image: "images/menu/dabeli.jpg", desc: "masala itna zabardast, har bite mein blast." },
             { id: "str-7", name: "Veg Pakoda", price: 60, isVeg: true, tag: null, image: "https://plus.unsplash.com/premium_photo-1694141253763-201b17b62fe1?q=80&w=400&auto=format&fit=crop" },
             { id: "str-8", name: "Cheela Besan", price: 40, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1589301773099-23ce56f571de?q=80&w=400&auto=format&fit=crop" },
             { id: "str-9", name: "Cheela Suji", price: 40, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=400&auto=format&fit=crop" },
@@ -47,9 +47,9 @@ const menuData = [
             { id: "str-11", name: "Chhole Bhature", price: 70, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?q=80&w=400&auto=format&fit=crop" },
             { id: "str-12", name: "Burger", price: 80, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400&auto=format&fit=crop" },
             { id: "str-13", name: "Pizza", price: 99, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=400&auto=format&fit=crop" },
-            { id: "str-14", name: "Samosa Chaat", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=400&auto=format&fit=crop" },
-            { id: "str-15", name: "Fruit Salad", price: 120, isVeg: true, tag: "Healthy", image: "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&w=400&auto=format&fit=crop" },
-            { id: "str-16", name: "Fruit Salad Chaat", price: 130, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1543227419-db359df3ba1b?q=80&w=400&auto=format&fit=crop" }
+            { id: "str-14", name: "Samosa Chaat", price: 60, isVeg: true, tag: null, image: "images/menu/samosa-chaat.png", desc: "Teen sides ka snack, par bhookh chaar guna." },
+            { id: "str-15", name: "Fruit Salad", price: 120, isVeg: true, tag: "Healthy", image: "images/menu/fruit-salad.jpg", desc: "Colorful bowl, powerful soul." },
+            { id: "str-16", name: "Fruit Salad Chaat", price: 130, isVeg: true, tag: null, image: "images/menu/fruit-salad.jpg", desc: "Vitamin ka bomb, taste ka storm." }
         ]
     },
     {
