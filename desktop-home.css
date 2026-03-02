@@ -398,6 +398,9 @@ h4,
     cursor: pointer;
     box-shadow: var(--shadow-card);
     transition: all 0.3s;
+    text-decoration: none;
+    color: var(--text-main);
+    display: block;
 }
 
 .cat-card:hover {
