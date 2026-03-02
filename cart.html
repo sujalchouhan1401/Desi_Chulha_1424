@@ -4,181 +4,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#F2EEE9">
-    <title>Desi Chulha - Cart</title>
-    <!-- Google Fonts: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <title>Desi Chulha | Checkout</title>
+    <!-- Google Fonts: Inter/Poppins -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet">
+    <!-- Desktop Base CSS -->
+    <link rel="stylesheet" href="desktop-home.css">
+    <!-- Shopping Cart CSS (Desktop Version) -->
     <link rel="stylesheet" href="cart.css">
-    <link rel="stylesheet" href="nav.css">
 </head>
 
 <body>
 
-    <main class="app-content">
-        <!-- Header -->
-        <header class="page-header">
-            <h1 class="page-title">Your Cart</h1>
-            <p class="subtitle">2 items from Desi Chulha</p>
+    <!-- Top Sticky Navigation Bar -->
+    <nav class="desktop-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo">🔥</div>
+                <span class="brand-name">Desi Chulha</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="desktop-home.html">Home</a></li>
+                <li><a href="desktop-menu.html">Menu</a></li>
+                <li><a href="desktop-combos.html">Combos</a></li>
+                <li><a href="#" class="active">Orders & Cart</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+
+            <div class="nav-profile">
+                <div class="avatar-wrap">
+                    <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=40&font-size=0.4"
+                        alt="Profile avatar">
+                </div>
+                <!-- Simple Dropdown Arrow Indicator -->
+                <span class="dropdown-arrow">▼</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Container Wrapper for 1200px Max-Width -->
+    <main class="desktop-container cart-page-layout">
+
+        <header class="cart-header">
+            <h1>Secure Checkout</h1>
+            <p>2 items in your cart from Desi Chulha</p>
         </header>
 
-        <!-- Delivery Address -->
-        <section class="cart-section address-section">
-            <div class="section-top">
-                <span class="icon">📍</span>
-                <div class="addr-info">
-                    <h3>Delivering to Home</h3>
-                    <p>123 Spicewood Drive, Food City, 40001</p>
-                </div>
-                <button class="text-btn">Change</button>
-            </div>
-            <div class="delivery-time">
-                <span class="bolt">⚡</span> Expected delivery in 30-40 mins
-            </div>
-        </section>
-
-        <!-- Cart Items -->
-        <section class="cart-section order-items">
-            <!-- Item 1 -->
-            <div class="cart-item">
-                <div class="item-visuals">
-                    <div class="veg-badge non-veg"></div>
-                    <span class="item-name">Butter Chicken Masala</span>
-                </div>
-                <div class="item-actions">
-                    <div class="qty-control cart-qty">
-                        <button class="qty-btn dec-btn">-</button>
-                        <div class="qty-value">1</div>
-                        <button class="qty-btn inc-btn">+</button>
+        <div class="cart-grid">
+            <!-- Left Side: Order Details -->
+            <div class="cart-left">
+                <!-- Delivery Info -->
+                <div class="cart-card">
+                    <h3>📍 Delivery Address</h3>
+                    <div class="address-info">
+                        <h4>Home</h4>
+                        <p>Near JK Lakshmipat University, Ajmer Rd, near Mahindra SEZ, Mahapura, Rajasthan 302026</p>
+                        <button class="btn-outline">Change Address</button>
                     </div>
-                    <p class="item-price">₹340</p>
                 </div>
-            </div>
 
-            <!-- Item 2 -->
-            <div class="cart-item">
-                <div class="item-visuals">
-                    <div class="veg-badge veg"></div>
-                    <span class="item-name">Paneer Tikka</span>
-                </div>
-                <div class="item-actions">
-                    <div class="qty-control cart-qty">
-                        <button class="qty-btn dec-btn">-</button>
-                        <div class="qty-value">1</div>
-                        <button class="qty-btn inc-btn">+</button>
+                <!-- Items in Cart -->
+                <div class="cart-card">
+                    <h3>🛒 Order Summary</h3>
+
+                    <div class="cart-items-list">
+                        <!-- Item 1 -->
+                        <div class="cart-item-row">
+                            <div class="item-visual">
+                                <span class="veg-indicator non-veg-indicator"></span>
+                                <span class="item-name">Butter Chicken Masala</span>
+                            </div>
+                            <div class="item-actions">
+                                <div class="qty-control">
+                                    <button class="qty-btn">-</button>
+                                    <span class="qty-val">1</span>
+                                    <button class="qty-btn">+</button>
+                                </div>
+                                <span class="item-price">₹340</span>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="cart-item-row">
+                            <div class="item-visual">
+                                <span class="veg-indicator"></span>
+                                <span class="item-name">Paneer Tikka</span>
+                            </div>
+                            <div class="item-actions">
+                                <div class="qty-control">
+                                    <button class="qty-btn">-</button>
+                                    <span class="qty-val">1</span>
+                                    <button class="qty-btn">+</button>
+                                </div>
+                                <span class="item-price">₹280</span>
+                            </div>
+                        </div>
                     </div>
-                    <p class="item-price">₹280</p>
+
+                    <div class="chef-note">
+                        <span>✍️</span>
+                        <input type="text" placeholder="Add Cooking Instructions (e.g. less spicy, extra onions)...">
+                    </div>
                 </div>
+
             </div>
 
-            <div class="add-instructions">
-                <span class="icon">✍️</span>
-                <input type="text" placeholder="Add cooking instructions...">
-            </div>
-        </section>
+            <!-- Right Side: Billing & Payments -->
+            <div class="cart-right">
+                <!-- Offers -->
+                <div class="cart-card">
+                    <div class="coupon-box">
+                        <div class="coupon-icon">%</div>
+                        <div class="coupon-text">Apply Coupon Code</div>
+                        <span class="arrow">›</span>
+                    </div>
+                </div>
 
-        <!-- Offers -->
-        <section class="cart-section apply-coupon">
-            <div class="coupon-box">
-                <span class="icon">%</span>
-                <span class="coupon-text">Apply Coupon Code</span>
-                <button class="arrow-btn">›</button>
-            </div>
-        </section>
+                <!-- Bill -->
+                <div class="cart-card bill-details">
+                    <h3>🧾 Bill Details</h3>
+                    <div class="bill-row">
+                        <span>Item Total</span>
+                        <span>₹620</span>
+                    </div>
+                    <div class="bill-row">
+                        <span>Delivery Fee</span>
+                        <span>₹40</span>
+                    </div>
+                    <div class="bill-row discount">
+                        <span>Restaurant Discount</span>
+                        <span>- ₹124</span>
+                    </div>
+                    <div class="bill-row">
+                        <span>Taxes & Charges</span>
+                        <span>₹35</span>
+                    </div>
+                    <hr class="bill-divider">
+                    <div class="bill-row grand-total">
+                        <span>To Pay</span>
+                        <span>₹571</span>
+                    </div>
 
-        <!-- Bill Details -->
-        <section class="cart-section bill-details">
-            <h3>Bill Details</h3>
-            <div class="bill-row">
-                <span>Item Total</span>
-                <span>₹620</span>
-            </div>
-            <div class="bill-row">
-                <span>Delivery Fee</span>
-                <span>₹40</span>
-            </div>
-            <div class="bill-row discount">
-                <span>Restaurant Discount</span>
-                <span>- ₹124</span>
-            </div>
-            <div class="bill-row">
-                <span>Taxes & Charges</span>
-                <span>₹35</span>
-            </div>
-            <hr class="bill-divider">
-            <div class="bill-row grand-total">
-                <span>To Pay</span>
-                <span>₹571</span>
-            </div>
-        </section>
+                    <button class="btn-checkout-full" onclick="placeOrder()">Proceed to Pay
+                        ₹571</button>
+                </div>
 
-        <!-- Payment Setup -->
-        <section class="cart-section payment-section">
-            <h3>Payment Method</h3>
-            <div class="payment-option selected">
-                <div class="pay-icon">UPI</div>
-                <span>Google Pay / PhonePe</span>
-                <div class="radio-circle active"></div>
-            </div>
-            <div class="payment-option">
-                <div class="pay-icon">💳</div>
-                <span>Credit / Debit Card</span>
-                <div class="radio-circle"></div>
-            </div>
-            <div class="payment-option">
-                <div class="pay-icon">💵</div>
-                <span>Cash on Delivery</span>
-                <div class="radio-circle"></div>
-            </div>
-        </section>
+                <!-- Payments Preview -->
+                <div class="cart-card">
+                    <h3>💳 Payment Method</h3>
+                    <div class="payment-methods">
+                        <div class="payment-method active">
+                            <span class="pay-icon">📱</span>
+                            <span class="pay-name">UPI (GPay, PhonePe, Paytm)</span>
+                            <div class="radio-btn"></div>
+                        </div>
+                        <div class="payment-method">
+                            <span class="pay-icon">💳</span>
+                            <span class="pay-name">Credit / Debit Card</span>
+                            <div class="radio-btn"></div>
+                        </div>
+                        <div class="payment-method">
+                            <span class="pay-icon">💵</span>
+                            <span class="pay-name">Cash on Delivery</span>
+                            <div class="radio-btn"></div>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Bottom Spacer -->
-        <div class="bottom-spacer"></div>
+            </div>
+        </div>
 
     </main>
 
-    <!-- Sticky Place Order -->
-    <div class="sticky-checkout with-nav">
-        <div class="checkout-info">
-            <span class="final-amt">₹571</span>
-            <span class="view-bill">View Detailed Bill</span>
+    <!-- Desktop-Rich Footer -->
+    <footer class="desktop-footer">
+        <div class="footer-grid">
+
+            <div class="footer-col brand-col">
+                <div class="f-brand">
+                    <span class="logo">🔥</span> Desi Chulha
+                </div>
+                <p class="f-desc">Bringing the authentic taste of Indian homes right to your table. Experience joy in
+                    every bite.</p>
+                <div class="social-links">
+                    <a href="#" class="social-btn">IG</a>
+                    <a href="#" class="social-btn">FB</a>
+                    <a href="#" class="social-btn">X</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Menu</a></li>
+                    <li><a href="#">Book a Table</a></li>
+                    <li><a href="#">Catering Services</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="contact-list">
+                    <li>📞 +91 8233595881</li>
+                    <li><span style="color:#25D366">💬</span> WhatsApp available</li>
+                    <li>🕒 Open Everyday: 10 AM - 10 PM</li>
+                </ul>
+            </div>
+
+            <div class="footer-col map-col">
+                <h4>Our Location</h4>
+                <p>Near JK Lakshmipat University, Ajmer Rd, near Mahindra SEZ, Mahapura, Rajasthan 302026</p>
+                <div class="map-placeholder">
+                    <div class="map-marker">📍</div>
+                    <span>Google Maps Integration</span>
+                </div>
+            </div>
+
         </div>
-        <button class="btn-primary" id="place-order-btn">
-            Place Order <span class="arrow-right">→</span>
-        </button>
-    </div>
 
-    <!-- Bottom Navigation Bar -->
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <span class="nav-icon">🏠</span>
-            Home
-        </a>
-        <a href="menu.html" class="nav-item">
-            <span class="nav-icon">📋</span>
-            Menu
-        </a>
-        <a href="cart.html" class="nav-item active">
-            <span class="nav-icon">🛒</span>
-            Cart
-        </a>
-        <a href="profile.html" class="nav-item">
-            <span class="nav-icon">👤</span>
-            Profile
-        </a>
-    </nav>
-
-    <!-- Success Modal Overlay -->
-    <div id="success-modal" class="modal-overlay hidden">
-        <div class="modal-card">
-            <div class="success-icon">🎉</div>
-            <h2>Order Placed!</h2>
-            <p>Your delicious food is being prepared.</p>
-            <button class="btn-primary mt-2" onclick="window.location.href='profile.html'">Track Order</button>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Desi Chulha. All rights reserved.</p>
+            <div class="bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
         </div>
-    </div>
+    </footer>
 
-    <script src="cart.js"></script>
+    <script src="cart-manager.js"></script>
+    <script>
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', () => {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+            });
+        });
+
+        // Cart Page Render logic
+        function renderCartPage() {
+            if (!window.cartManager) return;
+            const items = window.cartManager.getCart();
+            const listEl = document.querySelector('.cart-items-list');
+
+            if (!listEl) return;
+
+            if (items.length === 0) {
+                listEl.innerHTML = '<div style="padding: 24px; text-align: center; color: var(--text-muted);">Your cart is empty.</div>';
+                document.querySelector('.cart-header p').textContent = '0 items in your cart from Desi Chulha';
+                updateCartTotals({ itemTotal: 0 });
+                return;
+            }
+
+            let html = '';
+            items.forEach(item => {
+                html += `
+                <div class="cart-item-row" data-id="${item.id}">
+                    <div class="item-visual">
+                        <span class="veg-indicator ${item.isVeg ? '' : 'non-veg-indicator'}"></span>
+                        <span class="item-name">${item.name}</span>
+                    </div>
+                    <div class="item-actions">
+                        <div class="qty-control">
+                            <button class="qty-btn dec-btn" onclick="window.cartManager.updateQuantity('${item.id}', 'decrement'); renderCartPage()">-</button>
+                            <span class="qty-val">${item.qty}</span>
+                            <button class="qty-btn inc-btn" onclick="window.cartManager.updateQuantity('${item.id}', 'increment'); renderCartPage()">+</button>
+                        </div>
+                        <span class="item-price">₹${item.price * item.qty}</span>
+                    </div>
+                </div>
+                `;
+            });
+
+            listEl.innerHTML = html;
+            document.querySelector('.cart-header p').textContent = `${items.length} items in your cart from Desi Chulha`;
+
+            updateCartTotals(window.cartManager.getTotals());
+        }
+
+        function updateCartTotals(totals) {
+            const itemTotal = totals.itemTotal;
+            const deliveryFee = itemTotal > 0 ? 40 : 0;
+            const discount = itemTotal > 0 ? Math.floor(itemTotal * 0.2) : 0; // 20% discount mock
+            const taxes = itemTotal > 0 ? 35 : 0;
+            const grandTotal = itemTotal + deliveryFee - discount + taxes;
+
+            const billRows = document.querySelectorAll('.bill-details .bill-row span:last-child');
+            if (billRows.length >= 5) {
+                billRows[0].textContent = '₹' + itemTotal;
+                billRows[1].textContent = '₹' + deliveryFee;
+                billRows[2].textContent = '- ₹' + discount;
+                billRows[3].textContent = '₹' + taxes;
+                billRows[4].textContent = '₹' + grandTotal;
+            }
+
+            const btnPay = document.querySelector('.btn-checkout-full');
+            if (btnPay) {
+                btnPay.textContent = itemTotal > 0 ? 'Proceed to Pay ₹' + grandTotal : 'Cart is Empty';
+                btnPay.disabled = itemTotal === 0;
+            }
+        }
+
+        function placeOrder() {
+            if (!window.cartManager) return;
+            const items = window.cartManager.getCart();
+            if (items.length === 0) return;
+
+            alert('Order placed successfully! Redirecting to home...');
+            window.cartManager.clearCart();
+            window.location.href = 'desktop-home.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCartPage();
+        });
+    </script>
 </body>
 
 </html>

@@ -75,6 +75,67 @@
             </div>
         </section>
 
+        <!-- Highlights Slider Section (New Arrivals, Latest Offers) -->
+        <section class="highlights-slider-section">
+            <div class="slider-wrapper" id="highlights-slider">
+                <!-- Slide 1: Combo Offer -->
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1626776876729-bab43bfe0e70?q=80&w=1200&auto=format&fit=crop"
+                        alt="Combo Offer">
+                    <div class="slide-content">
+                        <span class="slide-badge">⚡ Flat 20% Off</span>
+                        <h2 class="slide-title">Mega Thali Festival is Live!</h2>
+                        <p class="slide-desc">Order our Special Maharaja Thali today and save big on authentic Indian
+                            flavors.</p>
+                        <button class="btn-slide" onclick="window.location.href='desktop-combos.html'">View
+                            Combos</button>
+                    </div>
+                </div>
+
+                <!-- Slide 2: New Arrival -->
+                <div class="slide">
+                    <img src="images/menu/raj-kachori.jpg" alt="New Arrival"
+                        onerror="this.src='https://plus.unsplash.com/premium_photo-1694141253763-201b17b62fe1?q=80&w=1200&auto=format&fit=crop'">
+                    <div class="slide-content">
+                        <span class="slide-badge" style="background:var(--warning-val); color:#000;">🌟 New
+                            Arrival</span>
+                        <h2 class="slide-title">Introducing Raj Kachori</h2>
+                        <p class="slide-desc">Ye snack nahi, full-size surprise hai. A crispy delight loaded with
+                            flavors.</p>
+                        <button class="btn-slide" onclick="window.location.href='desktop-menu.html#cat-chaat'">Order
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Bestseller Spotlight -->
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=80&w=1200&auto=format&fit=crop"
+                        alt="Pav Bhaji Spotlight">
+                    <div class="slide-content">
+                        <span class="slide-badge" style="background:var(--success-val);">🔥 Customer's Favorite</span>
+                        <h2 class="slide-title">Mumbai-style Pav Bhaji</h2>
+                        <p class="slide-desc">A spicy, buttery vegetable mash served with soft, toasted pavs. The king
+                            of street food.</p>
+                        <button class="btn-slide"
+                            onclick="window.location.href='desktop-menu.html#cat-indian-street-delights'">Add to
+                            Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="slider-controls" id="slider-dots">
+                <div class="slider-dot active" data-index="0"></div>
+                <div class="slider-dot" data-index="1"></div>
+                <div class="slider-dot" data-index="2"></div>
+            </div>
+
+            <div class="slider-arrows">
+                <button class="slider-arrow" id="slide-prev">❮</button>
+                <button class="slider-arrow" id="slide-next">❯</button>
+            </div>
+        </section>
+
         <!-- Offers Section (Wide Cards) -->
         <section class="offers-grid">
             <div class="offer-card bg-orange">
@@ -101,30 +162,31 @@
             </div>
 
             <div class="categories-grid">
-                <div class="cat-card">
-                    <div class="cat-icon-lg">🍚</div>
-                    <h4>Biryani</h4>
-                </div>
-                <div class="cat-card">
+                <!-- Links updated to point to the desktop-menu.html and jump to their respective category ID anchor -->
+                <a href="desktop-menu.html#cat-chaat" class="cat-card">
+                    <div class="cat-icon-lg">🥟</div>
+                    <h4>Chaat</h4>
+                </a>
+                <a href="desktop-menu.html#cat-combos" class="cat-card">
                     <div class="cat-icon-lg">🍱</div>
                     <h4>Thali</h4>
-                </div>
-                <div class="cat-card">
-                    <div class="cat-icon-lg">🍢</div>
-                    <h4>Tandoor</h4>
-                </div>
-                <div class="cat-card">
-                    <div class="cat-icon-lg">🍛</div>
+                </a>
+                <a href="desktop-menu.html#cat-paratha" class="cat-card">
+                    <div class="cat-icon-lg">🫓</div>
+                    <h4>Paratha</h4>
+                </a>
+                <a href="desktop-menu.html#cat-indian-street-delights" class="cat-card">
+                    <div class="cat-icon-lg">🥙</div>
+                    <h4>Street Food</h4>
+                </a>
+                <a href="desktop-menu.html#cat-combos" class="cat-card">
+                    <div class="cat-icon-lg"></div>
                     <h4>Combos</h4>
-                </div>
-                <div class="cat-card">
-                    <div class="cat-icon-lg">🍨</div>
-                    <h4>Desserts</h4>
-                </div>
-                <div class="cat-card">
-                    <div class="cat-icon-lg">🥤</div>
+                </a>
+                <a href="desktop-menu.html#cat-beverage" class="cat-card">
+                    <div class="cat-icon-lg">☕</div>
                     <h4>Beverages</h4>
-                </div>
+                </a>
             </div>
         </section>
 
@@ -132,72 +194,75 @@
         <section class="section-block bg-slight">
             <div class="section-header">
                 <h2>Best Sellers</h2>
+                <p style="color: var(--text-muted);">Our most loved dishes</p>
             </div>
 
             <div class="bestsellers-grid">
-                <!-- Item 1 -->
+                <!-- Item 1: Pav Bhaji -->
                 <div class="food-card">
                     <div class="badge-ribbon">⭐ Bestseller</div>
                     <div class="food-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=80&w=400&auto=format&fit=crop"
-                            alt="Butter Chicken Map">
+                        <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=80&w=400&auto=format&fit=crop"
+                            alt="Pav Bhaji">
                     </div>
                     <div class="food-info">
-                        <h3>Butter Chicken Masala</h3>
-                        <p class="desc">Creamy, rich and mildly spiced aromatic chicken curry.</p>
+                        <h3>Pav Bhaji</h3>
+                        <p class="desc">A spicy, buttery vegetable mash served with soft, toasted pavs.</p>
                         <div class="food-footer">
-                            <span class="price">₹340</span>
-                            <button class="btn-add-cart" data-price="340">Add to Cart</button>
+                            <span class="price">₹70</span>
+                            <button class="btn-add-cart" data-price="70">Add to Cart</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Item 2 -->
+                <!-- Item 2: Chhole Bhature -->
                 <div class="food-card">
                     <div class="badge-ribbon must-try">🔥 Must Try</div>
                     <div class="food-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=400&auto=format&fit=crop"
-                            alt="Paneer Tikka">
+                        <img src="https://images.unsplash.com/photo-1626200419199-391ae4be7a41?q=80&w=400&auto=format&fit=crop"
+                            alt="Chhole Bhature">
                     </div>
                     <div class="food-info">
-                        <h3>Paneer Tikka</h3>
-                        <p class="desc">Charcoal grilled fresh paneer cubes with mint chutney.</p>
+                        <h3>Chhole Bhature</h3>
+                        <p class="desc">Classic North Indian delight with spicy chickpea curry and fluffy fried bread.
+                        </p>
                         <div class="food-footer">
-                            <span class="price">₹280</span>
-                            <button class="btn-add-cart" data-price="280">Add to Cart</button>
+                            <span class="price">₹70</span>
+                            <button class="btn-add-cart" data-price="70">Add to Cart</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Item 3 -->
+                <!-- Item 3: Dahi Patasi / Papdi Chaat -->
                 <div class="food-card">
+                    <div class="badge-ribbon" style="background: rgba(82, 113, 255, 0.9);">✨ Popular</div>
                     <div class="food-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=400&auto=format&fit=crop"
-                            alt="Chicken Biryani">
+                        <img src="images/menu/dahi-patasi.jpg" alt="Dahi Patasi"
+                            onerror="this.src='https://images.unsplash.com/photo-1589301773099-23ce56f571de?q=80&w=400&auto=format&fit=crop'">
                     </div>
                     <div class="food-info">
-                        <h3>Hyderabadi Chicken Biryani</h3>
-                        <p class="desc">Slow cooked basmati rice layered with marinated chicken.</p>
+                        <h3>Dahi Patasi</h3>
+                        <p class="desc">Diet kal se… aaj toh Dahi Patasi hi sahi. Tangy, sweet, and spicy flavors.</p>
                         <div class="food-footer">
-                            <span class="price">₹320</span>
-                            <button class="btn-add-cart" data-price="320">Add to Cart</button>
+                            <span class="price">₹60</span>
+                            <button class="btn-add-cart" data-price="60">Add to Cart</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Item 4 -->
+                <!-- Item 4: Special Thali -->
                 <div class="food-card">
-                    <div class="badge-ribbon veg-healthy">🥬 Healthy</div>
+                    <div class="badge-ribbon veg-healthy">👑 Value Meal</div>
                     <div class="food-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=400&auto=format&fit=crop"
-                            alt="Mix Veg">
+                        <img src="https://plus.unsplash.com/premium_photo-1683617301662-7204dc6630f9?q=80&w=400&auto=format&fit=crop"
+                            alt="Special Thali">
                     </div>
                     <div class="food-info">
-                        <h3>Mixed Vegetable Curry</h3>
-                        <p class="desc">Farm fresh vegetables cooked in homestyle gravy.</p>
+                        <h3>Special Thali</h3>
+                        <p class="desc">Paneer Veg, Daal, Rice, 4 Roti, Salad. A complete hearty meal.</p>
                         <div class="food-footer">
-                            <span class="price">₹220</span>
-                            <button class="btn-add-cart" data-price="220">Add to Cart</button>
+                            <span class="price">₹130</span>
+                            <button class="btn-add-cart" data-price="130">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -340,6 +405,7 @@
         </div>
     </div>
 
+    <script src="cart-manager.js"></script>
     <script src="desktop-home.js"></script>
 </body>
 

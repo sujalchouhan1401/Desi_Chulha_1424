@@ -210,7 +210,7 @@ function renderMenu() {
                         ? `<img src="${item.image}" alt="${item.name}" class="dish-image">`
                         : `<div class="dish-visual-placeholder">${cat.icon}</div>`
                     }
-                            <button class="btn-add-item" data-price="${item.price}" data-name="${item.name}">+ Add</button>
+                            <button class="btn-add-item" data-price="${item.price}" data-name="${item.name}" data-veg="${item.isVeg}">+ Add</button>
                         </div>
                     </div>
                 `;
@@ -232,7 +232,16 @@ function renderMenu() {
         btn.addEventListener('click', (e) => {
             const price = parseInt(e.target.getAttribute('data-price'));
             const name = e.target.getAttribute('data-name');
-            addToCart(price, name);
+            const isVeg = e.target.getAttribute('data-veg') === 'true';
+
+            if (window.cartManager) {
+                window.cartManager.addItem({
+                    name: name,
+                    price: price,
+                    isVeg: isVeg
+                });
+            }
+            showToast(`Added ${name} to cart`);
         });
     });
 
@@ -261,27 +270,6 @@ function setupFilters() {
         bestsellerBtn.classList.toggle('active', filterBestsellerOnly);
         renderMenu();
     });
-}
-
-function addToCart(price, name) {
-    cartItemCount++;
-    cartTotalAmount += price;
-    updateCartWidget();
-    showToast(`Added ${name} to cart`);
-}
-
-function updateCartWidget() {
-    const widget = document.getElementById('desktop-cart-widget');
-    const countEl = document.getElementById('cart-count');
-    const totalEl = document.getElementById('widget-total');
-
-    if (cartItemCount > 0) {
-        widget.classList.remove('hidden');
-        countEl.textContent = cartItemCount;
-        totalEl.textContent = `₹${cartTotalAmount}`;
-    } else {
-        widget.classList.add('hidden');
-    }
 }
 
 function showToast(message) {
