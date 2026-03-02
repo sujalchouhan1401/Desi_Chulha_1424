@@ -47,11 +47,21 @@
                             <input type="tel" id="phone-number" placeholder="Enter your phone number" required
                                 autocomplete="tel" pattern="[0-9]{10}" maxlength="10">
                         </div>
+                        <div id="recaptcha-container"></div>
                         <button type="submit" class="primary-btn" id="send-otp-btn">
                             <span class="btn-text">Send OTP</span>
                             <span class="loader hidden"></span>
                         </button>
                     </form>
+
+                    <!-- DEVELOPMENT ONLY LOGIN (Wrap in DEV flag) -->
+                    <div id="dev-login-container" class="dev-mode-only">
+                        <button type="button" class="dev-btn" id="dev-login-btn">
+                            <span class="btn-text">Continue as Guest <span class="dev-badge">DEV</span></span>
+                        </button>
+                        <p class="dev-helper-text">For development & testing only</p>
+                    </div>
+
                 </div>
 
                 <!-- Step 2: OTP Input -->
@@ -61,6 +71,8 @@
                             <p>Enter the 4-digit code sent to<br><strong id="display-phone">+91 00000 00000</strong></p>
                         </div>
                         <div class="otp-inputs">
+                            <input type="text" maxlength="1" class="otp-box" inputmode="numeric" required>
+                            <input type="text" maxlength="1" class="otp-box" inputmode="numeric" required>
                             <input type="text" maxlength="1" class="otp-box" inputmode="numeric" required>
                             <input type="text" maxlength="1" class="otp-box" inputmode="numeric" required>
                             <input type="text" maxlength="1" class="otp-box" inputmode="numeric" required>
@@ -81,7 +93,10 @@
         </div>
         </div>
 
-        <script src="script.js"></script>
+        <!-- Firebase SDKs -->
+        <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+        <script src="app.js"></script>
 </body>
 
 </html>

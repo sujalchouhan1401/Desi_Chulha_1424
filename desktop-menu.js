@@ -23,7 +23,10 @@ const menuData = [
             { id: "chaat-4", name: "Dahi Bhalla", price: 50, isVeg: true, tag: null },
             { id: "chaat-5", name: "Kaji Vada", price: 30, isVeg: true, tag: null },
             { id: "chaat-6", name: "Raj Kachori", price: 90, isVeg: true, tag: "Chef's Special" },
-            { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null }
+            { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null },
+            { id: "chaat-8", name: "Samosa Chaat", price: 60, isVeg: true, tag: null },
+            { id: "chaat-9", name: "Fruit Salad", price: 120, isVeg: true, tag: "Healthy" },
+            { id: "chaat-10", name: "Fruit Salad Chaat", price: 130, isVeg: true, tag: null }
         ]
     },
     {
@@ -43,10 +46,8 @@ const menuData = [
             { id: "str-10", name: "Popcorn", price: 50, isVeg: true, tag: null },
             { id: "str-11", name: "Chhole Bhature", price: 70, isVeg: true, tag: "Bestseller" },
             { id: "str-12", name: "Burger", price: 80, isVeg: true, tag: null },
-            { id: "str-13", name: "Pizza", price: 99, isVeg: true, tag: null },
-            { id: "str-14", name: "Samosa Chaat", price: 60, isVeg: true, tag: null },
-            { id: "str-15", name: "Fruit Salad", price: 120, isVeg: true, tag: "Healthy" },
-            { id: "str-16", name: "Fruit Salad Chaat", price: 130, isVeg: true, tag: null }
+            { id: "str-13", name: "Pizza", price: 99, isVeg: true, tag: null }
+            
         ]
     },
     {
