@@ -4,12 +4,12 @@ const menuData = [
         name: "Beverage",
         icon: "☕",
         items: [
-            { id: "bev-1", name: "Tea", price: 10, isVeg: true, tag: null, image: "images/menu/tea.jpg" },
-            { id: "bev-2", name: "Kulhad Tea", price: 15, isVeg: true, tag: "Must Try", image: "images/menu/kulhad-tea.jpg" },
-            { id: "bev-3", name: "Hot Coffee", price: 30, isVeg: true, tag: null, image: "images/menu/hot-coffee.jpg" },
-            { id: "bev-4", name: "Cold Coffee", price: 50, isVeg: true, tag: "Bestseller", image: "images/menu/cold-coffee.jpg" },
-            { id: "bev-5", name: "Lassi Sweet", price: 50, isVeg: true, tag: null },
-            { id: "bev-6", name: "Lassi Salty", price: 30, isVeg: true, tag: null }
+            { id: "bev-1", name: "Tea", price: 10, isVeg: true, tag: null, image: "images/menu/tea.jpg", desc: "Ek cup jo din bana de." },
+            { id: "bev-2", name: "Kulhad Tea", price: 15, isVeg: true, tag: "Must Try", image: "images/menu/kulhad-tea.png", desc: "Desi vibes, kadak taste." },
+            { id: "bev-3", name: "Hot Coffee", price: 30, isVeg: true, tag: null, image: "images/menu/hot-coffee.png", desc: "Sip karo, stress ko skip karo." },
+            { id: "bev-4", name: "Cold Coffee", price: 50, isVeg: true, tag: "Bestseller", image: "images/menu/cold-coffee.png", desc: "Sip karo, heat ko beat karo." },
+            { id: "bev-5", name: "Lassi Sweet", price: 50, isVeg: true, tag: null, image: "images/menu/lassi.png", desc: "Garmi ka meetha solution." },
+            { id: "bev-6", name: "Lassi Salty", price: 30, isVeg: true, tag: null, image: "images/menu/lassi.png", desc: "Namak ka tadka, sukoon ka jhatka." }
         ]
     },
     {
@@ -17,10 +17,10 @@ const menuData = [
         name: "Chaat",
         icon: "🥟",
         items: [
-            { id: "chaat-1", name: "Papadi Chaat", price: 70, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=400&auto=format&fit=crop" },
-            { id: "chaat-2", name: "Papadi Bhalla Chaat", price: 80, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1599813589999-90606fbfd14d?q=80&w=400&auto=format&fit=crop" },
-            { id: "chaat-3", name: "Dahi Patasi", price: 60, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=400&auto=format&fit=crop" },
-            { id: "chaat-4", name: "Dahi Bhalla", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=80&w=400&auto=format&fit=crop" },
+            { id: "chaat-1", name: "Papadi Chaat", price: 70, isVeg: true, tag: null, image: "images/menu/papdi-chaat.jpg", desc: "har bite mein chatpata dhamaka" },
+            { id: "chaat-2", name: "Papadi Bhalla Chaat", price: 80, isVeg: true, tag: null, image: "images/menu/papdi-bhalla-chaat.jpg", desc: "soft bhalla, crispy papdi aur chatpata swaad ka perfect combo." },
+            { id: "chaat-3", name: "Dahi Patasi", price: 60, isVeg: true, tag: "Bestseller", image: "images/menu/dahi-patasi.jpg", desc: "Diet kal se… aaj toh Dahi Patasi hi sahi." },
+            { id: "chaat-4", name: "Dahi Bhalla", price: 50, isVeg: true, tag: null, image: "images/menu/dahi-bhalla.jpg", desc: "Itna soft, bas dil bhi pighal jaye." },
             { id: "chaat-5", name: "Kaji Vada", price: 30, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?q=80&w=400&auto=format&fit=crop" },
             { id: "chaat-6", name: "Raj Kachori", price: 90, isVeg: true, tag: "Chef's Special", image: "https://plus.unsplash.com/premium_photo-1694141253763-201b17b62fe1?q=80&w=400&auto=format&fit=crop" },
             { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1589301773099-23ce56f571de?q=80&w=400&auto=format&fit=crop" }
