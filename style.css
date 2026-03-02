@@ -1,8 +1,10 @@
 /* Base Variables */
 :root {
-    --bg-color: #F2EEE9;          /* Cream / Off-white */
+    --bg-color: #F2EEE9;
+    /* Cream / Off-white */
     --card-bg: #FFFFFF;
-    --primary-color: #F07A5D;     /* Warm Coral Orange */
+    --primary-color: #F07A5D;
+    /* Warm Coral Orange */
     --primary-hover: #E0684B;
     --text-main: #332B29;
     --text-muted: #7A726E;
@@ -10,11 +12,11 @@
     --border-focus: #F07A5D;
     --focus-ring: rgba(240, 122, 93, 0.2);
     --peach-light: #FCEAE4;
-    
+
     --radius-sm: 8px;
     --radius-md: 16px;
     --radius-lg: 24px;
-    
+
     --shadow-soft: 0 10px 40px rgba(89, 78, 74, 0.08);
 }
 
@@ -101,8 +103,15 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Phone Input Styles */
@@ -200,7 +209,9 @@ body {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* OTP Specific Styles */
@@ -303,12 +314,66 @@ body {
         padding: 32px 24px;
         border-radius: 20px;
     }
+
     .heading {
         font-size: 22px;
     }
+
     .otp-box {
         width: 48px;
         height: 54px;
         font-size: 20px;
     }
+}
+
+/* Development Login Button Styles */
+.dev-mode-only {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.dev-btn {
+    width: 100%;
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dev-btn:hover {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    border-color: #D0C6C1;
+}
+
+.dev-btn:active {
+    transform: scale(0.98);
+}
+
+.dev-badge {
+    background-color: #E2DBD6;
+    color: var(--text-main);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+    letter-spacing: 0.5px;
+}
+
+.dev-helper-text {
+    font-size: 11px;
+    color: #A39B98;
+    margin-top: 8px;
+    letter-spacing: 0.3px;
 }

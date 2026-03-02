@@ -1,4 +1,30 @@
+// Firebase configuration (REPLACE WITH YOUR ACTUAL FIREBASE CONFIG)
+const firebaseConfig = {
+    apiKey: "AIzaSyC_Iqy4WrYeIY0kcFJThCimU2z0CUSliHs",
+    authDomain: "desichulha-b6b9a.firebaseapp.com",
+    projectId: "desichulha-b6b9a",
+    storageBucket: "desichulha-b6b9a.firebasestorage.app",
+    messagingSenderId: "875626400095",
+    appId: "1:875626400095:web:914d32cfa82e1bce34ceea"
+};
+
+// Initialize Firebase
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    let currentPhone = '';
+    let confirmationResult = null;
+
+    // Initialize Recaptcha Verifier
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+        'size': 'invisible',
+        'callback': (response) => {
+            // reCAPTCHA solved
+        }
+    });
+
     // Elements
     const phoneForm = document.getElementById('phone-form');
     const otpForm = document.getElementById('otp-form');
@@ -11,32 +37,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const editPhoneBtn = document.getElementById('edit-phone-btn');
     const timerDisplay = document.getElementById('timer');
     const otpBoxes = document.querySelectorAll('.otp-box');
+    const devLoginBtn = document.getElementById('dev-login-btn');
 
-    // Phone Form Simulation
+    // ==========================================
+    // DEVELOPMENT LOGIN (Remove before Production)
+    // ==========================================
+    if (devLoginBtn) {
+        devLoginBtn.addEventListener('click', () => {
+            console.warn("🔐 DEV MODE LOG IN INITIATED. Skipping OTP.");
+            localStorage.setItem("desi_auth_token", "DEV_USER_TEST_ID_12345");
+            window.location.href = 'desktop-home.html';
+        });
+    }
+
+    // Phone Form Submission (Firebase Phone Auth)
     phoneForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const phone = phoneNumberInput.value.trim();
-        if (phone.length < 10) return;
+        currentPhone = phoneNumberInput.value.trim();
+        if (currentPhone.length < 10) return;
 
         // UI Loading State
         setButtonLoading(sendOtpBtn, true, 'Sending...');
 
-        // Simulate network request
-        setTimeout(() => {
-            setButtonLoading(sendOtpBtn, false, 'Send OTP');
+        const phoneNumber = `+91${currentPhone}`;
+        const appVerifier = window.recaptchaVerifier;
 
-            // Format phone for display
-            displayPhone.textContent = `+91 ${phone.substring(0, 5)} ${phone.substring(5)}`;
+        firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+            .then((result) => {
+                // SMS sent. Prompt user to type the code from the message structure
+                confirmationResult = result;
 
-            // Transition to OTP step
-            stepPhone.classList.remove('step-active');
-            stepOtp.classList.add('step-active');
+                setButtonLoading(sendOtpBtn, false, 'Send OTP');
 
-            // Focus first OTP box and start timer
-            otpBoxes[0].focus();
-            startTimer(30);
-        }, 800);
+                // Format phone for display
+                displayPhone.textContent = `+91 ${currentPhone.substring(0, 5)} ${currentPhone.substring(5)}`;
+
+                // Transition to OTP step
+                stepPhone.classList.remove('step-active');
+                stepOtp.classList.add('step-active');
+
+                // Focus first OTP box and start timer
+                otpBoxes[0].focus();
+                startTimer(30);
+            }).catch((error) => {
+                setButtonLoading(sendOtpBtn, false, 'Send OTP');
+                console.error("Error sending OTP:", error);
+
+                // Reset recaptcha if error occurs
+                if (window.recaptchaVerifier) window.recaptchaVerifier.render().then(function (widgetId) {
+                    window.grecaptcha.reset(widgetId);
+                });
+
+                alert("Failed to send OTP. " + (error.message || "Please try again. Make sure Firebase Config is correct."));
+            });
     });
 
     // OTP Input Logic (Auto-focusing)
@@ -81,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Verify Form Simulation
+    // Verify Form Submission (Firebase Phone Auth)
     otpForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -89,14 +143,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const otpCompleted = Array.from(otpBoxes).every(box => box.value !== '');
         if (!otpCompleted) return;
 
+        const otpCode = Array.from(otpBoxes).map(box => box.value).join('');
         setButtonLoading(verifyOtpBtn, true, 'Verifying...');
 
-        setTimeout(() => {
+        if (!confirmationResult) {
             setButtonLoading(verifyOtpBtn, false, 'Verify & Continue');
-            // Simulate saving auth token
-            // localStorage.setItem("desi_auth", "true");
-            window.location.href = 'home.html';
-        }, 1200);
+            alert("Please request OTP first.");
+            return;
+        }
+
+        confirmationResult.confirm(otpCode).then((result) => {
+            // User signed in successfully.
+            const user = result.user;
+            setButtonLoading(verifyOtpBtn, false, 'Verify & Continue');
+
+            // Save local auth state if needed and redirect
+            localStorage.setItem("desi_auth_token", user.uid);
+            window.location.href = 'desktop-home.html';
+        }).catch((error) => {
+            // User couldn't sign in (bad verification code?)
+            setButtonLoading(verifyOtpBtn, false, 'Verify & Continue');
+            console.error("Error verifying OTP:", error);
+            alert("Invalid OTP code. Please try again.");
+            otpBoxes.forEach(box => box.value = ''); // Clear on error
+            otpBoxes[0].focus();
+        });
     });
 
     // Navigation - Back to Phone Input

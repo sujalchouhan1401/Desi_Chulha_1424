@@ -23,7 +23,10 @@ const menuData = [
             { id: "chaat-4", name: "Dahi Bhalla", price: 50, isVeg: true, tag: null, image: "images/menu/dahi-bhalla.jpg", desc: "Itna soft, bas dil bhi pighal jaye." },
             { id: "chaat-5", name: "Kaji Vada", price: 30, isVeg: true, tag: null, image: "images/menu/kaji-vada.jpg", desc: "Marwadi rasoi ka mashhoor swaad – Kaji Vada lajawab." },
             { id: "chaat-6", name: "Raj Kachori", price: 90, isVeg: true, tag: "Chef's Special", image: "images/menu/raj-kachori.jpg", desc: "Ye snack nahi, full-size surprise hai." },
-            { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1589301773099-23ce56f571de?q=80&w=400&auto=format&fit=crop" }
+            { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1589301773099-23ce56f571de?q=80&w=400&auto=format&fit=crop" },
+            { id: "chaat-8", name: "Samosa Chaat", price: 60, isVeg: true, tag: null },
+            { id: "chaat-9", name: "Fruit Salad", price: 120, isVeg: true, tag: "Healthy" },
+            { id: "chaat-10", name: "Fruit Salad Chaat", price: 130, isVeg: true, tag: null }
         ]
     },
     {
