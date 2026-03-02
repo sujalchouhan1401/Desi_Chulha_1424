@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desi Chulha | Menu</title>
+    <!-- Google Fonts: Inter/Poppins -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="desktop-home.css">
+    <link rel="stylesheet" href="desktop-menu.css">
+</head>
+
+<body>
+
+    <!-- Top Sticky Navigation Bar -->
+    <nav class="desktop-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo">🔥</div>
+                <span class="brand-name">Desi Chulha</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="desktop-home.html">Home</a></li>
+                <li><a href="desktop-menu.html" class="active">Menu</a></li>
+                <li><a href="#">Combos</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+
+            <div class="nav-profile">
+                <div class="avatar-wrap">
+                    <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=40&font-size=0.4"
+                        alt="Profile avatar">
+                </div>
+                <span class="dropdown-arrow">▼</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Container Wrapper for 1200px Max-Width -->
+    <main class="desktop-container menu-page-layout">
+
+        <!-- Top Header: Title, Search & Filters -->
+        <header class="menu-page-header">
+            <h1 class="page-title">Our Menu</h1>
+            <div class="menu-controls">
+                <div class="search-box">
+                    <span class="icon">🔍</span>
+                    <input type="text" id="menu-search" placeholder="Search dishes...">
+                </div>
+                <div class="filter-toggles">
+                    <button class="filter-btn" id="filter-veg">
+                        <span class="veg-dot"></span> Veg Only
+                    </button>
+                    <button class="filter-btn" id="filter-bestseller">⭐ Bestseller</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="menu-grid-container">
+            <!-- Left Sidebar -->
+            <aside class="menu-sidebar">
+                <ul class="category-list" id="category-list">
+                    <!-- Categories injected by JS -->
+                </ul>
+            </aside>
+
+            <!-- Right Main Content -->
+            <section class="menu-content" id="menu-content">
+                <!-- Sections injected by JS -->
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Desktop-Rich Footer -->
+    <footer class="desktop-footer">
+        <div class="footer-grid">
+
+            <div class="footer-col brand-col">
+                <div class="f-brand">
+                    <span class="logo">🔥</span> Desi Chulha
+                </div>
+                <p class="f-desc">Bringing the authentic taste of Indian homes right to your table. Experience joy in
+                    every bite.</p>
+                <div class="social-links">
+                    <a href="#" class="social-btn">IG</a>
+                    <a href="#" class="social-btn">FB</a>
+                    <a href="#" class="social-btn">X</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Menu</a></li>
+                    <li><a href="#">Book a Table</a></li>
+                    <li><a href="#">Catering Services</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="contact-list">
+                    <li>📞 +91 98765 43210</li>
+                    <li><span style="color:#25D366">💬</span> WhatsApp available</li>
+                    <li>🕒 Open Everyday: 11 AM - 11 PM</li>
+                </ul>
+            </div>
+
+            <div class="footer-col map-col">
+                <h4>Our Location</h4>
+                <p>123 Spicewood Drive, Food City, Mumbai, 400001</p>
+                <div class="map-placeholder">
+                    <div class="map-marker">📍</div>
+                    <span>Google Maps Integration</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Desi Chulha. All rights reserved.</p>
+            <div class="bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Right Sticky Cart Widget -->
+    <div id="desktop-cart-widget" class="desktop-cart-widget hidden">
+        <div class="widget-header">
+            <h4>Your Cart</h4>
+            <span class="item-count badge-circle" id="cart-count">0</span>
+        </div>
+        <div class="widget-body">
+            <div class="subtotal-row">
+                <span>Subtotal</span>
+                <span class="amt" id="widget-total">₹0</span>
+            </div>
+            <button class="btn-checkout-full" onclick="window.location.href='cart.html'">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="desktop-menu.js"></script>
+</body>
+
+</html>
