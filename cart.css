@@ -1,0 +1,516 @@
+/* Base Variables - Premium Desi Chulha Theme */
+:root {
+    --bg-color: #F2EEE9;
+    --card-bg: #FFFFFF;
+    --primary-color: #F07A5D;
+    --primary-hover: #E0684B;
+    --primary-light: #FCEAE4;
+    --text-main: #332B29;
+    --text-muted: #7A726E;
+    --border-color: #E6DFD9;
+    --success-val: #34A853;
+
+    --veg-color: #34A853;
+    --nonveg-color: #E53935;
+
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-pill: 100px;
+
+    --shadow-soft: 0 8px 24px rgba(89, 78, 74, 0.08);
+    --shadow-float: 0 -4px 24px rgba(0, 0, 0, 0.06);
+
+    --font-fam: 'Poppins', sans-serif;
+    --app-max-width: 480px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--font-fam);
+    background-color: #e0d8d0;
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.app-content {
+    width: 100%;
+    max-width: var(--app-max-width);
+    background-color: var(--bg-color);
+    position: relative;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    padding-bottom: 24px;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.mt-2 {
+    margin-top: 16px;
+}
+
+/* Header */
+.page-header {
+    padding: 24px 20px 16px;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Cart Sections Base */
+.cart-section {
+    background: var(--card-bg);
+    margin: 0 20px 16px;
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Address */
+.address-section {
+    border: 1px solid var(--border-color);
+}
+
+.section-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.addr-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.addr-info p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.text-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.delivery-time {
+    background: #F8F5F2;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Items */
+.order-items {
+    padding-bottom: 12px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.item-visuals {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.veg-badge {
+    width: 14px;
+    height: 14px;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.veg-badge::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.veg-badge.veg {
+    color: var(--veg-color);
+}
+
+.veg-badge.non-veg {
+    color: var(--nonveg-color);
+}
+
+.item-name {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.cart-qty {
+    display: flex;
+    align-items: center;
+    background: #F8F5F2;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    height: 32px;
+    width: 80px;
+}
+
+.qty-btn {
+    width: 28px;
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.qty-value {
+    flex: 1;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.item-price {
+    font-size: 15px;
+    font-weight: 600;
+    width: 45px;
+    text-align: right;
+}
+
+.add-instructions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #F8F5F2;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+}
+
+.add-instructions input {
+    background: transparent;
+    border: none;
+    outline: none;
+    flex: 1;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-main);
+}
+
+/* Coupon */
+.apply-coupon {
+    padding: 16px 20px;
+    cursor: pointer;
+}
+
+.coupon-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.coupon-text {
+    flex: 1;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.arrow-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+/* Bill Details */
+.bill-details h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.bill-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: var(--text-muted);
+}
+
+.bill-row.discount {
+    color: var(--success-val);
+    font-weight: 500;
+}
+
+.bill-divider {
+    border: none;
+    border-top: 1px dashed var(--border-color);
+    margin: 16px 0;
+}
+
+.grand-total {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text-main);
+    margin-bottom: 0;
+}
+
+/* Payment */
+.payment-section h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.payment-option.selected {
+    border-color: var(--primary-color);
+    background: var(--primary-light);
+}
+
+.payment-option span {
+    flex: 1;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.radio-circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--text-muted);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.radio-circle.active {
+    border-color: var(--primary-color);
+}
+
+.radio-circle.active::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: var(--primary-color);
+    border-radius: 50%;
+}
+
+.pay-icon {
+    width: 40px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.bottom-spacer {
+    height: 180px;
+}
+
+/* Sticky Checkout Footer */
+.sticky-checkout {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: var(--app-max-width);
+    background: var(--card-bg);
+    padding: 16px 20px 24px;
+    box-shadow: var(--shadow-float);
+    z-index: 90;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+}
+
+/* Lift it above bottom nav if present via .with-nav */
+.sticky-checkout.with-nav {
+    bottom: 70px;
+    box-shadow: none;
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    width: calc(100% - 40px);
+    background: #fff;
+    padding: 12px 16px;
+}
+
+.checkout-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.final-amt {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.view-bill {
+    font-size: 11px;
+    color: var(--primary-color);
+    text-decoration: underline;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 24px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(240, 122, 93, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s;
+}
+
+.btn-primary:active {
+    transform: scale(0.96);
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 40px 32px;
+    width: 85%;
+    max-width: 320px;
+    text-align: center;
+    box-shadow: var(--shadow-float);
+    animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.success-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.modal-card h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.modal-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+.modal-card .btn-primary {
+    width: 100%;
+    justify-content: center;
+}

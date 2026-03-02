@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F2EEE9">
+    <title>Desi Chulha - Cart</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="nav.css">
+</head>
+
+<body>
+
+    <main class="app-content">
+        <!-- Header -->
+        <header class="page-header">
+            <h1 class="page-title">Your Cart</h1>
+            <p class="subtitle">2 items from Desi Chulha</p>
+        </header>
+
+        <!-- Delivery Address -->
+        <section class="cart-section address-section">
+            <div class="section-top">
+                <span class="icon">📍</span>
+                <div class="addr-info">
+                    <h3>Delivering to Home</h3>
+                    <p>123 Spicewood Drive, Food City, 40001</p>
+                </div>
+                <button class="text-btn">Change</button>
+            </div>
+            <div class="delivery-time">
+                <span class="bolt">⚡</span> Expected delivery in 30-40 mins
+            </div>
+        </section>
+
+        <!-- Cart Items -->
+        <section class="cart-section order-items">
+            <!-- Item 1 -->
+            <div class="cart-item">
+                <div class="item-visuals">
+                    <div class="veg-badge non-veg"></div>
+                    <span class="item-name">Butter Chicken Masala</span>
+                </div>
+                <div class="item-actions">
+                    <div class="qty-control cart-qty">
+                        <button class="qty-btn dec-btn">-</button>
+                        <div class="qty-value">1</div>
+                        <button class="qty-btn inc-btn">+</button>
+                    </div>
+                    <p class="item-price">₹340</p>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="cart-item">
+                <div class="item-visuals">
+                    <div class="veg-badge veg"></div>
+                    <span class="item-name">Paneer Tikka</span>
+                </div>
+                <div class="item-actions">
+                    <div class="qty-control cart-qty">
+                        <button class="qty-btn dec-btn">-</button>
+                        <div class="qty-value">1</div>
+                        <button class="qty-btn inc-btn">+</button>
+                    </div>
+                    <p class="item-price">₹280</p>
+                </div>
+            </div>
+
+            <div class="add-instructions">
+                <span class="icon">✍️</span>
+                <input type="text" placeholder="Add cooking instructions...">
+            </div>
+        </section>
+
+        <!-- Offers -->
+        <section class="cart-section apply-coupon">
+            <div class="coupon-box">
+                <span class="icon">%</span>
+                <span class="coupon-text">Apply Coupon Code</span>
+                <button class="arrow-btn">›</button>
+            </div>
+        </section>
+
+        <!-- Bill Details -->
+        <section class="cart-section bill-details">
+            <h3>Bill Details</h3>
+            <div class="bill-row">
+                <span>Item Total</span>
+                <span>₹620</span>
+            </div>
+            <div class="bill-row">
+                <span>Delivery Fee</span>
+                <span>₹40</span>
+            </div>
+            <div class="bill-row discount">
+                <span>Restaurant Discount</span>
+                <span>- ₹124</span>
+            </div>
+            <div class="bill-row">
+                <span>Taxes & Charges</span>
+                <span>₹35</span>
+            </div>
+            <hr class="bill-divider">
+            <div class="bill-row grand-total">
+                <span>To Pay</span>
+                <span>₹571</span>
+            </div>
+        </section>
+
+        <!-- Payment Setup -->
+        <section class="cart-section payment-section">
+            <h3>Payment Method</h3>
+            <div class="payment-option selected">
+                <div class="pay-icon">UPI</div>
+                <span>Google Pay / PhonePe</span>
+                <div class="radio-circle active"></div>
+            </div>
+            <div class="payment-option">
+                <div class="pay-icon">💳</div>
+                <span>Credit / Debit Card</span>
+                <div class="radio-circle"></div>
+            </div>
+            <div class="payment-option">
+                <div class="pay-icon">💵</div>
+                <span>Cash on Delivery</span>
+                <div class="radio-circle"></div>
+            </div>
+        </section>
+
+        <!-- Bottom Spacer -->
+        <div class="bottom-spacer"></div>
+
+    </main>
+
+    <!-- Sticky Place Order -->
+    <div class="sticky-checkout with-nav">
+        <div class="checkout-info">
+            <span class="final-amt">₹571</span>
+            <span class="view-bill">View Detailed Bill</span>
+        </div>
+        <button class="btn-primary" id="place-order-btn">
+            Place Order <span class="arrow-right">→</span>
+        </button>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            Home
+        </a>
+        <a href="menu.html" class="nav-item">
+            <span class="nav-icon">📋</span>
+            Menu
+        </a>
+        <a href="cart.html" class="nav-item active">
+            <span class="nav-icon">🛒</span>
+            Cart
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            Profile
+        </a>
+    </nav>
+
+    <!-- Success Modal Overlay -->
+    <div id="success-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="success-icon">🎉</div>
+            <h2>Order Placed!</h2>
+            <p>Your delicious food is being prepared.</p>
+            <button class="btn-primary mt-2" onclick="window.location.href='profile.html'">Track Order</button>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F2EEE9">
+    <title>Desi Chulha - Profile</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="nav.css">
+</head>
+
+<body>
+
+    <main class="app-content">
+        <!-- Header / User Info -->
+        <header class="profile-header">
+            <div class="user-details">
+                <h1 class="user-name">Sujal Chouhan</h1>
+                <p class="user-phone">+91 98765 43210</p>
+                <button class="edit-profile-btn">Edit Profile</button>
+            </div>
+            <div class="user-avatar">
+                <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=80&font-size=0.4"
+                    alt="Sujal">
+            </div>
+        </header>
+
+        <!-- Quick Stats -->
+        <section class="quick-stats">
+            <div class="stat-box">
+                <span class="stat-val">12</span>
+                <span class="stat-label">Orders</span>
+            </div>
+            <div class="divider"></div>
+            <div class="stat-box">
+                <span class="stat-val">₹240</span>
+                <span class="stat-label">Rewards</span>
+            </div>
+        </section>
+
+        <!-- Past Orders -->
+        <section class="profile-section">
+            <div class="section-top">
+                <h2>Past Orders</h2>
+                <button class="text-btn">View All</button>
+            </div>
+
+            <div class="order-card">
+                <div class="order-header">
+                    <span class="order-id">#ORD-9082</span>
+                    <span class="order-status delivered">Delivered</span>
+                </div>
+                <p class="order-items">1x Butter Chicken, 2x Garlic Naan</p>
+                <div class="order-footer">
+                    <span class="order-date">24 Oct, 7:30 PM</span>
+                    <span class="order-total">₹440</span>
+                </div>
+                <div class="order-actions">
+                    <button class="btn-outline">Reorder</button>
+                    <button class="btn-text-sm">Rate Order</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu List Links -->
+        <section class="profile-section link-list">
+            <a href="#" class="list-item">
+                <div class="left-icon">📍</div>
+                <div class="list-text">Manage Addresses</div>
+                <div class="right-arrow">›</div>
+            </a>
+            <a href="#" class="list-item">
+                <div class="left-icon">💳</div>
+                <div class="list-text">Payment Methods</div>
+                <div class="right-arrow">›</div>
+            </a>
+            <a href="#" class="list-item">
+                <div class="left-icon">💬</div>
+                <div class="list-text">Help & Support</div>
+                <div class="right-arrow">›</div>
+            </a>
+            <a href="#" class="list-item">
+                <div class="left-icon">⚙️</div>
+                <div class="list-text">Settings</div>
+                <div class="right-arrow">›</div>
+            </a>
+        </section>
+
+        <!-- Logout -->
+        <div class="logout-wrapper">
+            <button class="btn-logout" id="logout-btn">Log Out</button>
+            <p class="app-version">App Version 1.0.0</p>
+        </div>
+
+        <div class="bottom-spacer"></div>
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            Home
+        </a>
+        <a href="menu.html" class="nav-item">
+            <span class="nav-icon">📋</span>
+            Menu
+        </a>
+        <a href="cart.html" class="nav-item">
+            <span class="nav-icon">🛒</span>
+            Cart
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <span class="nav-icon">👤</span>
+            Profile
+        </a>
+    </nav>
+
+    <script src="profile.js"></script>
+</body>
+
+</html>

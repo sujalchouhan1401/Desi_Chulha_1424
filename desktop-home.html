@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desi Chulha | Premium Desktop Home</title>
+    <!-- Google Fonts: Inter/Poppins -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="desktop-home.css">
+</head>
+
+<body>
+
+    <!-- Top Sticky Navigation Bar -->
+    <nav class="desktop-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo">🔥</div>
+                <span class="brand-name">Desi Chulha</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">Combos</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+
+            <div class="nav-profile">
+                <div class="avatar-wrap">
+                    <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=40&font-size=0.4"
+                        alt="Profile avatar">
+                </div>
+                <!-- Simple Dropdown Arrow Indicator -->
+                <span class="dropdown-arrow">▼</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Container Wrapper for 1200px Max-Width -->
+    <main class="desktop-container">
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Ghar jaisa khana, dil se ❤️</h1>
+                <p class="hero-subtext">Freshly prepared authentic Indian meals, tailored just for you. Experience
+                    warmth in every single bite.</p>
+                <button class="btn-primary hero-btn">Order Now</button>
+            </div>
+            <div class="hero-visual">
+                <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?q=80&w=800&auto=format&fit=crop"
+                    alt="Delicious Indian Food Spread" class="hero-img">
+                <div class="floating-badge top-badge">♨️ Freshly Cooked</div>
+                <div class="floating-badge bottom-badge">⭐ 4.9/5 Ratings</div>
+            </div>
+        </section>
+
+        <!-- Order Type Selector -->
+        <section class="order-type-section">
+            <div class="order-tabs">
+                <button class="type-pill active" data-type="delivery">
+                    <span class="icon">🚚</span> Delivery
+                </button>
+                <button class="type-pill" data-type="pickup">
+                    <span class="icon">🏃</span> Pickup
+                </button>
+                <button class="type-pill" data-type="dinein">
+                    <span class="icon">🍽</span> Dine-In
+                </button>
+            </div>
+        </section>
+
+        <!-- Offers Section (Wide Cards) -->
+        <section class="offers-grid">
+            <div class="offer-card bg-orange">
+                <div class="offer-text">
+                    <h3>FLAT 20% OFF</h3>
+                    <p>On all Tandoor items today only</p>
+                </div>
+                <div class="offer-badge">Use Code: TANDOOR20</div>
+            </div>
+            <div class="offer-card bg-brown">
+                <div class="offer-text">
+                    <h3>FREE ROTI</h3>
+                    <p>On all orders above ₹299</p>
+                </div>
+                <div class="offer-badge">Auto Applied</div>
+            </div>
+        </section>
+
+        <!-- Explore Categories (Grid layout) -->
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Explore Categories</h2>
+                <a href="#" class="view-all-link">View Full Menu →</a>
+            </div>
+
+            <div class="categories-grid">
+                <div class="cat-card">
+                    <div class="cat-icon-lg">🍚</div>
+                    <h4>Biryani</h4>
+                </div>
+                <div class="cat-card">
+                    <div class="cat-icon-lg">🍱</div>
+                    <h4>Thali</h4>
+                </div>
+                <div class="cat-card">
+                    <div class="cat-icon-lg">🍢</div>
+                    <h4>Tandoor</h4>
+                </div>
+                <div class="cat-card">
+                    <div class="cat-icon-lg">🍛</div>
+                    <h4>Combos</h4>
+                </div>
+                <div class="cat-card">
+                    <div class="cat-icon-lg">🍨</div>
+                    <h4>Desserts</h4>
+                </div>
+                <div class="cat-card">
+                    <div class="cat-icon-lg">🥤</div>
+                    <h4>Beverages</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Sellers Grid -->
+        <section class="section-block bg-slight">
+            <div class="section-header">
+                <h2>Best Sellers</h2>
+            </div>
+
+            <div class="bestsellers-grid">
+                <!-- Item 1 -->
+                <div class="food-card">
+                    <div class="badge-ribbon">⭐ Bestseller</div>
+                    <div class="food-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=80&w=400&auto=format&fit=crop"
+                            alt="Butter Chicken Map">
+                    </div>
+                    <div class="food-info">
+                        <h3>Butter Chicken Masala</h3>
+                        <p class="desc">Creamy, rich and mildly spiced aromatic chicken curry.</p>
+                        <div class="food-footer">
+                            <span class="price">₹340</span>
+                            <button class="btn-add-cart" data-price="340">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="food-card">
+                    <div class="badge-ribbon must-try">🔥 Must Try</div>
+                    <div class="food-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=400&auto=format&fit=crop"
+                            alt="Paneer Tikka">
+                    </div>
+                    <div class="food-info">
+                        <h3>Paneer Tikka</h3>
+                        <p class="desc">Charcoal grilled fresh paneer cubes with mint chutney.</p>
+                        <div class="food-footer">
+                            <span class="price">₹280</span>
+                            <button class="btn-add-cart" data-price="280">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="food-card">
+                    <div class="food-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=400&auto=format&fit=crop"
+                            alt="Chicken Biryani">
+                    </div>
+                    <div class="food-info">
+                        <h3>Hyderabadi Chicken Biryani</h3>
+                        <p class="desc">Slow cooked basmati rice layered with marinated chicken.</p>
+                        <div class="food-footer">
+                            <span class="price">₹320</span>
+                            <button class="btn-add-cart" data-price="320">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="food-card">
+                    <div class="badge-ribbon veg-healthy">🥬 Healthy</div>
+                    <div class="food-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=400&auto=format&fit=crop"
+                            alt="Mix Veg">
+                    </div>
+                    <div class="food-info">
+                        <h3>Mixed Vegetable Curry</h3>
+                        <p class="desc">Farm fresh vegetables cooked in homestyle gravy.</p>
+                        <div class="food-footer">
+                            <span class="price">₹220</span>
+                            <button class="btn-add-cart" data-price="220">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Combos & Thali (Wide Cards) -->
+        <section class="section-block">
+            <div class="section-header">
+                <h2>Combos & Thali Highlight</h2>
+            </div>
+
+            <div class="combo-grid">
+                <!-- Regular Thali -->
+                <div class="combo-wide-card">
+                    <div class="combo-photo">
+                        <img src="https://images.unsplash.com/photo-1626776876729-bab43bfe0e70?q=80&w=500&auto=format&fit=crop"
+                            alt="Regular Thali">
+                    </div>
+                    <div class="combo-details">
+                        <div class="combo-header">
+                            <div>
+                                <h3>Regular Veg Thali</h3>
+                                <p class="serves">Serves 1</p>
+                            </div>
+                            <div class="combo-price">₹249</div>
+                        </div>
+                        <ul class="combo-includes">
+                            <li>✓ 2 Butter Roti</li>
+                            <li>✓ Dal Makhani</li>
+                            <li>✓ Paneer Butter Masala</li>
+                            <li>✓ Jeera Rice & Sweet</li>
+                        </ul>
+                        <button class="btn-combo-add" data-price="249">Add Combo</button>
+                    </div>
+                </div>
+
+                <!-- Special Thali -->
+                <div class="combo-wide-card special-card">
+                    <div class="combo-photo">
+                        <img src="https://plus.unsplash.com/premium_photo-1683617301662-7204dc6630f9?q=80&w=500&auto=format&fit=crop"
+                            alt="Maharaja Thali">
+                        <div class="premium-tag">👑 Maharaja Special</div>
+                    </div>
+                    <div class="combo-details">
+                        <div class="combo-header">
+                            <div>
+                                <h3>Maharaja Non-Veg Thali</h3>
+                                <p class="serves">Serves 2</p>
+                            </div>
+                            <div class="combo-price">₹599</div>
+                        </div>
+                        <ul class="combo-includes">
+                            <li>✓ 4 Butter Naan</li>
+                            <li>✓ Butter Chicken</li>
+                            <li>✓ Chicken Tikka (4 pcs)</li>
+                            <li>✓ Mutton Biryani & Dessert</li>
+                        </ul>
+                        <button class="btn-combo-add" data-price="599">Add Combo</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Desktop-Rich Footer -->
+    <footer class="desktop-footer">
+        <div class="footer-grid">
+
+            <!-- Brand & Socials -->
+            <div class="footer-col brand-col">
+                <div class="f-brand">
+                    <span class="logo">🔥</span> Desi Chulha
+                </div>
+                <p class="f-desc">Bringing the authentic taste of Indian homes right to your table. Experience joy in
+                    every bite.</p>
+                <div class="social-links">
+                    <a href="#" class="social-btn">IG</a>
+                    <a href="#" class="social-btn">FB</a>
+                    <a href="#" class="social-btn">X</a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Menu</a></li>
+                    <li><a href="#">Book a Table</a></li>
+                    <li><a href="#">Catering Services</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="contact-list">
+                    <li>📞 +91 98765 43210</li>
+                    <li><span style="color:#25D366">💬</span> WhatsApp available</li>
+                    <li>🕒 Open Everyday: 11 AM - 11 PM</li>
+                </ul>
+            </div>
+
+            <!-- Location / Maps Mock -->
+            <div class="footer-col map-col">
+                <h4>Our Location</h4>
+                <p>123 Spicewood Drive, Food City, Mumbai, 400001</p>
+                <div class="map-placeholder">
+                    <div class="map-marker">📍</div>
+                    <span>Google Maps Integration</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Desi Chulha. All rights reserved.</p>
+            <div class="bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Right Sticky Cart Widget -->
+    <div id="desktop-cart-widget" class="desktop-cart-widget hidden">
+        <div class="widget-header">
+            <h4>Your Cart</h4>
+            <span class="item-count badge-circle">2</span>
+        </div>
+        <div class="widget-body">
+            <div class="subtotal-row">
+                <span>Subtotal</span>
+                <span class="amt" id="widget-total">₹0</span>
+            </div>
+            <button class="btn-checkout-full">Checkout</button>
+        </div>
+    </div>
+
+    <script src="desktop-home.js"></script>
+</body>
+
+</html>
