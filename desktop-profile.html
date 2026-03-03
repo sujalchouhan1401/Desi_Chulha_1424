@@ -128,40 +128,7 @@
                     </div>
 
                     <div class="address-grid">
-                        <!-- Address Card 1 -->
-                        <div class="address-card">
-                            <div class="address-tag">Home</div>
-                            <h4>Sujal Chouhan</h4>
-                            <p>JK Lakshmipat University Hostel<br>Ajmer Road, Near Mahindra SEZ<br>Mahapura, Rajasthan
-                                302026</p>
-                            <div class="address-actions" style="justify-content: space-between; align-items: center;">
-                                <div style="display:flex; gap:16px;">
-                                    <button type="button">Edit</button>
-                                    <button type="button" class="delete-btn">Delete</button>
-                                </div>
-                                <label
-                                    style="font-size: 13px; color: var(--text-muted); display:flex; gap:6px; cursor:pointer;">
-                                    <input type="radio" name="default_addr" checked> Set as Default
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Address Card 2 -->
-                        <div class="address-card">
-                            <div class="address-tag">Work</div>
-                            <h4>Sujal Chouhan</h4>
-                            <p>Tech Park Building, Floor 4<br>Sitapura Industrial Area<br>Jaipur, Rajasthan 302022</p>
-                            <div class="address-actions" style="justify-content: space-between; align-items: center;">
-                                <div style="display:flex; gap:16px;">
-                                    <button type="button">Edit</button>
-                                    <button type="button" class="delete-btn">Delete</button>
-                                </div>
-                                <label
-                                    style="font-size: 13px; color: var(--text-muted); display:flex; gap:6px; cursor:pointer;">
-                                    <input type="radio" name="default_addr"> Set as Default
-                                </label>
-                            </div>
-                        </div>
+                        <!-- Addresses will be rendered dynamically by profile-manager.js -->
 
                         <!-- Add New Address -->
                         <button class="add-new-address" onclick="openAddressModal()">
@@ -340,6 +307,7 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="profile-manager.js"></script>
     <script src="cart-manager.js"></script>
     <script src="geolocation-manager.js"></script>
     <script src="desktop-home.js"></script>

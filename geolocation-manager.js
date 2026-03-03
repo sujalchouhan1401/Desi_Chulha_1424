@@ -113,14 +113,16 @@ class GeolocationManager {
      */
     populateAddressFields(addr) {
         // addr keys include: house_number, road, suburb, city, state, postcode, country...
+        console.log('OSM Address Data:', addr);
 
-        const street = [
-            addr.house_number,
-            addr.road,
-            addr.neighbourhood || addr.suburb
-        ].filter(Boolean).join(', ');
+        const road = addr.road || addr.pedestrian || addr.suburb || '';
+        const houseNumber = addr.house_number || '';
+        const neighborhood = addr.neighbourhood || addr.suburb || addr.residential || '';
 
-        const city = addr.city || addr.town || addr.village || addr.state_district || '';
+        const streetParts = [houseNumber, road, neighborhood].filter(Boolean);
+        const street = streetParts.join(', ');
+
+        const city = addr.city || addr.town || addr.village || addr.state_district || addr.county || '';
         const pincode = addr.postcode || '';
 
         // Profile Page Filling
@@ -135,8 +137,9 @@ class GeolocationManager {
         // Cart Page Filling
         const cartDisplay = document.getElementById('addr-display');
         if (cartDisplay) {
-            const fullAddr = [street, city, addr.state, pincode].filter(Boolean).join(', ');
-            cartDisplay.textContent = fullAddr;
+            const fullAddrParts = [street, city, addr.state, pincode].filter(Boolean);
+            const fullAddr = fullAddrParts.join(', ');
+            cartDisplay.textContent = fullAddr || 'Location detected, please verify.';
         }
     }
 }
