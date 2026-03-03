@@ -422,3 +422,23 @@
     background: var(--primary-color, #F07A5D);
     color: #fff;
 }
+
+/* Geolocation Loader */
+.gps-loader {
+    display: inline-block;
+    animation: gps-spin 1s linear infinite;
+}
+
+@keyframes gps-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
