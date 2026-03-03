@@ -567,3 +567,154 @@
     font-size: 12px;
     font-weight: 600;
 }
+
+/* ======== Mobile Menu Responsiveness (Max 768px) ======== */
+@media (max-width: 768px) {
+    .menu-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .menu-page-header .page-title {
+        font-size: 24px;
+    }
+
+    .menu-controls {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .filter-toggles {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+    }
+
+    .filter-toggles::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filter-btn {
+        white-space: nowrap;
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+
+    /* Grid Container Changes */
+    .menu-grid-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Sidebar to Horizontal Category Bar */
+    .menu-sidebar {
+        position: sticky;
+        top: 60px;
+        /* Below mobile header */
+        z-index: 100;
+        background: var(--bg-color);
+        margin: 0 -20px;
+        padding: 10px 20px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .category-list {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        gap: 8px;
+        scrollbar-width: none;
+    }
+
+    .category-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .cat-nav-link {
+        white-space: nowrap;
+        padding: 8px 16px;
+        font-size: 14px;
+        background: #fff;
+        border: 1px solid var(--border-color);
+    }
+
+    .cat-nav-item.active .cat-nav-link {
+        background: var(--primary-color);
+        color: #fff;
+        border-color: var(--primary-color);
+    }
+
+    /* Menu Items Grid */
+    .menu-items-grid {
+        grid-template-columns: 1fr;
+        /* Single column for better readability on narrow phones */
+        gap: 16px;
+    }
+
+    /* At tablet or wide mobile, 2 columns */
+    @media (min-width: 480px) {
+        .menu-items-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .menu-section {
+        margin-bottom: 40px;
+    }
+
+    .menu-section-title {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+
+    /* Dish Card Adjustments */
+    .dish-card {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .dish-name {
+        font-size: 16px;
+    }
+
+    .dish-price {
+        font-size: 16px;
+    }
+
+    .dish-visual {
+        width: 100px;
+    }
+
+    .dish-image,
+    .dish-visual-placeholder {
+        width: 100px;
+        height: 100px;
+    }
+
+    .btn-add-item {
+        padding: 6px 16px;
+        font-size: 12px;
+        width: 100%;
+    }
+
+    /* Quantity Selector for Mobile */
+    .qty-selector {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .qty-btn {
+        width: 28px;
+        height: 28px;
+    }
+}
