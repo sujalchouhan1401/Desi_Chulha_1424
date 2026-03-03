@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desi Chulha | My Profile</title>
+    <!-- Google Fonts: Inter/Poppins -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="desktop-home.css">
+    <link rel="stylesheet" href="desktop-profile.css">
+</head>
+
+<body>
+
+    <!-- Top Sticky Navigation Bar -->
+    <nav class="desktop-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo">🔥</div>
+                <span class="brand-name">Desi Chulha</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="desktop-home.html">Home</a></li>
+                <li><a href="desktop-menu.html">Menu</a></li>
+                <li><a href="desktop-combos.html">Combos</a></li>
+                <li><a href="javascript:void(0)" onclick="openOrdersModal()">Orders</a></li>
+                <li><a href="javascript:void(0)" onclick="openContactModal()">Contact</a></li>
+            </ul>
+
+            <div class="header-actions-wrap">
+                <!-- Cart Header Icon & Dropdown -->
+                <div class="header-cart-container">
+                    <a href="cart.html" class="header-cart-icon-wrap">
+                        <span>🛒</span>
+                        <span id="header-cart-badge" class="badge-circle" style="display: none;">0</span>
+                    </a>
+
+                    <!-- The Dropdown Widget -->
+                    <div id="desktop-cart-widget" class="desktop-cart-widget hidden">
+                        <div class="widget-header">
+                            <h4>Your Cart</h4>
+                            <span class="item-count badge-circle"
+                                style="color: var(--primary-color); background: #fff;">0</span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="subtotal-row">
+                                <span>Subtotal</span>
+                                <span class="amt" id="widget-total">₹0</span>
+                            </div>
+                            <button class="btn-checkout-full" onclick="window.location.href='cart.html'"
+                                style="margin-top: 15px;">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-profile active">
+                    <div class="avatar-wrap">
+                        <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=40&font-size=0.4"
+                            alt="Profile avatar">
+                    </div>
+                    <span class="dropdown-arrow">▼</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Container Wrapper -->
+    <main class="desktop-container profile-container">
+        <div class="profile-layout">
+
+            <!-- Left Sidebar -->
+            <aside class="profile-sidebar">
+                <div class="user-summary">
+                    <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=100&font-size=0.4"
+                        alt="User Avatar" class="avatar-lg">
+                    <h3>Sujal C</h3>
+                    <p>+91 8233595881</p>
+                </div>
+                <nav class="profile-nav">
+                    <a href="#my-profile" class="active"><i>👤</i> My Profile</a>
+                    <a href="#my-orders"><i>📦</i> My Orders</a>
+                    <a href="#my-addresses"><i>📍</i> My Addresses</a>
+                    <a href="#my-rewards"><i>🎁</i> My Rewards</a>
+                    <a href="index.html" class="text-danger"><i>🚪</i> Logout</a>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div class="profile-content">
+
+                <!-- Section: My Profile -->
+                <section id="my-profile" class="profile-section">
+                    <div class="profile-section-header">
+                        <h2>Account Information</h2>
+                        <p>Update your personal details here. Your phone number is verified via OTP and cannot be
+                            modified directly.</p>
+                    </div>
+                    <form action="#" method="POST" class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" class="form-control" value="Sujal Chouhan">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span
+                                    style="font-weight:normal;color:var(--text-muted)">(Optional)</span></label>
+                            <input type="email" id="email" class="form-control" placeholder="sujal@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" id="phone" class="form-control" value="+91 8233595881" readonly
+                                title="Phone number cannot be changed (OTP Verified)">
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="button" class="btn-save">Save Changes</button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Section: My Addresses -->
+                <section id="my-addresses" class="profile-section">
+                    <div class="profile-section-header">
+                        <h2>Saved Addresses</h2>
+                        <p>Manage your delivery locations for a faster checkout experience.</p>
+                    </div>
+
+                    <div class="address-grid">
+                        <!-- Address Card 1 -->
+                        <div class="address-card">
+                            <div class="address-tag">Home</div>
+                            <h4>Sujal Chouhan</h4>
+                            <p>JK Lakshmipat University Hostel<br>Ajmer Road, Near Mahindra SEZ<br>Mahapura, Rajasthan
+                                302026</p>
+                            <div class="address-actions" style="justify-content: space-between; align-items: center;">
+                                <div style="display:flex; gap:16px;">
+                                    <button type="button">Edit</button>
+                                    <button type="button" class="delete-btn">Delete</button>
+                                </div>
+                                <label
+                                    style="font-size: 13px; color: var(--text-muted); display:flex; gap:6px; cursor:pointer;">
+                                    <input type="radio" name="default_addr" checked> Set as Default
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Address Card 2 -->
+                        <div class="address-card">
+                            <div class="address-tag">Work</div>
+                            <h4>Sujal Chouhan</h4>
+                            <p>Tech Park Building, Floor 4<br>Sitapura Industrial Area<br>Jaipur, Rajasthan 302022</p>
+                            <div class="address-actions" style="justify-content: space-between; align-items: center;">
+                                <div style="display:flex; gap:16px;">
+                                    <button type="button">Edit</button>
+                                    <button type="button" class="delete-btn">Delete</button>
+                                </div>
+                                <label
+                                    style="font-size: 13px; color: var(--text-muted); display:flex; gap:6px; cursor:pointer;">
+                                    <input type="radio" name="default_addr"> Set as Default
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Add New Address -->
+                        <button class="add-new-address" onclick="openAddressModal()">
+                            <div class="icon">⊕</div>
+                            <span>Add New Address</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Section: My Orders -->
+                <section id="my-orders" class="profile-section">
+                    <div class="profile-section-header">
+                        <h2>Order History</h2>
+                        <p>View your past orders, track current status, and quickly reorder your favorites.</p>
+                    </div>
+
+                    <!-- Empty State (Hidden currently, but structure lives here) -->
+                    <div class="empty-state hidden"
+                        style="text-align: center; padding: 40px 0; border: 1px dashed var(--border-color); border-radius: 16px;">
+                        <span style="font-size: 40px; display: block; margin-bottom: 16px;">☕</span>
+                        <h3 style="font-size: 18px; color: var(--text-main); margin-bottom: 8px;">You haven’t placed any
+                            orders yet</h3>
+                        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 24px;">Time to treat
+                            yourself to something delicious.</p>
+                        <a href="desktop-menu.html" class="btn-save" style="text-decoration: none;">Explore Menu</a>
+                    </div>
+
+                    <div class="order-list">
+                        <!-- Order Item 1 -->
+                        <div class="order-card">
+                            <div class="order-info">
+                                <h4>Order #DC-8429</h4>
+                                <div class="order-meta">
+                                    <span>📅 Today, 01:45 PM</span>
+                                    <span>•</span>
+                                    <span>💳 ₹330 Paid via UPI</span>
+                                </div>
+                                <div class="order-items">
+                                    1x Special Thali, 2x Cold Coffee, 1x Veg Sandwich
+                                </div>
+                            </div>
+                            <div class="order-status-actions">
+                                <span class="status-badge status-processing">⏳ Preparing Food</span>
+                                <button class="btn-reorder">Track Order</button>
+                            </div>
+                        </div>
+
+                        <!-- Order Item 2 -->
+                        <div class="order-card">
+                            <div class="order-info">
+                                <h4>Order #DC-7102</h4>
+                                <div class="order-meta">
+                                    <span>📅 28 Feb 2026, 08:30 PM</span>
+                                    <span>•</span>
+                                    <span>💳 ₹210 Cash on Delivery</span>
+                                </div>
+                                <div class="order-items">
+                                    1x 2 Pav Bhaji + 2 Cold Coffee Combo
+                                </div>
+                            </div>
+                            <div class="order-status-actions">
+                                <span class="status-badge status-delivered">✓ Delivered</span>
+                                <button class="btn-reorder">Reorder</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: My Rewards -->
+                <section id="my-rewards" class="profile-section hidden">
+                    <div class="profile-section-header">
+                        <h2>My Rewards 🎁</h2>
+                        <p>Earn points on every order and unlock delicious freebies.</p>
+                    </div>
+
+                    <!-- Rewards Banner Card -->
+                    <div
+                        style="background: linear-gradient(135deg, var(--primary-color) 0%, #E0684B 100%); color: #fff; padding: 32px; border-radius: 16px; box-shadow: 0 8px 24px rgba(240, 122, 93, 0.3); display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <p style="font-size: 14px; opacity: 0.9; margin-bottom: 4px;">Current Balance</p>
+                            <h3
+                                style="font-size: 48px; font-weight: 800; font-family: var(--font-heading); margin-bottom: 8px; line-height: 1;">
+                                850 <span style="font-size: 18px; font-weight: 500;">Pts</span></h3>
+                            <p style="font-size: 14px; opacity: 0.9;">Equivalent to ₹85 in Desi Chulha Wallet</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <button class="btn-slide"
+                                style="color: var(--primary-color); padding: 12px 28px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Redeem
+                                Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Progress tracking -->
+                    <div
+                        style="margin-top: 32px; padding: 24px; border: 1px solid var(--border-color); border-radius: 16px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h4 style="font-size: 16px; font-weight: 600;">Next Milestone: Free Masala Chai ☕</h4>
+                            <span style="font-size: 13px; font-weight: 600; color: var(--primary-color);">2 orders
+                                away!</span>
+                        </div>
+                        <!-- Progress Bar Visual -->
+                        <div
+                            style="width: 100%; height: 12px; background: #fdf2f0; border-radius: 100px; overflow: hidden; margin-bottom: 12px;">
+                            <div
+                                style="width: 60%; height: 100%; background: var(--primary-color); border-radius: 100px;">
+                            </div>
+                        </div>
+                        <p style="font-size: 13px; color: var(--text-muted);">You have completed 3 out of 5 orders this
+                            month to unlock your free premium beverage.</p>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Desktop-Rich Footer -->
+    <footer class="desktop-footer">
+        <div class="footer-grid">
+
+            <!-- Brand & Socials -->
+            <div class="footer-col brand-col">
+                <div class="f-brand">
+                    <span class="logo">🔥</span> Desi Chulha
+                </div>
+                <p class="f-desc">Bringing the authentic taste of Indian homes right to your table. Experience joy in
+                    every bite.</p>
+                <div class="social-links">
+                    <a href="#" class="social-btn">IG</a>
+                    <a href="#" class="social-btn">FB</a>
+                    <a href="#" class="social-btn">X</a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="desktop-menu.html">Our Menu</a></li>
+                    <li><a href="#">Book a Table</a></li>
+                    <li><a href="#">Catering Services</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="contact-list">
+                    <li>📞 +91 8233595881</li>
+                    <li><span style="color:#25D366">💬</span> WhatsApp available</li>
+                    <li>🕒 Open Everyday: 10 AM - 10 PM</li>
+                </ul>
+            </div>
+
+            <!-- Location / Maps Mock -->
+            <div class="footer-col map-col">
+                <h4>Our Location</h4>
+                <p>Near JK Lakshmipat University, Ajmer Rd, near Mahindra SEZ, Mahapura, Rajasthan 302026</p>
+                <div class="map-placeholder">
+                    <div class="map-marker">📍</div>
+                    <span>Google Maps Integration</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Desi Chulha. All rights reserved.</p>
+            <div class="bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="cart-manager.js"></script>
+    <script src="desktop-home.js"></script>
+
+    <!-- Additional Script to Handle Active Sidebar State (Optional UX Enhancement) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.profile-nav a:not(.text-danger)');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Toggle sections via sidebar nav
+        document.querySelectorAll('.profile-nav a:not(.text-danger)').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                // Highlight link
+                document.querySelectorAll('.profile-nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                // Show specific section
+                document.querySelectorAll('.profile-section').forEach(sec => {
+                    sec.classList.add('hidden');
+                    sec.style.display = 'none'; // Ensure CSS overridden if needed
+                });
+
+                const targetSec = document.getElementById(targetId);
+                if (targetSec) {
+                    targetSec.classList.remove('hidden');
+                    targetSec.style.display = 'flex';
+                }
+            });
+        });
+
+        // Init visual
+        document.querySelectorAll('.profile-section').forEach(sec => {
+            if (sec.id !== 'my-profile') {
+                sec.classList.add('hidden');
+                sec.style.display = 'none';
+            } else {
+                sec.style.display = 'flex';
+            }
+        });
+
+        function openAddressModal() {
+            document.getElementById('address-modal').classList.add('active');
+        }
+        function closeAddressModal() {
+            document.getElementById('address-modal').classList.remove('active');
+        }
+    </script>
+
+    <!-- Modals -->
+    <div id="address-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAddressModal()">&times;</button>
+            <div class="modal-header">
+                <h2>Add New Address</h2>
+            </div>
+            <div class="modal-body" style="padding-right: 10px;">
+                <form onsubmit="event.preventDefault(); closeAddressModal();">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <button type="button" class="btn-outline"
+                            style="width: 100%; padding: 12px; border-color: var(--primary-color); color: var(--primary-color); border-radius: 8px; font-weight: 600; display:flex; align-items:center; justify-content:center; gap:8px;">
+                            📍 Use Current Location (GPS)
+                        </button>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label>Save as (Label)</label>
+                        <select class="form-control" required style="cursor:pointer; appearance:auto;">
+                            <option value="Home">Home</option>
+                            <option value="Hostel">Hostel</option>
+                            <option value="Work">Work</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label>Street Address / House No.</label>
+                        <input type="text" class="form-control" placeholder="e.g. 124, Blue Diamond Residency" required>
+                    </div>
+
+                    <div style="display: flex; gap: 16px; margin-bottom: 24px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>City</label>
+                            <input type="text" class="form-control" placeholder="Jaipur" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>Pincode</label>
+                            <input type="text" class="form-control" placeholder="302026" required data-type="number"
+                                maxlength="6">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-checkout-full" style="background: var(--primary-color);">Save
+                        Address</button>
+                </form>
+            </div>
+        </div>
+    </div>

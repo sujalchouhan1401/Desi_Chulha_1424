@@ -146,6 +146,72 @@ h4,
     color: var(--text-muted);
 }
 
+/* ======== Profile Navigation Dropdown ======== */
+.header-profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-dropdown-menu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    margin-top: 8px;
+    background: #fff;
+    min-width: 220px;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-color);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+/* Add an active class toggler later from JS or Hover fallback */
+.header-profile-container:hover .profile-dropdown-menu,
+.header-profile-container.active .profile-dropdown-menu,
+.profile-dropdown-menu.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.profile-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.2s;
+}
+
+.profile-dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+.profile-dropdown-menu a:hover {
+    background: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.profile-dropdown-menu a.logout-btn {
+    color: #E03546;
+}
+
+.profile-dropdown-menu a.logout-btn:hover {
+    background: rgba(224, 53, 70, 0.05);
+}
+
 
 /* ======== Main Container ======== */
 .desktop-container {
