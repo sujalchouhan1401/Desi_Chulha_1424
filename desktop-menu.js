@@ -113,8 +113,8 @@ const menuData = [
         name: "Thali",
         icon: "🍱",
         items: [
-            { id: "cmb-1", name: "Regular thali", price: 100, isVeg: true, tag: "Daily Need", desc: "Ek plate mein poora Hindustan – har bite mein ghar ka swaad.", image: "images/menu/regular-thali.jpg" },
-            { id: "cmb-2", name: "Special Thali", price: 130, isVeg: true, tag: "Must Try", desc: "Yeh sirf thali nahi, poora celebration hai — har katori mein royal treatment.", image: "images/menu/special-thali.jpg" },
+            { id: "cmb-1", name: "Regular thali", price: 100, isVeg: true, tag: "Daily Need", desc: "Roti , Chaval , Sabji, Daal, Salad", image: "images/menu/regular-thali.jpg" },
+            { id: "cmb-2", name: "Special Thali", price: 130, isVeg: true, tag: "Must Try", desc: "Roti , Chaval , Special Sabji , Daal/Kadi , Sweet , Dahi , Salad", image: "images/menu/special-thali.jpg" },
             { id: "cmb-3", name: "Dall Bati (2 Pic)", price: 60, isVeg: true, tag: "Traditional", image: "images/menu/dal-bati.jpg", desc: "Jitna ghee, utna pyaar – yahi hai daal baati ka asli sanskaar." },
             { id: "cmb-4", name: "Dall Bati With Ghee (2 Pic)", price: 80, isVeg: true, tag: "Rich", image: "images/menu/dal-bati-ghee.jpg", desc: "Jitna ghee, utna pyaar – yahi hai daal baati ka asli sanskaar." }
         ]
