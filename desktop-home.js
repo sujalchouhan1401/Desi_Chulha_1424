@@ -117,63 +117,117 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ---------------------------------
-    // Sticky Cart Logic
+    // Cart Buttons & Quantity Sync Logic
     // ---------------------------------
-    const addCartBtns = document.querySelectorAll(".btn-add-cart, .btn-combo-add");
+    window.syncHomeCartButtons = function() {
+        if (!window.cartManager) return;
+        const cartItems = window.cartManager.getCart();
 
-    addCartBtns.forEach(btn => {
-        btn.addEventListener("click", (e) => {
+        const allContainers = document.querySelectorAll('.food-footer, .combo-details, .slide-content');
+        allContainers.forEach(container => {
+            const parentCard = container.closest('.food-card, .combo-wide-card, .slide-content');
+            if (!parentCard) return;
+            const titleEl = parentCard.querySelector('h3') || parentCard.querySelector('.slide-title');
+            if (!titleEl) return;
+            
+            const itemName = titleEl.textContent;
+            const itemId = 'item-' + itemName.toLowerCase().replace(/\s+/g, '-');
+            const cartItem = cartItems.find(i => i.id === itemId);
+            
+            const addBtn = container.querySelector('.btn-add-cart, .btn-combo-add');
+            // If it doesn't have an add btn that we control, skip
+            if (!addBtn && !container.querySelector('.qty-control-wrapper')) return;
+
+            let qtyControl = container.querySelector('.qty-control-wrapper');
+
+            if (cartItem) {
+                // Item in cart, show qty control, hide add btn
+                if (addBtn) addBtn.style.display = 'none';
+                
+                if (!qtyControl) {
+                    qtyControl = document.createElement('div');
+                    qtyControl.className = 'qty-control-wrapper';
+                    // Apply styles inline so it looks good on the homepage/combopage
+                    qtyControl.style.display = 'flex';
+                    qtyControl.style.alignItems = 'center';
+                    qtyControl.style.background = 'var(--bg-color)';
+                    qtyControl.style.borderRadius = 'var(--radius-sm)';
+                    qtyControl.style.padding = '4px 8px';
+                    
+                    if (container.classList.contains('combo-details')) {
+                        qtyControl.style.width = '100%';
+                        qtyControl.style.justifyContent = 'space-between';
+                        qtyControl.style.marginTop = 'auto';
+                        qtyControl.style.padding = '10px';
+                    }
+
+                    qtyControl.innerHTML = `
+                        <button class="qty-btn dec-btn" style="background:transparent; border:none; color:var(--primary-color); font-size:18px; font-weight:600; cursor:pointer; width:30px;" onclick="window.cartManager.updateQuantity('${itemId}', 'decrement'); window.syncHomeCartButtons();">-</button>
+                        <span class="qty-val" style="font-weight:600; width:40px; text-align:center;">${cartItem.qty}</span>
+                        <button class="qty-btn inc-btn" style="background:transparent; border:none; color:var(--primary-color); font-size:18px; font-weight:600; cursor:pointer; width:30px;" onclick="window.cartManager.updateQuantity('${itemId}', 'increment'); window.syncHomeCartButtons();">+</button>
+                    `;
+                    
+                    if (addBtn && addBtn.parentNode) {
+                        addBtn.parentNode.insertBefore(qtyControl, addBtn.nextSibling);
+                    } else {
+                        container.appendChild(qtyControl);
+                    }
+                } else {
+                    qtyControl.querySelector('.qty-val').textContent = cartItem.qty;
+                }
+            } else {
+                // Not in cart
+                if (addBtn) {
+                    if(container.classList.contains('combo-details')) {
+                        addBtn.style.display = 'block';
+                    } else {
+                        addBtn.style.display = 'inline-block';
+                    }
+                }
+                if (qtyControl) qtyControl.remove();
+            }
+        });
+        
+        // Let the global cartManager know UI changed (updates overall total and widget)
+        if (window.cartManager) {
+            window.cartManager.updateGlobalWidget();
+        }
+    };
+
+    // Initial Sync
+    window.syncHomeCartButtons();
+
+    // Hook up Add buttons to trigger state changes
+    document.body.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-add-cart') || e.target.classList.contains('btn-combo-add')) {
+            const btn = e.target;
             e.preventDefault();
 
-            // Find closest parent that might contain title (e.g., food-card, combo-wide-card)
-            const parentCard = btn.closest('.food-card') || btn.closest('.combo-wide-card');
+            const parentCard = btn.closest('.food-card') || btn.closest('.combo-wide-card') || btn.closest('.slide-content');
             let itemName = "Item";
             let isVeg = true;
 
             if (parentCard) {
-                const titleEl = parentCard.querySelector('h3');
+                const titleEl = parentCard.querySelector('h3') || parentCard.querySelector('.slide-title');
                 if (titleEl) itemName = titleEl.textContent;
 
-                // Assume non-veg if there is any text implying 'Chicken', 'Mutton', 'Non-Veg'
                 if (itemName.toLowerCase().includes('chicken') || itemName.toLowerCase().includes('mutton') || itemName.toLowerCase().includes('non-veg')) {
                     isVeg = false;
                 }
             }
 
-            // Get price from data attribute
             const price = parseInt(btn.getAttribute("data-price"));
             if (!price) return;
 
-            // Use global cartManager to add item and trigger widget update
             if (window.cartManager) {
                 window.cartManager.addItem({
                     name: itemName,
                     price: price,
                     isVeg: isVeg
                 });
+                window.syncHomeCartButtons();
             }
-
-            // Button visual feedback
-            const originalText = btn.innerHTML;
-            btn.innerHTML = "Added ✓";
-
-            // Inline CSS to match success
-            const origBg = btn.style.backgroundColor;
-            const origColor = btn.style.color;
-            const origBorder = btn.style.borderColor;
-
-            btn.style.backgroundColor = "var(--success-val)";
-            btn.style.color = "#fff";
-            btn.style.borderColor = "var(--success-val)";
-
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.style.backgroundColor = origBg;
-                btn.style.color = origColor;
-                btn.style.borderColor = origBorder;
-            }, 1200);
-
-        });
+        }
     });
 
     // ---------------------------------

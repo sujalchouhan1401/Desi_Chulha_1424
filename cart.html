@@ -533,7 +533,16 @@
                 if (window.cartManager) {
                     window.cartManager.clearCart();
                     openOrdersModal();
-                    renderCartPage(); // Sync main page
+                    if (typeof renderCartPage === 'function') renderCartPage();
+                }
+            }
+        };
+
+        window.clearCartPageHandler = function () {
+            if (confirm('Are you sure you want to clear your entire cart?')) {
+                if (window.cartManager) {
+                    window.cartManager.clearCart();
+                    if (typeof renderCartPage === 'function') renderCartPage();
                 }
             }
         };
