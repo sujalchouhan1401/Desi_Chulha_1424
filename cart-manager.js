@@ -124,21 +124,35 @@ class CartManager {
     }
 
     updateGlobalWidget() {
-        const cartWidget = document.getElementById("desktop-cart-widget");
-        if (!cartWidget) return;
-
-        const cartTotalEl = document.getElementById("widget-total");
-        const cartCountEl = cartWidget.querySelector(".item-count");
+        // Support header cart badges
+        const headerBadges = document.querySelectorAll("#header-cart-badge");
         const totals = this.getTotals();
 
-        if (totals.itemCount > 0) {
-            cartCountEl.textContent = totals.itemCount;
-            if (cartTotalEl) cartTotalEl.textContent = `₹${totals.itemTotal}`;
+        headerBadges.forEach(badge => {
+            if (totals.itemCount > 0) {
+                badge.textContent = totals.itemCount;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        });
 
-            cartWidget.classList.remove("hidden");
-        } else {
-            cartWidget.classList.add("hidden");
-        }
+        const cartWidgets = document.querySelectorAll(".desktop-cart-widget");
+        if (cartWidgets.length === 0) return;
+
+        cartWidgets.forEach(cartWidget => {
+            const cartTotalEl = cartWidget.querySelector("#widget-total");
+            const cartCountEl = cartWidget.querySelector(".item-count");
+
+            if (totals.itemCount > 0) {
+                if (cartCountEl) cartCountEl.textContent = totals.itemCount;
+                if (cartTotalEl) cartTotalEl.textContent = `₹${totals.itemTotal}`;
+
+                cartWidget.classList.remove("hidden");
+            } else {
+                cartWidget.classList.add("hidden");
+            }
+        });
     }
 }
 
@@ -148,15 +162,4 @@ window.cartManager = new CartManager();
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize widget on load
     window.cartManager.updateGlobalWidget();
-
-    // Hook up checkout button in widget if it exists
-    const widgetCheckoutBtn = document.querySelector('#desktop-cart-widget .btn-checkout-full');
-    if (widgetCheckoutBtn) {
-        // If not already explicitly linked in HTML
-        if (!widgetCheckoutBtn.hasAttribute('onclick')) {
-            widgetCheckoutBtn.addEventListener('click', () => {
-                window.location.href = 'cart.html';
-            });
-        }
-    }
 });

@@ -30,13 +30,40 @@
                 <li><a href="javascript:void(0)" onclick="openContactModal()">Contact</a></li>
             </ul>
 
-            <div class="nav-profile">
-                <div class="avatar-wrap">
-                    <img src="https://ui-avatars.com/api/?name=Sujal+Chouhan&background=F07A5D&color=fff&size=40&font-size=0.4"
-                        alt="Profile avatar">
+            <div class="header-actions-wrap">
+                <!-- Cart Header Icon & Dropdown -->
+                <div class="header-cart-container">
+                    <a href="cart.html" class="header-cart-icon-wrap">
+                        <span>🛒</span>
+                        <span id="header-cart-badge" class="badge-circle" style="display: none;">0</span>
+                    </a>
+
+                    <!-- The Dropdown Widget -->
+                    <div id="desktop-cart-widget" class="desktop-cart-widget hidden">
+                        <div class="widget-header">
+                            <h4>Your Cart</h4>
+                            <span class="item-count badge-circle"
+                                style="color: var(--primary-color); background: #fff;">0</span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="subtotal-row">
+                                <span>Subtotal</span>
+                                <span class="amt" id="widget-total">₹0</span>
+                            </div>
+                            <button class="btn-checkout-full" onclick="window.location.href='cart.html'"
+                                style="margin-top: 15px;">Checkout</button>
+                        </div>
+                    </div>
                 </div>
-                <span class="user-name">Sujal Chouhan</span>
-                <span class="dropdown-arrow">▼</span>
+
+                <div class="nav-profile">
+                    <div class="avatar-wrap">
+                        <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=40&font-size=0.4"
+                            alt="Profile avatar">
+                    </div>
+                    <!-- Simple Dropdown Arrow Indicator -->
+                    <span class="dropdown-arrow">▼</span>
+                </div>
             </div>
         </div>
     </nav>
@@ -176,21 +203,19 @@
             <div class="section-header">
                 <h2>Quick Bites & Student Budget</h2>
             </div>
-            <div class="bestsellers-grid" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="bestsellers-grid" style="grid-template-columns: repeat(5, 1fr);">
                 <!-- Snack 1 -->
-                <div class="food-card">
+                <div class="food-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="badge-ribbon" style="z-index: 2;">Cheese Blast</div>
                     <div class="food-img-wrap" style="display: flex;">
                         <img src="images/menu/maggi.jpg" alt="Maggi"
-                            style="width: 50%; height: 120px; object-fit: cover; border-radius: 8px 0 0 8px;">
-                        <img src="images/menu/aloo-sandwich.png" alt="Cheese Sandwich"
-                            style="width: 50%; height: 120px; object-fit: cover; border-radius: 0 8px 8px 0;">
+                            style="width: 50%; height: 140px; object-fit: cover;">
+                        <img src="images/menu/aloo-sandwich.png" alt="Cheese"
+                            style="width: 50%; height: 140px; object-fit: cover;">
                     </div>
-                    <div class="food-info">
-                        <div class="badge-ribbon"
-                            style="position: static; margin-bottom: 12px; width: fit-content; display: inline-block;">
-                            Cheese Blast</div>
+                    <div class="food-info" style="flex-grow: 1; display: flex; flex-direction: column;">
                         <h3>Cheese Blast Combo</h3>
-                        <p class="desc" style="margin-bottom: 12px;">Cheese Maggi + Veg Cheese Sandwich</p>
+                        <p class="desc" style="flex-grow: 1;">Cheese Maggi with a loaded Veg Cheese Sandwich.</p>
                         <div class="food-footer" style="margin-top:auto;">
                             <span class="price">₹99</span>
                             <button class="btn-add-cart" data-price="99">Add</button>
@@ -199,19 +224,16 @@
                 </div>
 
                 <!-- Snack 2 -->
-                <div class="food-card">
+                <div class="food-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="badge-ribbon must-try" style="z-index: 2;">Budget</div>
                     <div class="food-img-wrap" style="display: flex;">
                         <img src="images/menu/dabeli.jpg" alt="Dabeli"
-                            style="width: 50%; height: 120px; object-fit: cover; border-radius: 8px 0 0 8px;">
-                        <img src="images/menu/tea.jpg" alt="Chai"
-                            style="width: 50%; height: 120px; object-fit: cover; border-radius: 0 8px 8px 0;">
+                            style="width: 50%; height: 140px; object-fit: cover;">
+                        <img src="images/menu/tea.jpg" alt="Chai" style="width: 50%; height: 140px; object-fit: cover;">
                     </div>
-                    <div class="food-info">
-                        <div class="badge-ribbon"
-                            style="position: static; margin-bottom: 12px; width: fit-content; display: inline-block;">
-                            Pocket Friendly</div>
-                        <h3>DA Bell EHHH</h3>
-                        <p class="desc" style="margin-bottom: 12px;">dabeli + chai</p>
+                    <div class="food-info" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <h3>Dabeli + Chai</h3>
+                        <p class="desc" style="flex-grow: 1;">Authentic Kutchi Dabeli paired with hot Masala Chai.</p>
                         <div class="food-footer" style="margin-top:auto;">
                             <span class="price">₹35</span>
                             <button class="btn-add-cart" data-price="35">Add</button>
@@ -220,15 +242,18 @@
                 </div>
 
                 <!-- Snack 3 -->
-                <div class="food-card">
-                    <div class="food-info pb-0">
+                <div class="food-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="badge-ribbon" style="z-index: 2;">Best Pair</div>
+                    <div class="food-img-wrap" style="display: flex;">
+                        <img src="images/menu/aloo-sandwich.png" alt="Sandwich"
+                            style="width: 50%; height: 140px; object-fit: cover;">
+                        <img src="images/menu/cold-coffee.jpg" alt="Coffee"
+                            style="width: 50%; height: 140px; object-fit: cover;">
+                    </div>
+                    <div class="food-info" style="flex-grow: 1; display: flex; flex-direction: column;">
                         <h3>Sandwich + Coffee</h3>
-                    </div>
-                    <div class="food-img-wrap">
-                        <img src="images/menu/aloo-sandwich.png" alt="Sandwich Coffee"
-                            style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px;">
-                    </div>
-                    <div class="food-info">
+                        <p class="desc" style="flex-grow: 1;">Grilled Aloo Sandwich perfectly paired with Cold Coffee.
+                        </p>
                         <div class="food-footer" style="margin-top:auto;">
                             <span class="price">₹85</span>
                             <button class="btn-add-cart" data-price="85">Add</button>
@@ -237,16 +262,38 @@
                 </div>
 
                 <!-- Snack 4 -->
-                <div class="food-card">
-                    <div class="badge-ribbon must-try">Pocket Friendly</div>
-                    <div class="food-info pb-0">
-                        <h3>Chowmein + Drink</h3>
+                <div class="food-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="badge-ribbon must-try" style="z-index: 2;">Student Fav</div>
+                    <div class="food-img-wrap" style="display: flex;">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400&auto=format&fit=crop"
+                            alt="Burger" style="width: 50%; height: 140px; object-fit: cover;">
+                        <img src="images/menu/cold-coffee.jpg" alt="Coffee"
+                            style="width: 50%; height: 140px; object-fit: cover;">
                     </div>
-                    <div class="food-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=400&auto=format&fit=crop"
-                            alt="Chowmein" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px;">
+                    <div class="food-info" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <h3>3 Burgers + 1 <Code></Code>Cold Coffee</h3>
+                        <p class="desc" style="flex-grow: 1;">Three delicious veg burgers served with a chilled cold
+                            coffee.</p>
+                        <div class="food-footer" style="margin-top:auto;">
+                            <span class="price">₹229</span>
+                            <button class="btn-add-cart" data-price="229">Add</button>
+                        </div>
                     </div>
-                    <div class="food-info">
+                </div>
+
+                <!-- Snack 5 -->
+                <div class="food-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="badge-ribbon veg-healthy"
+                        style="background:var(--warning-val); color:#000; z-index: 2;">Mega Offer</div>
+                    <div class="food-img-wrap" style="display: flex;">
+                        <img src="images/menu/aloo-paratha.jpg" alt="Paratha"
+                            style="width: 50%; height: 140px; object-fit: cover;">
+                        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=400&auto=format&fit=crop"
+                            alt="Lassi" style="width: 50%; height: 140px; object-fit: cover;">
+                    </div>
+                    <div class="food-info" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <h3>veg maggie + cold coffee</h3>
+                        <p class="desc" style="flex-grow: 1;">veg maggie + cold coffee </p>
                         <div class="food-footer" style="margin-top:auto;">
                             <span class="price">₹70</span>
                             <button class="btn-add-cart" data-price="70">Add</button>
@@ -317,21 +364,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Bottom Right Sticky Cart Widget -->
-    <div id="desktop-cart-widget" class="desktop-cart-widget hidden">
-        <div class="widget-header">
-            <h4>Your Cart</h4>
-            <span class="item-count badge-circle">0</span>
-        </div>
-        <div class="widget-body">
-            <div class="subtotal-row">
-                <span>Subtotal</span>
-                <span class="amt" id="widget-total">₹0</span>
-            </div>
-            <button class="btn-checkout-full">Checkout</button>
-        </div>
-    </div>
 
     <script src="cart-manager.js"></script>
     <script src="desktop-home.js"></script>

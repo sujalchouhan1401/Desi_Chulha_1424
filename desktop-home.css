@@ -939,30 +939,60 @@ h4,
 }
 
 
-/* ======== Sticky Hovering Cart Widget ======== */
+/* ======== Header Cart Dropdown Widget ======== */
+.header-actions-wrap {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.header-cart-icon-wrap {
+    position: relative;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 5px;
+    color: var(--text-main);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.header-cart-icon-wrap:hover {
+    color: var(--primary-color);
+}
+
+.header-cart-container {
+    position: relative;
+}
+
+.header-cart-container:hover .desktop-cart-widget:not(.hidden) {
+    display: block;
+    animation: dropDown 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 .desktop-cart-widget {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
+    position: absolute;
+    top: 100%;
+    right: -10px;
     width: 320px;
     background: var(--card-bg);
     border-radius: var(--radius-lg);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     overflow: hidden;
-    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid var(--border-color);
+    display: none;
+    margin-top: 10px;
 }
 
-@keyframes popIn {
+@keyframes dropDown {
     0% {
         opacity: 0;
-        transform: scale(0.9) translateY(20px);
+        transform: translateY(-10px);
     }
-
     100% {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: translateY(0);
     }
 }
 
