@@ -1,71 +1,59 @@
-/* Bottom Navigation Bar Styles */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: var(--app-max-width, 480px);
-    background: var(--card-bg, #FFFFFF);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 12px 10px 16px;
-    box-shadow: 0 -4px 24px rgba(89, 78, 74, 0.08);
-    z-index: 1000;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
+/* Mobile Bottom Navigation Bar Styles */
+@media (max-width: 768px) {
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        color: var(--text-muted, #7A726E);
+        text-decoration: none;
+        font-size: 10px;
+        font-weight: 600;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        flex: 1;
+    }
+
+    .nav-item.active {
+        color: var(--primary-color, #F07A5D);
+    }
+
+    .nav-icon {
+        font-size: 22px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-item:active {
+        transform: scale(0.9);
+    }
+
+    /* Adjust sticky cart when nav is present */
+    .sticky-cart {
+        bottom: calc(70px + env(safe-area-inset-bottom)) !important;
+    }
 }
 
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    color: var(--text-muted, #7A726E);
-    text-decoration: none;
-    font-size: 11px;
-    font-weight: 500;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.2s ease;
-    width: 60px;
-}
-
-.nav-item.active {
-    color: var(--primary-color, #F07A5D);
-}
-
-.nav-icon {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    /* For emojis */
-}
-
-/* Custom SVG styling if used */
-.nav-icon svg {
-    width: 24px;
-    height: 24px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.nav-item.active .nav-icon svg {
-    fill: currentColor;
-    stroke-width: 0;
-}
-
-.nav-item:active {
-    transform: scale(0.92);
-}
-
-/* Adjust sticky cart when nav is present */
-.sticky-cart.with-nav {
-    bottom: 90px !important;
+@media (min-width: 769px) {
+    .bottom-nav {
+        display: none !important;
+    }
 }

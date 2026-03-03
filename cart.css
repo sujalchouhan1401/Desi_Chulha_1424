@@ -353,3 +353,90 @@
     font-weight: 600;
     font-size: 14px;
 }
+
+/* ======== Mobile Cart Responsiveness (Max 768px) ======== */
+@media (max-width: 768px) {
+    .cart-header h1 {
+        font-size: 24px;
+    }
+
+    .cart-header p {
+        font-size: 14px;
+    }
+
+    .cart-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .cart-card {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .cart-card h3 {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .order-types {
+        gap: 10px;
+    }
+
+    .order-type {
+        padding: 12px 8px;
+    }
+
+    .order-type .type-icon {
+        font-size: 20px;
+    }
+
+    .order-type .type-name {
+        font-size: 12px;
+    }
+
+    .cart-item-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .item-visual {
+        width: 100%;
+    }
+
+    .item-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .item-price {
+        min-width: unset;
+    }
+
+    .bill-row {
+        font-size: 14px;
+    }
+
+    .bill-row.grand-total {
+        font-size: 18px;
+    }
+
+    .btn-checkout-full {
+        font-size: 15px;
+        padding: 14px;
+    }
+
+    .payment-method {
+        padding: 12px;
+    }
+
+    .pay-icon {
+        font-size: 20px;
+        margin-right: 12px;
+    }
+
+    .pay-name {
+        font-size: 14px;
+    }
+}
