@@ -113,10 +113,20 @@
 
                 <!-- Delivery Info / Address (Only show for delivery) -->
                 <div class="cart-card" id="address-card">
-                    <h3>📍 Delivery Address</h3>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <h3 style="margin-bottom: 0;">📍 Delivery Address</h3>
+                        <button type="button" class="btn-outline" id="gps-btn"
+                            style="font-size: 12px; padding: 6px 12px; display: flex; align-items: center; gap: 6px;">
+                            <span class="gps-icon">📍</span>
+                            <span class="gps-text">Detect Location</span>
+                            <span class="gps-loader hidden">⏳</span>
+                        </button>
+                    </div>
                     <div class="address-info">
-                        <h4>Home</h4>
-                        <p>Near JK Lakshmipat University, Ajmer Rd, near Mahindra SEZ, Mahapura, Rajasthan 302026</p>
+                        <h4 id="addr-type">Home</h4>
+                        <p id="addr-display">Near JK Lakshmipat University, Ajmer Rd, near Mahindra SEZ, Mahapura,
+                            Rajasthan 302026</p>
                         <button class="btn-outline">Change Address</button>
                     </div>
                 </div>
@@ -316,6 +326,8 @@
         </div>
     </footer>
 
+    <script src="../js/profile-manager.js"></script>
+    <script src="../js/geolocation-manager.js"></script>
     <script src="../js/cart-manager.js"></script>
     <script>
         let currentOrderType = window.cartManager ? window.cartManager.getOrderType() : 'delivery';

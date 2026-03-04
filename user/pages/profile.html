@@ -128,40 +128,7 @@
                     </div>
 
                     <div class="address-grid">
-                        <!-- Address Card 1 -->
-                        <div class="address-card">
-                            <div class="address-tag">Home</div>
-                            <h4>Sujal Chouhan</h4>
-                            <p>JK Lakshmipat University Hostel<br>Ajmer Road, Near Mahindra SEZ<br>Mahapura, Rajasthan
-                                302026</p>
-                            <div class="address-actions" style="justify-content: space-between; align-items: center;">
-                                <div style="display:flex; gap:16px;">
-                                    <button type="button">Edit</button>
-                                    <button type="button" class="delete-btn">Delete</button>
-                                </div>
-                                <label
-                                    style="font-size: 13px; color: var(--text-muted); display:flex; gap:6px; cursor:pointer;">
-                                    <input type="radio" name="default_addr" checked> Set as Default
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Address Card 2 -->
-                        <div class="address-card">
-                            <div class="address-tag">Work</div>
-                            <h4>Sujal Chouhan</h4>
-                            <p>Tech Park Building, Floor 4<br>Sitapura Industrial Area<br>Jaipur, Rajasthan 302022</p>
-                            <div class="address-actions" style="justify-content: space-between; align-items: center;">
-                                <div style="display:flex; gap:16px;">
-                                    <button type="button">Edit</button>
-                                    <button type="button" class="delete-btn">Delete</button>
-                                </div>
-                                <label
-                                    style="font-size: 13px; color: var(--text-muted); display:flex; gap:6px; cursor:pointer;">
-                                    <input type="radio" name="default_addr"> Set as Default
-                                </label>
-                            </div>
-                        </div>
+                        <!-- Addresses will be rendered dynamically by profile-manager.js -->
 
                         <!-- Add New Address -->
                         <button class="add-new-address" onclick="openAddressModal()">
@@ -340,7 +307,9 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="../js/profile-manager.js"></script>
     <script src="../js/cart-manager.js"></script>
+    <script src="../js/geolocation-manager.js"></script>
     <script src="../js/home.js"></script>
 
     <!-- Additional Script to Handle Active Sidebar State (Optional UX Enhancement) -->
@@ -410,9 +379,11 @@
                 <form onsubmit="event.preventDefault(); closeAddressModal();">
                     <div
                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                        <button type="button" class="btn-outline"
+                        <button type="button" class="btn-outline" id="gps-btn"
                             style="width: 100%; padding: 12px; border-color: var(--primary-color); color: var(--primary-color); border-radius: 8px; font-weight: 600; display:flex; align-items:center; justify-content:center; gap:8px;">
-                            📍 Use Current Location (GPS)
+                            <span class="gps-icon">📍</span>
+                            <span class="gps-text">Use Current Location (GPS)</span>
+                            <span class="gps-loader hidden">⏳</span>
                         </button>
                     </div>
 
@@ -428,18 +399,19 @@
 
                     <div class="form-group" style="margin-bottom: 16px;">
                         <label>Street Address / House No.</label>
-                        <input type="text" class="form-control" placeholder="e.g. 124, Blue Diamond Residency" required>
+                        <input type="text" id="addr-street" class="form-control"
+                            placeholder="e.g. 124, Blue Diamond Residency" required>
                     </div>
 
                     <div style="display: flex; gap: 16px; margin-bottom: 24px;">
                         <div class="form-group" style="flex: 1;">
                             <label>City</label>
-                            <input type="text" class="form-control" placeholder="Jaipur" required>
+                            <input type="text" id="addr-city" class="form-control" placeholder="Jaipur" required>
                         </div>
                         <div class="form-group" style="flex: 1;">
                             <label>Pincode</label>
-                            <input type="text" class="form-control" placeholder="302026" required data-type="number"
-                                maxlength="6">
+                            <input type="text" id="addr-pincode" class="form-control" placeholder="302026" required
+                                data-type="number" maxlength="6">
                         </div>
                     </div>
 
