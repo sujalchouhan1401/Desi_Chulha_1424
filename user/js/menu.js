@@ -336,12 +336,10 @@ function openOrdersModal() {
 }
 
 function clearCartHandler() {
-    if (confirm('Are you sure you want to clear your entire cart?')) {
-        if (window.cartManager) {
-            window.cartManager.clearCart();
-            openOrdersModal();
-            renderMenu(); // Re-render menu to reset quantity selectors
-        }
+    if (window.cartManager) {
+        window.cartManager.clearCart();
+        openOrdersModal();
+        renderMenu(); // Re-render menu to reset quantity selectors
     }
 }
 

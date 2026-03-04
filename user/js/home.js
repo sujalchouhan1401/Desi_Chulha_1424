@@ -73,11 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     window.clearCartHandler = function () {
-        if (confirm('Are you sure you want to clear your entire cart?')) {
-            if (window.cartManager) {
-                window.cartManager.clearCart();
-                openOrdersModal();
-            }
+        if (window.cartManager) {
+            window.cartManager.clearCart();
+            openOrdersModal();
         }
     }
 

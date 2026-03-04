@@ -607,21 +607,17 @@
         };
 
         window.clearCartHandlerByModal = function () {
-            if (confirm('Are you sure you want to clear your entire cart?')) {
-                if (window.cartManager) {
-                    window.cartManager.clearCart();
-                    openOrdersModal();
-                    if (typeof renderCartPage === 'function') renderCartPage();
-                }
+            if (window.cartManager) {
+                window.cartManager.clearCart();
+                openOrdersModal();
+                if (typeof renderCartPage === 'function') renderCartPage();
             }
         };
 
         window.clearCartPageHandler = function () {
-            if (confirm('Are you sure you want to clear your entire cart?')) {
-                if (window.cartManager) {
-                    window.cartManager.clearCart();
-                    if (typeof renderCartPage === 'function') renderCartPage();
-                }
+            if (window.cartManager) {
+                window.cartManager.clearCart();
+                if (typeof renderCartPage === 'function') renderCartPage();
             }
         };
 
@@ -647,7 +643,28 @@
     </div>
 
     <div id="contact-modal" class="modal-overlay">
-        <!-- ... (modal content) ... -->
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('contact-modal')">&times;</button>
+            <div class="modal-header">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="modal-body">
+                <div class="contact-info-card">
+                    <div class="contact-info-row">
+                        <div class="icon">👤</div>
+                        <div class="contact-val">Sujal Chouhan</div>
+                    </div>
+                    <div class="contact-info-row">
+                        <div class="icon">📞</div>
+                        <div class="contact-val">+91 8233595881</div>
+                    </div>
+                    <div class="contact-info-row">
+                        <div class="icon">📍</div>
+                        <div class="contact-val">Near JK Lakshmipat University, Ajmer Rd, Jaipur</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Mobile Bottom Navigation -->
