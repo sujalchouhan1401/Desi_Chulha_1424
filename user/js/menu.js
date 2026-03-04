@@ -4,12 +4,12 @@ const menuData = [
         name: "Beverage",
         icon: "☕",
         items: [
-            { id: "bev-1", name: "Tea", price: 10, isVeg: true, tag: null, image: "images/menu/tea.jpg", desc: "Ek cup jo din bana de." },
-            { id: "bev-2", name: "Kulhad Tea", price: 15, isVeg: true, tag: "Must Try", image: "images/menu/kulhad-tea.png", desc: "Desi vibes, kadak taste." },
-            { id: "bev-3", name: "Hot Coffee", price: 30, isVeg: true, tag: null, image: "images/menu/hot-coffee.png", desc: "Sip karo, stress ko skip karo." },
-            { id: "bev-4", name: "Cold Coffee", price: 50, isVeg: true, tag: "Bestseller", image: "images/menu/cold-coffee.png", desc: "Sip karo, heat ko beat karo." },
-            { id: "bev-5", name: "Lassi Sweet", price: 50, isVeg: true, tag: null, image: "images/menu/lassi.png", desc: "Garmi ka meetha solution." },
-            { id: "bev-6", name: "Lassi Salty", price: 30, isVeg: true, tag: null, image: "images/menu/lassi.png", desc: "Namak ka tadka, sukoon ka jhatka." }
+            { id: "bev-1", name: "Tea", price: 10, isVeg: true, tag: null, image: "../../images/menu/tea.jpg", desc: "Ek cup jo din bana de." },
+            { id: "bev-2", name: "Kulhad Tea", price: 15, isVeg: true, tag: "Must Try", image: "../../images/menu/kulhad-tea.png", desc: "Desi vibes, kadak taste." },
+            { id: "bev-3", name: "Hot Coffee", price: 30, isVeg: true, tag: null, image: "../../images/menu/hot-coffee.png", desc: "Sip karo, stress ko skip karo." },
+            { id: "bev-4", name: "Cold Coffee", price: 50, isVeg: true, tag: "Bestseller", image: "../../images/menu/cold-coffee.png", desc: "Sip karo, heat ko beat karo." },
+            { id: "bev-5", name: "Lassi Sweet", price: 50, isVeg: true, tag: null, image: "../../images/menu/lassi.png", desc: "Garmi ka meetha solution." },
+            { id: "bev-6", name: "Lassi Salty", price: 30, isVeg: true, tag: null, image: "../../images/menu/lassi.png", desc: "Namak ka tadka, sukoon ka jhatka." }
         ]
     },
     {
@@ -17,16 +17,16 @@ const menuData = [
         name: "Chaat",
         icon: "🥟",
         items: [
-            { id: "chaat-1", name: "Papadi Chaat", price: 70, isVeg: true, tag: null, image: "images/menu/papdi-chaat.jpg", desc: "har bite mein chatpata dhamaka" },
-            { id: "chaat-2", name: "Papadi Bhalla Chaat", price: 80, isVeg: true, tag: null, image: "images/menu/papdi-bhalla-chaat.jpg", desc: "soft bhalla, crispy papdi aur chatpata swaad ka perfect combo." },
-            { id: "chaat-3", name: "Dahi Patasi", price: 60, isVeg: true, tag: "Bestseller", image: "images/menu/dahi-patasi.jpg", desc: "Diet kal se… aaj toh Dahi Patasi hi sahi." },
-            { id: "chaat-4", name: "Dahi Bhalla", price: 50, isVeg: true, tag: null, image: "images/menu/dahi-bhalla.jpg", desc: "Itna soft, bas dil bhi pighal jaye." },
-            { id: "chaat-5", name: "Kaji Vada", price: 30, isVeg: true, tag: null, image: "images/menu/kaji-vada.jpg", desc: "Marwadi rasoi ka mashhoor swaad – Kaji Vada lajawab." },
-            { id: "chaat-6", name: "Raj Kachori", price: 90, isVeg: true, tag: "Chef's Special", image: "images/menu/raj-kachori.jpg", desc: "Ye snack nahi, full-size surprise hai." },
-            { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null, image: "images/menu/aloo-tikki-chaat.jpg", desc: "Aloo Tikki – control system permanently fail." },
-            { id: "chaat-8", name: "Samosa Chaat", price: 60, isVeg: true, tag: null, image: "images/menu/samosa-chaat.png", desc: "Teen sides ka snack, par bhookh chaar guna." },
-            { id: "chaat-9", name: "Fruit Salad", price: 120, isVeg: true, tag: "Healthy", image: "images/menu/fruit-salad.jpg", desc: "Colorful bowl, powerful soul." },
-            { id: "chaat-10", name: "Fruit Salad Chaat", price: 130, isVeg: true, tag: null, image: "images/menu/fruit-salad.jpg", desc: "Vitamin ka bomb, taste ka storm." }
+            { id: "chaat-1", name: "Papadi Chaat", price: 70, isVeg: true, tag: null, image: "../../images/menu/papdi-chaat.jpg", desc: "har bite mein chatpata dhamaka" },
+            { id: "chaat-2", name: "Papadi Bhalla Chaat", price: 80, isVeg: true, tag: null, image: "../../images/menu/papdi-bhalla-chaat.jpg", desc: "soft bhalla, crispy papdi aur chatpata swaad ka perfect combo." },
+            { id: "chaat-3", name: "Dahi Patasi", price: 60, isVeg: true, tag: "Bestseller", image: "../../images/menu/dahi-patasi.jpg", desc: "Diet kal se… aaj toh Dahi Patasi hi sahi." },
+            { id: "chaat-4", name: "Dahi Bhalla", price: 50, isVeg: true, tag: null, image: "../../images/menu/dahi-bhalla.jpg", desc: "Itna soft, bas dil bhi pighal jaye." },
+            { id: "chaat-5", name: "Kaji Vada", price: 30, isVeg: true, tag: null, image: "../../images/menu/kaji-vada.jpg", desc: "Marwadi rasoi ka mashhoor swaad – Kaji Vada lajawab." },
+            { id: "chaat-6", name: "Raj Kachori", price: 90, isVeg: true, tag: "Chef's Special", image: "../../images/menu/raj-kachori.jpg", desc: "Ye snack nahi, full-size surprise hai." },
+            { id: "chaat-7", name: "Aloo Tikki Chaat", price: 60, isVeg: true, tag: null, image: "../../images/menu/aloo-tikki-chaat.jpg", desc: "Aloo Tikki – control system permanently fail." },
+            { id: "chaat-8", name: "Samosa Chaat", price: 60, isVeg: true, tag: null, image: "../../images/menu/samosa-chaat.png", desc: "Teen sides ka snack, par bhookh chaar guna." },
+            { id: "chaat-9", name: "Fruit Salad", price: 120, isVeg: true, tag: "Healthy", image: "../../images/menu/fruit-salad.jpg", desc: "Colorful bowl, powerful soul." },
+            { id: "chaat-10", name: "Fruit Salad Chaat", price: 130, isVeg: true, tag: null, image: "../../images/menu/fruit-salad.jpg", desc: "Vitamin ka bomb, taste ka storm." }
         ]
     },
     {
@@ -34,17 +34,17 @@ const menuData = [
         name: "Indian Street Delights",
         icon: "🥙",
         items: [
-            { id: "str-1", name: "Puri Bhaji", price: 60, isVeg: true, tag: null, image: "images/menu/puri-bhaji.png", desc: "Puri Bhaji – pet bhi happy, dil bhi happy." },
-            { id: "str-2", name: "Poha", price: 40, isVeg: true, tag: null, image: "images/menu/poha.jpg", desc: "Haldi ka rang, sehat ke sang." },
-            { id: "str-3", name: "Bhel Puri", price: 50, isVeg: true, tag: null, image: "images/menu/bhel-puri.jpg", desc: "Ek mutthi bhel, aur mood ho jaye swell." },
-            { id: "str-4", name: "Pav Bhaji", price: 70, isVeg: true, tag: "Bestseller", image: "images/menu/pav-bhaji.png", desc: "taste ka asli Mumbaiya blast." },
-            { id: "str-5", name: "Vada Pav", price: 50, isVeg: true, tag: "Must Try", image: "images/menu/vada-pav.png", desc: "snack itna famous ki log bhi brand ban gaye." },
-            { id: "str-6", name: "Dabeli", price: 30, isVeg: true, tag: null, image: "images/menu/dabeli.jpg", desc: "masala itna zabardast, har bite mein blast." },
-            { id: "str-7", name: "Veg Pakoda", price: 60, isVeg: true, tag: null, image: "images/menu/veg-pakoda.jpg", desc: "baarish ka official partner." },
-            { id: "str-8", name: "Cheela Besan", price: 40, isVeg: true, tag: null, image: "images/menu/cheela-besan.jpg", desc: "Healthy bolke khate hain… par upar se chatni double." },
-            { id: "str-9", name: "Cheela Suji", price: 40, isVeg: true, tag: null, image: "images/menu/cheela-suji.png", desc: "Sujal ka Suji Chilla – breakfast ka asli star." },
-            { id: "str-10", name: "Popcorn", price: 50, isVeg: true, tag: null, image: "images/menu/popcorn.jpg", desc: "Picture shuru ho ya na ho, popcorn zaroori hai." },
-            { id: "str-11", name: "Chhole Bhature", price: 70, isVeg: true, tag: "Bestseller", image: "images/menu/chole-bhature.jpg", desc: "Itna zabardast combo, diet bole – main chali." },
+            { id: "str-1", name: "Puri Bhaji", price: 60, isVeg: true, tag: null, image: "../../images/menu/puri-bhaji.png", desc: "Puri Bhaji – pet bhi happy, dil bhi happy." },
+            { id: "str-2", name: "Poha", price: 40, isVeg: true, tag: null, image: "../../images/menu/poha.jpg", desc: "Haldi ka rang, sehat ke sang." },
+            { id: "str-3", name: "Bhel Puri", price: 50, isVeg: true, tag: null, image: "../../images/menu/bhel-puri.jpg", desc: "Ek mutthi bhel, aur mood ho jaye swell." },
+            { id: "str-4", name: "Pav Bhaji", price: 70, isVeg: true, tag: "Bestseller", image: "../../images/menu/pav-bhaji.png", desc: "taste ka asli Mumbaiya blast." },
+            { id: "str-5", name: "Vada Pav", price: 50, isVeg: true, tag: "Must Try", image: "../../images/menu/vada-pav.png", desc: "snack itna famous ki log bhi brand ban gaye." },
+            { id: "str-6", name: "Dabeli", price: 30, isVeg: true, tag: null, image: "../../images/menu/dabeli.jpg", desc: "masala itna zabardast, har bite mein blast." },
+            { id: "str-7", name: "Veg Pakoda", price: 60, isVeg: true, tag: null, image: "../../images/menu/veg-pakoda.jpg", desc: "baarish ka official partner." },
+            { id: "str-8", name: "Cheela Besan", price: 40, isVeg: true, tag: null, image: "../../images/menu/cheela-besan.jpg", desc: "Healthy bolke khate hain… par upar se chatni double." },
+            { id: "str-9", name: "Cheela Suji", price: 40, isVeg: true, tag: null, image: "../../images/menu/cheela-suji.png", desc: "Sujal ka Suji Chilla – breakfast ka asli star." },
+            { id: "str-10", name: "Popcorn", price: 50, isVeg: true, tag: null, image: "../../images/menu/popcorn.jpg", desc: "Picture shuru ho ya na ho, popcorn zaroori hai." },
+            { id: "str-11", name: "Chhole Bhature", price: 70, isVeg: true, tag: "Bestseller", image: "../../images/menu/chole-bhature.jpg", desc: "Itna zabardast combo, diet bole – main chali." },
             { id: "str-12", name: "Burger", price: 80, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400&auto=format&fit=crop", desc: "Messy hands, happy heart." },
             { id: "str-13", name: "Pizza", price: 99, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=400&auto=format&fit=crop", desc: "Ek slice mein history, har bite mein chemistry." }
         ]
@@ -54,13 +54,13 @@ const menuData = [
         name: "Paratha",
         icon: "🫓",
         items: [
-            { id: "par-1", name: "Aloo Paratha", price: 40, isVeg: true, tag: "Bestseller", image: "images/menu/aloo-paratha.jpg", desc: "Gym skip karo, Aloo Paratha pick karo." },
-            { id: "par-2", name: "Gobhi Paratha", price: 50, isVeg: true, tag: null, image: "images/menu/gobhi-paratha.jpg", desc: "jab sehat aur swaad saath aaye." },
-            { id: "par-3", name: "Mooli Paratha", price: 50, isVeg: true, tag: null, image: "images/menu/mooli-paratha.jpg", desc: "khane mein royal, baad mein 'announcement' automatic." },
-            { id: "par-4", name: "Paneer Paratha", price: 60, isVeg: true, tag: null, image: "images/menu/paneer-paratha.jpg", desc: "har bite mein shahi shaan." },
-            { id: "par-5", name: "Paneer Mawa Sweer Paratha", price: 70, isVeg: true, tag: "Sweet", image: "images/menu/paneer-mawa-paratha.jpg", desc: "Har bite mein dessert wali delight." },
-            { id: "par-6", name: "Mater Paratha", price: 50, isVeg: true, tag: null, image: "images/menu/matar-paratha.jpg", desc: "Hari matar ka tadka, breakfast ka dhamaka." },
-            { id: "par-7", name: "Plain Paratha", price: 20, isVeg: true, tag: null, image: "images/menu/plain-paratha.png", desc: "Chai ho ya sabzi, Plain Paratha har jagah busy." }
+            { id: "par-1", name: "Aloo Paratha", price: 40, isVeg: true, tag: "Bestseller", image: "../../images/menu/aloo-paratha.jpg", desc: "Gym skip karo, Aloo Paratha pick karo." },
+            { id: "par-2", name: "Gobhi Paratha", price: 50, isVeg: true, tag: null, image: "../../images/menu/gobhi-paratha.jpg", desc: "jab sehat aur swaad saath aaye." },
+            { id: "par-3", name: "Mooli Paratha", price: 50, isVeg: true, tag: null, image: "../../images/menu/mooli-paratha.jpg", desc: "khane mein royal, baad mein 'announcement' automatic." },
+            { id: "par-4", name: "Paneer Paratha", price: 60, isVeg: true, tag: null, image: "../../images/menu/paneer-paratha.jpg", desc: "har bite mein shahi shaan." },
+            { id: "par-5", name: "Paneer Mawa Sweer Paratha", price: 70, isVeg: true, tag: "Sweet", image: "../../images/menu/paneer-mawa-paratha.jpg", desc: "Har bite mein dessert wali delight." },
+            { id: "par-6", name: "Mater Paratha", price: 50, isVeg: true, tag: null, image: "../../images/menu/matar-paratha.jpg", desc: "Hari matar ka tadka, breakfast ka dhamaka." },
+            { id: "par-7", name: "Plain Paratha", price: 20, isVeg: true, tag: null, image: "../../images/menu/plain-paratha.png", desc: "Chai ho ya sabzi, Plain Paratha har jagah busy." }
         ]
     },
     {
@@ -68,10 +68,10 @@ const menuData = [
         name: "South Indian",
         icon: "🌮",
         items: [
-            { id: "sid-1", name: "Idli Sambhar", price: 40, isVeg: true, tag: null, image: "images/menu/idli-sambhar.jpg", desc: "Soft idli, spicy sambar – perfect harmony." },
-            { id: "sid-2", name: "Dosa Masala", price: 80, isVeg: true, tag: "Bestseller", image: "images/menu/dosa-masala.jpg", desc: "Dosa ki thickness bilkul perfect… na zyada, na kam — bilkul uski 'mood swings' ki tarah." },
-            { id: "sid-3", name: "Utpam", price: 60, isVeg: true, tag: null, image: "images/menu/utpam.jpg", desc: "Thick, tasty aur full veggie loaded." },
-            { id: "sid-4", name: "Upama", price: 60, isVeg: true, tag: null, image: "images/menu/upama.jpg", desc: "Har spoon mein sukoon." }
+            { id: "sid-1", name: "Idli Sambhar", price: 40, isVeg: true, tag: null, image: "../../images/menu/idli-sambhar.jpg", desc: "Soft idli, spicy sambar – perfect harmony." },
+            { id: "sid-2", name: "Dosa Masala", price: 80, isVeg: true, tag: "Bestseller", image: "../../images/menu/dosa-masala.jpg", desc: "Dosa ki thickness bilkul perfect… na zyada, na kam — bilkul uski 'mood swings' ki tarah." },
+            { id: "sid-3", name: "Utpam", price: 60, isVeg: true, tag: null, image: "../../images/menu/utpam.jpg", desc: "Thick, tasty aur full veggie loaded." },
+            { id: "sid-4", name: "Upama", price: 60, isVeg: true, tag: null, image: "../../images/menu/upama.jpg", desc: "Har spoon mein sukoon." }
         ]
     },
     {
@@ -79,10 +79,10 @@ const menuData = [
         name: "Soup",
         icon: "🥣",
         items: [
-            { id: "soup-1", name: "Tomato Soup", price: 50, isVeg: true, tag: null, image: "images/menu/tomato-soup.png", desc: "Ek cup aur thand ho gayi cup." },
-            { id: "soup-2", name: "Sweetcorn Soup", price: 50, isVeg: true, tag: null, image: "images/menu/sweetcorn-soup.jpg", desc: "simple, smooth, satisfying." },
-            { id: "soup-3", name: "Hot & Sour Soup", price: 50, isVeg: true, tag: null, image: "images/menu/hot-sure.jpg", desc: "ek sip mein fire bhi, desire bhi." },
-            { id: "soup-4", name: "Mix Veg Soup", price: 50, isVeg: true, tag: "Healthy", image: "images/menu/mix-veg-soup.jpg", desc: "Ek bowl aur body bole thank you." }
+            { id: "soup-1", name: "Tomato Soup", price: 50, isVeg: true, tag: null, image: "../../images/menu/tomato-soup.png", desc: "Ek cup aur thand ho gayi cup." },
+            { id: "soup-2", name: "Sweetcorn Soup", price: 50, isVeg: true, tag: null, image: "../../images/menu/sweetcorn-soup.jpg", desc: "simple, smooth, satisfying." },
+            { id: "soup-3", name: "Hot & Sour Soup", price: 50, isVeg: true, tag: null, image: "../../images/menu/hot-sure.jpg", desc: "ek sip mein fire bhi, desire bhi." },
+            { id: "soup-4", name: "Mix Veg Soup", price: 50, isVeg: true, tag: "Healthy", image: "../../images/menu/mix-veg-soup.jpg", desc: "Ek bowl aur body bole thank you." }
         ]
     },
     {
@@ -90,9 +90,9 @@ const menuData = [
         name: "Bread",
         icon: "🍞",
         items: [
-            { id: "brd-1", name: "Bread Jam", price: 50, isVeg: true, tag: null, image: "images/menu/bread-jam.jpg", desc: "quick bhi, cute bhi." },
-            { id: "brd-2", name: "Bread Butter", price: 30, isVeg: true, tag: null, image: "images/menu/bread-butter.jpg", desc: "simplicity ka smooth star." },
-            { id: "brd-3", name: "Aloo Sandwich", price: 40, isVeg: true, tag: null, image: "images/menu/aloo-sandwich.png", desc: "Aloo ka swag, bread ka tag." },
+            { id: "brd-1", name: "Bread Jam", price: 50, isVeg: true, tag: null, image: "../../images/menu/bread-jam.jpg", desc: "quick bhi, cute bhi." },
+            { id: "brd-2", name: "Bread Butter", price: 30, isVeg: true, tag: null, image: "../../images/menu/bread-butter.jpg", desc: "simplicity ka smooth star." },
+            { id: "brd-3", name: "Aloo Sandwich", price: 40, isVeg: true, tag: null, image: "../../images/menu/aloo-sandwich.png", desc: "Aloo ka swag, bread ka tag." },
             { id: "brd-4", name: "Veg. Sandwich", price: 50, isVeg: true, tag: null, image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=400&auto=format&fit=crop", desc: "Crisp veggies, cool mood." },
             { id: "brd-5", name: "Veg Cheese Sandwich", price: 60, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=400&auto=format&fit=crop", desc: "Sabziyon ka swag, upar se cheese ka tag." }
         ]
@@ -102,9 +102,9 @@ const menuData = [
         name: "Quick Bites",
         icon: "🍜",
         items: [
-            { id: "qb-1", name: "Maggi", price: 30, isVeg: true, tag: null, image: "images/menu/maggi.jpg", desc: "Jab bhookh ho emergency, Maggi hi frequency." },
-            { id: "qb-2", name: "Veg. Maggi", price: 40, isVeg: true, tag: null, image: "images/menu/veg-maggi.jpg", desc: "2 minute mein healthy twist." },
-            { id: "qb-3", name: "Cheese Maggi", price: 60, isVeg: true, tag: "Must Try", image: "images/menu/cheese-maggi.jpg", desc: "Melty magic, instant tragic." },
+            { id: "qb-1", name: "Maggi", price: 30, isVeg: true, tag: null, image: "../../images/menu/maggi.jpg", desc: "Jab bhookh ho emergency, Maggi hi frequency." },
+            { id: "qb-2", name: "Veg. Maggi", price: 40, isVeg: true, tag: null, image: "../../images/menu/veg-maggi.jpg", desc: "2 minute mein healthy twist." },
+            { id: "qb-3", name: "Cheese Maggi", price: 60, isVeg: true, tag: "Must Try", image: "../../images/menu/cheese-maggi.jpg", desc: "Melty magic, instant tragic." },
             { id: "qb-4", name: "Chowmein", price: 60, isVeg: true, tag: "Bestseller", image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=400&auto=format&fit=crop", desc: "Ek plate aur hunger late." }
         ]
     },
@@ -113,10 +113,10 @@ const menuData = [
         name: "Thali",
         icon: "🍱",
         items: [
-            { id: "cmb-1", name: "Regular thali", price: 100, isVeg: true, tag: "Daily Need", desc: "Roti , Chaval , Sabji, Daal, Salad", image: "images/menu/regular-thali.jpg" },
-            { id: "cmb-2", name: "Special Thali", price: 130, isVeg: true, tag: "Must Try", desc: "Roti , Chaval , Special Sabji , Daal/Kadi , Sweet , Dahi , Salad", image: "images/menu/special-thali.jpg" },
-            { id: "cmb-3", name: "Dall Bati (2 Pic)", price: 60, isVeg: true, tag: "Traditional", image: "images/menu/dal-bati.jpg", desc: "Jitna ghee, utna pyaar – yahi hai daal baati ka asli sanskaar." },
-            { id: "cmb-4", name: "Dall Bati With Ghee (2 Pic)", price: 80, isVeg: true, tag: "Rich", image: "images/menu/dal-bati-ghee.jpg", desc: "Jitna ghee, utna pyaar – yahi hai daal baati ka asli sanskaar." }
+            { id: "cmb-1", name: "Regular thali", price: 100, isVeg: true, tag: "Daily Need", desc: "Roti , Chaval , Sabji, Daal, Salad", image: "../../images/menu/regular-thali.jpg" },
+            { id: "cmb-2", name: "Special Thali", price: 130, isVeg: true, tag: "Must Try", desc: "Roti , Chaval , Special Sabji , Daal/Kadi , Sweet , Dahi , Salad", image: "../../images/menu/special-thali.jpg" },
+            { id: "cmb-3", name: "Dall Bati (2 Pic)", price: 60, isVeg: true, tag: "Traditional", image: "../../images/menu/dal-bati.jpg", desc: "Jitna ghee, utna pyaar – yahi hai daal baati ka asli sanskaar." },
+            { id: "cmb-4", name: "Dall Bati With Ghee (2 Pic)", price: 80, isVeg: true, tag: "Rich", image: "../../images/menu/dal-bati-ghee.jpg", desc: "Jitna ghee, utna pyaar – yahi hai daal baati ka asli sanskaar." }
         ]
     }
 ];
@@ -292,32 +292,9 @@ function openOrdersModal() {
     const modal = document.getElementById('orders-modal');
     const body = document.getElementById('orders-modal-body');
     const cart = window.cartManager ? window.cartManager.getCart() : [];
-    const currentType = window.cartManager ? window.cartManager.getOrderType() : 'delivery';
 
     modal.classList.add('active');
-
     let html = '';
-
-    // Add Order Type Switcher at the top of modal
-    html += `
-        <div class="cart-card" style="padding: 15px; margin-bottom: 20px; box-shadow: none; border: 1px solid #fdf2f0;">
-            <h3 style="font-size: 16px; margin-bottom: 15px;">🍱 Select Order Type</h3>
-            <div class="order-types" id="modal-order-type-selector" style="display: flex; gap: 10px;">
-                <div class="order-type ${currentType === 'delivery' ? 'active' : ''}" data-type="delivery" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
-                    <span class="type-icon">🛵</span>
-                    <div class="type-name" style="font-size: 12px; font-weight: 600;">Delivery</div>
-                </div>
-                <div class="order-type ${currentType === 'dinein' ? 'active' : ''}" data-type="dinein" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
-                    <span class="type-icon">🍽️</span>
-                    <div class="type-name" style="font-size: 12px; font-weight: 600;">Dine In</div>
-                </div>
-                <div class="order-type ${currentType === 'pickup' ? 'active' : ''}" data-type="pickup" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
-                    <span class="type-icon">🛍️</span>
-                    <div class="type-name" style="font-size: 12px; font-weight: 600;">Pickup</div>
-                </div>
-            </div>
-        </div>
-    `;
 
     if (cart.length === 0) {
         html += `
@@ -356,20 +333,6 @@ function openOrdersModal() {
     }
 
     body.innerHTML = html;
-
-    // Attach listeners to modal order types
-    const typeBtns = body.querySelectorAll('.order-type');
-    typeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const type = btn.getAttribute('data-type');
-            if (window.cartManager) {
-                window.cartManager.setOrderType(type);
-                // The global sync listener will handle re-rendering the modal if open, 
-                // but let's be explicit here too
-                openOrdersModal();
-            }
-        });
-    });
 }
 
 function clearCartHandler() {

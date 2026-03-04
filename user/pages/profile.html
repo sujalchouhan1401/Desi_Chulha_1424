@@ -57,12 +57,21 @@
                     </div>
                 </div>
 
-                <div class="nav-profile active">
-                    <div class="avatar-wrap">
-                        <img src="https://ui-avatars.com/api/?name=Sujal+C&background=F07A5D&color=fff&size=40&font-size=0.4"
-                            alt="Profile avatar">
+                <div class="header-profile-container">
+                    <div class="nav-profile active">
+                        <div class="avatar-wrap">
+                            <img src="https://ui-avatars.com/api/?name=User&background=F07A5D&color=fff&size=40&font-size=0.4"
+                                alt="Profile avatar">
+                        </div>
+                        <span class="user-name">Profile</span>
+                        <span class="dropdown-arrow">▼</span>
                     </div>
-                    <span class="dropdown-arrow">▼</span>
+                    <div class="profile-dropdown-menu">
+                        <a href="profile.html"><i>👤</i> My Profile</a>
+                        <a href="profile.html#my-orders"><i>📦</i> Orders</a>
+                        <a href="profile.html#my-addresses"><i>📍</i> Addresses</a>
+                        <a href="javascript:void(0)" onclick="window.logout()" class="logout-btn"><i>🚪</i> Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,27 +104,63 @@
                 <!-- Section: My Profile -->
                 <section id="my-profile" class="profile-section">
                     <div class="profile-section-header">
-                        <h2>Account Information</h2>
-                        <p>Update your personal details here. Your phone number is verified via OTP and cannot be
-                            modified directly.</p>
+                        <h2>My Profile</h2>
+                        <p>Manage your personal information, contact details, and default delivery address.</p>
                     </div>
-                    <form action="#" method="POST" class="form-grid">
+                    <form action="#" method="POST" class="form-grid" id="profile-form">
+
+                        <!-- Profile Picture -->
+                        <div class="form-group full-width"
+                            style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
+                            <div style="position:relative; flex-shrink:0;">
+                                <img id="profile-pic-preview"
+                                    src="https://ui-avatars.com/api/?name=Guest+User&background=F07A5D&color=fff&size=100&font-size=0.4"
+                                    alt="Profile Picture"
+                                    style="width:96px; height:96px; border-radius:50%; object-fit:cover; border:3px solid var(--primary-color); display:block;">
+                                <label for="profilePicInput" title="Change photo"
+                                    style="position:absolute; bottom:2px; right:2px; background:var(--primary-color); color:#fff; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:14px; box-shadow:0 2px 6px rgba(0,0,0,0.2);">✏️</label>
+                                <input type="file" id="profilePicInput" accept="image/*" style="display:none;">
+                            </div>
+                            <div>
+                                <p style="font-weight:600; font-size:15px; margin-bottom:4px;"
+                                    id="sidebar-name-preview">Your Name</p>
+                                <p style="font-size:13px; color:var(--text-muted);">Click the pencil to upload a profile
+                                    photo</p>
+                            </div>
+                        </div>
+
+                        <!-- Full Name -->
                         <div class="form-group full-width">
                             <label for="fullName">Full Name</label>
-                            <input type="text" id="fullName" class="form-control" value="Sujal Chouhan">
+                            <input type="text" id="fullName" class="form-control" placeholder="e.g. Sujal Chouhan">
                         </div>
+
+                        <!-- Phone Number -->
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span
+                                    style="font-weight:normal;color:var(--text-muted)">(Verified)</span></label>
+                            <input type="text" id="phone" class="form-control" placeholder="+91 XXXXXXXXXX"
+                                title="Phone number is OTP-verified and cannot be changed here.">
+                        </div>
+
+                        <!-- Email Address -->
                         <div class="form-group">
                             <label for="email">Email Address <span
                                     style="font-weight:normal;color:var(--text-muted)">(Optional)</span></label>
-                            <input type="email" id="email" class="form-control" placeholder="sujal@example.com">
+                            <input type="email" id="email" class="form-control" placeholder="you@example.com">
                         </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="text" id="phone" class="form-control" value="+91 8233595881" readonly
-                                title="Phone number cannot be changed (OTP Verified)">
-                        </div>
+
+                        <!-- Delivery Address -->
                         <div class="form-group full-width">
-                            <button type="button" class="btn-save">Save Changes</button>
+                            <label for="deliveryAddress">Default Delivery Address</label>
+                            <textarea id="deliveryAddress" class="form-control" rows="3"
+                                placeholder="e.g. House No. 12, Blue Diamond Residency, Ajmer Road, Jaipur - 302026"
+                                style="resize:vertical; min-height:80px;"></textarea>
+                        </div>
+
+                        <!-- Save Button -->
+                        <div class="form-group full-width">
+                            <button type="button" class="btn-save" id="save-profile-btn">💾 Save Changes</button>
                         </div>
                     </form>
                 </section>
@@ -145,63 +190,26 @@
                         <p>View your past orders, track current status, and quickly reorder your favorites.</p>
                     </div>
 
-                    <!-- Empty State (Hidden currently, but structure lives here) -->
-                    <div class="empty-state hidden"
+                    <!-- Empty State: shown when no orders -->
+                    <div id="orders-empty-state"
                         style="text-align: center; padding: 40px 0; border: 1px dashed var(--border-color); border-radius: 16px;">
                         <span style="font-size: 40px; display: block; margin-bottom: 16px;">☕</span>
-                        <h3 style="font-size: 18px; color: var(--text-main); margin-bottom: 8px;">You haven’t placed any
+                        <h3 style="font-size: 18px; color: var(--text-main); margin-bottom: 8px;">You haven't placed any
                             orders yet</h3>
                         <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 24px;">Time to treat
                             yourself to something delicious.</p>
                         <a href="menu.html" class="btn-save" style="text-decoration: none;">Explore Menu</a>
                     </div>
 
-                    <div class="order-list">
-                        <!-- Order Item 1 -->
-                        <div class="order-card">
-                            <div class="order-info">
-                                <h4>Order #DC-8429</h4>
-                                <div class="order-meta">
-                                    <span>📅 Today, 01:45 PM</span>
-                                    <span>•</span>
-                                    <span>💳 ₹330 Paid via UPI</span>
-                                </div>
-                                <div class="order-items">
-                                    1x Special Thali, 2x Cold Coffee, 1x Veg Sandwich
-                                </div>
-                            </div>
-                            <div class="order-status-actions">
-                                <span class="status-badge status-processing">⏳ Preparing Food</span>
-                                <button class="btn-reorder">Track Order</button>
-                            </div>
-                        </div>
-
-                        <!-- Order Item 2 -->
-                        <div class="order-card">
-                            <div class="order-info">
-                                <h4>Order #DC-7102</h4>
-                                <div class="order-meta">
-                                    <span>📅 28 Feb 2026, 08:30 PM</span>
-                                    <span>•</span>
-                                    <span>💳 ₹210 Cash on Delivery</span>
-                                </div>
-                                <div class="order-items">
-                                    1x 2 Pav Bhaji + 2 Cold Coffee Combo
-                                </div>
-                            </div>
-                            <div class="order-status-actions">
-                                <span class="status-badge status-delivered">✓ Delivered</span>
-                                <button class="btn-reorder">Reorder</button>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Orders rendered dynamically by profile-manager.js -->
+                    <div class="order-list" id="order-list"></div>
                 </section>
 
                 <!-- Section: My Rewards -->
                 <section id="my-rewards" class="profile-section hidden">
                     <div class="profile-section-header">
                         <h2>My Rewards 🎁</h2>
-                        <p>Earn points on every order and unlock delicious freebies.</p>
+                        <p>Earn 1 DC Coin for every ₹10 spent. 1 DC Coin = ₹1 off your next order.</p>
                     </div>
 
                     <!-- Rewards Banner Card -->
@@ -209,10 +217,11 @@
                         style="background: linear-gradient(135deg, var(--primary-color) 0%, #E0684B 100%); color: #fff; padding: 32px; border-radius: 16px; box-shadow: 0 8px 24px rgba(240, 122, 93, 0.3); display: flex; align-items: center; justify-content: space-between;">
                         <div>
                             <p style="font-size: 14px; opacity: 0.9; margin-bottom: 4px;">Current Balance</p>
-                            <h3
+                            <h3 id="rewards-coins-display"
                                 style="font-size: 48px; font-weight: 800; font-family: var(--font-heading); margin-bottom: 8px; line-height: 1;">
-                                850 <span style="font-size: 18px; font-weight: 500;">Pts</span></h3>
-                            <p style="font-size: 14px; opacity: 0.9;">Equivalent to ₹85 in Desi Chulha Wallet</p>
+                                0 <span style="font-size: 18px; font-weight: 500;">DC Coins</span></h3>
+                            <p style="font-size: 14px; opacity: 0.9;">Equivalent to <span
+                                    id="rewards-value-display">₹0</span> in Desi Chulha Wallet</p>
                         </div>
                         <div style="text-align: right;">
                             <button class="btn-slide"
@@ -226,19 +235,20 @@
                         style="margin-top: 32px; padding: 24px; border: 1px solid var(--border-color); border-radius: 16px;">
                         <div
                             style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                            <h4 style="font-size: 16px; font-weight: 600;">Next Milestone: Free Masala Chai ☕</h4>
-                            <span style="font-size: 13px; font-weight: 600; color: var(--primary-color);">2 orders
-                                away!</span>
+                            <h4 style="font-size: 16px; font-weight: 600;">How to earn DC Coins 🪙</h4>
                         </div>
-                        <!-- Progress Bar Visual -->
-                        <div
-                            style="width: 100%; height: 12px; background: #fdf2f0; border-radius: 100px; overflow: hidden; margin-bottom: 12px;">
-                            <div
-                                style="width: 60%; height: 100%; background: var(--primary-color); border-radius: 100px;">
-                            </div>
+                        <ul style="color: var(--text-muted); font-size: 14px; line-height: 2; padding-left: 20px;">
+                            <li>🛒 Spend <strong>₹10</strong> → Earn <strong>1 DC Coin</strong></li>
+                            <li>🪙 <strong>1 DC Coin = ₹1</strong> discount on your next order</li>
+                            <li>📦 Coins are added automatically after every successful order</li>
+                        </ul>
+                        <div style="margin-top: 20px;">
+                            <p
+                                style="font-size: 13px; font-weight: 600; color: var(--primary-color); margin-bottom: 8px;">
+                                Coin History</p>
+                            <div id="rewards-history" style="font-size: 13px; color: var(--text-muted);">No coin history
+                                yet.</div>
                         </div>
-                        <p style="font-size: 13px; color: var(--text-muted);">You have completed 3 out of 5 orders this
-                            month to unlock your free premium beverage.</p>
                     </div>
                 </section>
 

@@ -1,7 +1,7 @@
 class CartManager {
     constructor() {
         this.cart = JSON.parse(localStorage.getItem('desi_chulha_cart')) || [];
-        this.orderType = localStorage.getItem('desi_chulha_order_type') || 'delivery';
+        this.orderType = localStorage.getItem('desi_chulha_order_type') || null;
         this.appliedPromo = localStorage.getItem('desi_chulha_promo') || null;
 
         // Optional: listen to storage events to sync across tabs
@@ -13,7 +13,7 @@ class CartManager {
                 if (typeof window.syncOrderTypeUI === 'function') window.syncOrderTypeUI();
             }
             if (e.key === 'desi_chulha_order_type') {
-                this.orderType = e.newValue || 'delivery';
+                this.orderType = e.newValue || null;
                 if (typeof window.renderCartPage === 'function') window.renderCartPage();
                 if (typeof window.syncOrderTypeUI === 'function') window.syncOrderTypeUI();
             }

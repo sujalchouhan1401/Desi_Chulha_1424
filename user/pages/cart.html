@@ -74,7 +74,7 @@
                         <a href="profile.html"><i>👤</i> My Profile</a>
                         <a href="profile.html#my-orders"><i>📦</i> Orders</a>
                         <a href="profile.html#my-addresses"><i>📍</i> Addresses</a>
-                        <a href="../../index.html" class="logout-btn"><i>🚪</i> Logout</a>
+                        <a href="javascript:void(0)" onclick="window.logout()" class="logout-btn"><i>🚪</i> Logout</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                 <div class="cart-card">
                     <h3>🍱 Select Order Type</h3>
                     <div class="order-types" id="order-type-selector">
-                        <div class="order-type active" data-type="delivery">
+                        <div class="order-type" data-type="delivery">
                             <span class="type-icon">🛵</span>
                             <span class="type-name">Delivery</span>
                         </div>
@@ -112,7 +112,7 @@
                 </div>
 
                 <!-- Delivery Info / Address (Only show for delivery) -->
-                <div class="cart-card" id="address-card">
+                <div class="cart-card" id="address-card" style="display:none;">
                     <div
                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
                         <h3 style="margin-bottom: 0;">📍 Delivery Address</h3>
@@ -239,7 +239,7 @@
                         <span>₹571</span>
                     </div>
 
-                    <button class="btn-checkout-full" onclick="placeOrder()">Proceed to Pay
+                    <button class="btn-checkout-full" id="btn-proceed-pay" onclick="placeOrder()">Proceed to Pay
                         ₹571</button>
                 </div>
 
@@ -330,14 +330,14 @@
     <script src="../js/geolocation-manager.js"></script>
     <script src="../js/cart-manager.js"></script>
     <script>
-        let currentOrderType = window.cartManager ? window.cartManager.getOrderType() : 'delivery';
+        let currentOrderType = window.cartManager ? window.cartManager.getOrderType() : null;
 
         window.syncOrderTypeUI = function () {
-            currentOrderType = window.cartManager ? window.cartManager.getOrderType() : 'delivery';
+            currentOrderType = window.cartManager ? window.cartManager.getOrderType() : null;
 
             // Update UI classes
             document.querySelectorAll('.order-type').forEach(t => {
-                if (t.getAttribute('data-type') === currentOrderType) {
+                if (currentOrderType && t.getAttribute('data-type') === currentOrderType) {
                     t.classList.add('active');
                 } else {
                     t.classList.remove('active');
@@ -414,25 +414,26 @@
 
         function updateCartTotals(totals) {
             const itemTotal = totals.itemTotal;
-            // No delivery fee for Dine In or Pickup
+
+            // Delivery fee: ₹40 only when delivery is explicitly selected
             const deliveryFee = (itemTotal > 0 && currentOrderType === 'delivery') ? 40 : 0;
             const discount = totals.discount || 0;
-            const taxes = itemTotal > 0 ? 35 : 0;
-            const grandTotal = itemTotal + deliveryFee - discount + taxes;
+            // Taxes: 5% of Item Total only, to 2 decimal places
+            const taxes = (itemTotal > 0 && currentOrderType) ? parseFloat((itemTotal * 0.05).toFixed(2)) : 0;
+            const grandTotal = parseFloat((itemTotal + deliveryFee - discount + taxes).toFixed(2));
 
-            // Update UI
-            const promoSection = document.getElementById('promo-section');
+            // Update promo UI
             const activePromoBanner = document.getElementById('active-promo-banner');
             const couponTrigger = document.getElementById('coupon-trigger');
             const promoInputGroup = document.getElementById('promo-input-group');
 
             if (totals.promo === 'sujal1401') {
-                activePromoBanner.style.display = 'block';
-                couponTrigger.style.display = 'none';
-                promoInputGroup.style.display = 'none';
+                if (activePromoBanner) activePromoBanner.style.display = 'block';
+                if (couponTrigger) couponTrigger.style.display = 'none';
+                if (promoInputGroup) promoInputGroup.style.display = 'none';
             } else {
-                activePromoBanner.style.display = 'none';
-                couponTrigger.style.display = 'flex';
+                if (activePromoBanner) activePromoBanner.style.display = 'none';
+                if (couponTrigger) couponTrigger.style.display = 'flex';
             }
 
             const billRows = document.querySelectorAll('.bill-details .bill-row span:last-child');
@@ -444,11 +445,74 @@
                 billRows[4].textContent = '₹' + grandTotal;
             }
 
-            const btnPay = document.querySelector('.btn-checkout-full');
+            const btnPay = document.getElementById('btn-proceed-pay');
             if (btnPay) {
-                btnPay.textContent = itemTotal > 0 ? 'Proceed to Pay ₹' + grandTotal : 'Cart is Empty';
-                btnPay.disabled = itemTotal === 0;
+                if (!currentOrderType) {
+                    btnPay.textContent = '⚠️ Please Select Order Type';
+                    btnPay.disabled = true;
+                } else if (itemTotal === 0) {
+                    btnPay.textContent = 'Cart is Empty';
+                    btnPay.disabled = true;
+                } else {
+                    btnPay.textContent = 'Proceed to Pay ₹' + grandTotal;
+                    btnPay.disabled = false;
+                }
             }
+        }
+
+        // ── Place Order ──
+        window.placeOrder = function () {
+            if (!currentOrderType) {
+                alert('⚠️ Please select an order type first (Delivery / Dine In / Pickup).');
+                return;
+            }
+            if (!window.cartManager || window.cartManager.getCart().length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            const totals = window.cartManager.getTotals();
+            const itemTotal = totals.itemTotal;
+            const deliveryFee = currentOrderType === 'delivery' ? 40 : 0;
+            const taxes = parseFloat((itemTotal * 0.05).toFixed(2));
+            const grandTotal = parseFloat((itemTotal + deliveryFee - (totals.discount || 0) + taxes).toFixed(2));
+
+            // Earn DC Coins: 1 coin per ₹10 of item total
+            const coinsEarned = Math.floor(itemTotal / 10);
+            if (window.profileManager) {
+                window.profileManager.earnCoins(itemTotal);
+            }
+
+            // Save order to history
+            const cart = window.cartManager.getCart();
+            const orders = JSON.parse(localStorage.getItem('desi_chulha_orders')) || [];
+            const now = new Date();
+            orders.push({
+                id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
+                date: now.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) +
+                    ', ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+                items: cart.map(i => `${i.qty}x ${i.name}`).join(', '),
+                total: grandTotal,
+                paymentMethod: orderTypeLabel(),
+                status: 'Preparing'
+            });
+            localStorage.setItem('desi_chulha_orders', JSON.stringify(orders));
+
+            // Clear cart & order type for next session
+            window.cartManager.clearCart();
+            localStorage.removeItem('desi_chulha_order_type');
+
+            // Show success message
+            const coinMsg = coinsEarned > 0 ? `\n🪙 +${coinsEarned} DC Coins earned!` : '';
+            alert(`✅ Order placed successfully!${coinMsg}\n\nThank you for ordering from Desi Chulha 🔥`);
+            window.location.href = 'home.html';
+        };
+
+        function orderTypeLabel() {
+            if (currentOrderType === 'delivery') return 'Delivery';
+            if (currentOrderType === 'dinein') return 'Dine In';
+            if (currentOrderType === 'pickup') return 'Pickup';
+            return '';
         }
 
         // Setup Promo Event Listeners
@@ -491,32 +555,9 @@
             const modal = document.getElementById('orders-modal');
             const body = document.getElementById('orders-modal-body');
             const cart = window.cartManager ? window.cartManager.getCart() : [];
-            const currentType = window.cartManager ? window.cartManager.getOrderType() : 'delivery';
 
             modal.classList.add('active');
-
             let html = '';
-
-            // Add Order Type Switcher at the top of modal
-            html += `
-                <div class="cart-card" style="padding: 15px; margin-bottom: 20px; box-shadow: none; border: 1px solid #fdf2f0;">
-                    <h3 style="font-size: 16px; margin-bottom: 15px;">🍱 Select Order Type</h3>
-                    <div class="order-types" id="modal-order-type-selector" style="display: flex; gap: 10px;">
-                        <div class="order-type ${currentType === 'delivery' ? 'active' : ''}" data-type="delivery" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
-                            <span class="type-icon">🛵</span>
-                            <div class="type-name" style="font-size: 12px; font-weight: 600;">Delivery</div>
-                        </div>
-                        <div class="order-type ${currentType === 'dinein' ? 'active' : ''}" data-type="dinein" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
-                            <span class="type-icon">🍽️</span>
-                            <div class="type-name" style="font-size: 12px; font-weight: 600;">Dine In</div>
-                        </div>
-                        <div class="order-type ${currentType === 'pickup' ? 'active' : ''}" data-type="pickup" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
-                            <span class="type-icon">🛍️</span>
-                            <div class="type-name" style="font-size: 12px; font-weight: 600;">Pickup</div>
-                        </div>
-                    </div>
-                </div>
-            `;
 
             if (cart.length === 0) {
                 html += `
@@ -555,18 +596,6 @@
             }
 
             body.innerHTML = html;
-
-            // Attach listeners to modal order types
-            const modalTypeBtns = body.querySelectorAll('.order-type');
-            modalTypeBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const type = btn.getAttribute('data-type');
-                    if (window.cartManager) {
-                        window.cartManager.setOrderType(type);
-                        openOrdersModal(); // Refresh modal view
-                    }
-                });
-            });
         };
 
         window.openContactModal = function () {

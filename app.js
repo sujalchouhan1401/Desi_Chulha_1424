@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (devLoginBtn) {
         devLoginBtn.addEventListener('click', () => {
             console.warn("🔐 DEV MODE LOG IN INITIATED. Skipping OTP.");
+            clearGuestData();
             localStorage.setItem("desi_auth_token", "DEV_USER_TEST_ID_12345");
             window.location.href = 'user/pages/home.html';
         });
@@ -157,7 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const user = result.user;
             setButtonLoading(verifyOtpBtn, false, 'Verify & Continue');
 
-            // Save local auth state if needed and redirect
+            // Clear any previous user's data, then save new auth state
+            clearGuestData();
             localStorage.setItem("desi_auth_token", user.uid);
             window.location.href = 'user/pages/home.html';
         }).catch((error) => {
@@ -180,6 +182,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clear OTP inputs
         otpBoxes.forEach(box => box.value = '');
     });
+
+    // Clears all previous session data so each new login starts fresh
+    function clearGuestData() {
+        localStorage.removeItem('desi_user_profile');
+        localStorage.removeItem('desi_user_addresses');
+        localStorage.removeItem('desi_user_phone');
+        localStorage.removeItem('desi_chulha_cart');
+        localStorage.removeItem('desi_chulha_order_type');
+        localStorage.removeItem('desi_chulha_promo');
+        localStorage.removeItem('desi_chulha_orders');
+        localStorage.removeItem('desi_chulha_coins');
+        localStorage.removeItem('desi_chulha_coin_history');
+    }
 
     // Utility Functions
     function setButtonLoading(button, isLoading, text) {

@@ -21,32 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const modal = document.getElementById('orders-modal');
         const body = document.getElementById('orders-modal-body');
         const cart = window.cartManager ? window.cartManager.getCart() : [];
-        const currentType = window.cartManager ? window.cartManager.getOrderType() : 'delivery';
 
         modal.classList.add('active');
-
         let html = '';
-
-        // Add Order Type Switcher at the top of modal
-        html += `
-            <div class="cart-card" style="padding: 15px; margin-bottom: 20px; box-shadow: none; border: 1px solid #fdf2f0;">
-                <h3 style="font-size: 16px; margin-bottom: 15px;">🍱 Select Order Type</h3>
-                <div class="order-types" id="modal-order-type-selector" style="display: flex; gap: 10px;">
-                    <div class="order-type ${currentType === 'delivery' ? 'active' : ''}" data-type="delivery" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
-                        <span class="type-icon">🛵</span>
-                        <div class="type-name" style="font-size: 12px; font-weight: 600;">Delivery</div>
-                    </div>
-                    <div class="order-type ${currentType === 'dinein' ? 'active' : ''}" data-type="dinein" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
-                        <span class="type-icon">🍽️</span>
-                        <div class="type-name" style="font-size: 12px; font-weight: 600;">Dine In</div>
-                    </div>
-                    <div class="order-type ${currentType === 'pickup' ? 'active' : ''}" data-type="pickup" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; cursor: pointer;">
-                        <span class="type-icon">🛍️</span>
-                        <div class="type-name" style="font-size: 12px; font-weight: 600;">Pickup</div>
-                    </div>
-                </div>
-            </div>
-        `;
 
         if (cart.length === 0) {
             html += `
@@ -85,17 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         body.innerHTML = html;
-
-        // Attach listeners to modal order types
-        const modalTypeBtns = body.querySelectorAll('.order-type');
-        modalTypeBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const type = btn.getAttribute('data-type');
-                if (window.cartManager) {
-                    window.cartManager.setOrderType(type);
-                }
-            });
-        });
     }
 
     window.openContactModal = function () {
@@ -119,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ---------------------------------
     // Cart Buttons & Quantity Sync Logic
     // ---------------------------------
-    window.syncHomeCartButtons = function() {
+    window.syncHomeCartButtons = function () {
         if (!window.cartManager) return;
         const cartItems = window.cartManager.getCart();
 
@@ -129,11 +95,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!parentCard) return;
             const titleEl = parentCard.querySelector('h3') || parentCard.querySelector('.slide-title');
             if (!titleEl) return;
-            
+
             const itemName = titleEl.textContent;
             const itemId = 'item-' + itemName.toLowerCase().replace(/\s+/g, '-');
             const cartItem = cartItems.find(i => i.id === itemId);
-            
+
             const addBtn = container.querySelector('.btn-add-cart, .btn-combo-add');
             // If it doesn't have an add btn that we control, skip
             if (!addBtn && !container.querySelector('.qty-control-wrapper')) return;
@@ -143,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (cartItem) {
                 // Item in cart, show qty control, hide add btn
                 if (addBtn) addBtn.style.display = 'none';
-                
+
                 if (!qtyControl) {
                     qtyControl = document.createElement('div');
                     qtyControl.className = 'qty-control-wrapper';
@@ -153,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     qtyControl.style.background = 'var(--bg-color)';
                     qtyControl.style.borderRadius = 'var(--radius-sm)';
                     qtyControl.style.padding = '4px 8px';
-                    
+
                     if (container.classList.contains('combo-details')) {
                         qtyControl.style.width = '100%';
                         qtyControl.style.justifyContent = 'space-between';
@@ -166,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <span class="qty-val" style="font-weight:600; width:40px; text-align:center;">${cartItem.qty}</span>
                         <button class="qty-btn inc-btn" style="background:transparent; border:none; color:var(--primary-color); font-size:18px; font-weight:600; cursor:pointer; width:30px;" onclick="window.cartManager.updateQuantity('${itemId}', 'increment'); window.syncHomeCartButtons();">+</button>
                     `;
-                    
+
                     if (addBtn && addBtn.parentNode) {
                         addBtn.parentNode.insertBefore(qtyControl, addBtn.nextSibling);
                     } else {
@@ -178,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 // Not in cart
                 if (addBtn) {
-                    if(container.classList.contains('combo-details')) {
+                    if (container.classList.contains('combo-details')) {
                         addBtn.style.display = 'block';
                     } else {
                         addBtn.style.display = 'inline-block';
@@ -187,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (qtyControl) qtyControl.remove();
             }
         });
-        
+
         // Let the global cartManager know UI changed (updates overall total and widget)
         if (window.cartManager) {
             window.cartManager.updateGlobalWidget();
