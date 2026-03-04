@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         devLoginBtn.addEventListener('click', () => {
             console.warn("🔐 DEV MODE LOG IN INITIATED. Skipping OTP.");
             localStorage.setItem("desi_auth_token", "DEV_USER_TEST_ID_12345");
-            window.location.href = 'desktop-home.html';
+            window.location.href = 'user/pages/home.html';
         });
     }
 
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Save local auth state if needed and redirect
             localStorage.setItem("desi_auth_token", user.uid);
-            window.location.href = 'desktop-home.html';
+            window.location.href = 'user/pages/home.html';
         }).catch((error) => {
             // User couldn't sign in (bad verification code?)
             setButtonLoading(verifyOtpBtn, false, 'Verify & Continue');

@@ -1,0 +1,85 @@
+<!-- admin/pages/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- CSS and Layout injection managed by admin.js -->
+    <script src="/admin/utils/admin.js" type="module"></script>
+    <script src="/admin/js/pages/dashboard.js" type="module"></script>
+</head>
+
+<body class="admin-body">
+    <!-- Main Content Area Container where admin layout wrapper will be injected -->
+    <div id="admin-root">
+        <div class="admin-stats-grid">
+            <div class="admin-card stat-card">
+                <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+                <div class="stat-info">
+                    <h3>124</h3>
+                    <p>Total Orders (Today)</p>
+                </div>
+            </div>
+            <div class="admin-card stat-card">
+                <div class="stat-icon" style="background:#fef3c7; color:#d97706;"><i class="fas fa-clock"></i></div>
+                <div class="stat-info">
+                    <h3>12</h3>
+                    <p>Pending Orders</p>
+                </div>
+            </div>
+            <div class="admin-card stat-card">
+                <div class="stat-icon" style="background:#d1fae5; color:#059669;"><i class="fas fa-rupee-sign"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>₹34,500</h3>
+                    <p>Total Sales</p>
+                </div>
+            </div>
+            <div class="admin-card stat-card">
+                <div class="stat-icon" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-chart-bar"></i></div>
+                <div class="stat-info">
+                    <h3>₹1.2L</h3>
+                    <p>Revenue Summary</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-card" style="margin-top:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>Recent Orders Tracker</h3>
+                <button class="admin-btn">View All</button>
+            </div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#ORD-8923</td>
+                        <td>Rahul Kumar</td>
+                        <td>₹1,450</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td><button class="admin-btn" style="padding:5px 10px; font-size:0.8rem;">Update</button></td>
+                    </tr>
+                    <tr>
+                        <td>#ORD-8922</td>
+                        <td>Priya Singh</td>
+                        <td>₹890</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                        <td><button class="admin-btn" style="padding:5px 10px; font-size:0.8rem;">View</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

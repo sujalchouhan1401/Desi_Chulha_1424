@@ -1,0 +1,106 @@
+<!-- admin/pages/menu.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Management</title>
+    <script src="/admin/utils/admin.js" type="module"></script>
+    <script src="/admin/js/pages/menu.js" type="module"></script>
+    <style>
+        .menu-action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin: 0 5px;
+            font-size: 1rem;
+            color: var(--admin-text-muted);
+        }
+
+        .menu-action-btn.edit {
+            color: #4f46e5;
+        }
+
+        .menu-action-btn.delete {
+            color: #ef4444;
+        }
+
+        .menu-action-btn:hover {
+            color: var(--admin-text-main);
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body class="admin-body">
+    <div id="admin-root">
+        <div class="admin-card">
+            <div class="flex-between">
+                <h3>Menu Items</h3>
+                <button class="admin-btn" id="add-menu-btn"><i class="fas fa-plus"></i> Add New Item</button>
+            </div>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Bestseller</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Chole Bhature</td>
+                        <td>Main Course</td>
+                        <td>₹150</td>
+                        <td>
+                            <label style="display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" checked> In Stock
+                            </label>
+                        </td>
+                        <td>
+                            <label><input type="checkbox" checked> Yes</label>
+                        </td>
+                        <td>
+                            <button class="menu-action-btn edit" title="Edit Price/Details"><i
+                                    class="fas fa-edit"></i></button>
+                            <button class="menu-action-btn delete" title="Delete Item"><i
+                                    class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Aloo Paratha</td>
+                        <td>Breakfast</td>
+                        <td>₹80</td>
+                        <td>
+                            <label style="display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox"> Out of Stock
+                            </label>
+                        </td>
+                        <td>
+                            <label><input type="checkbox"> Yes</label>
+                        </td>
+                        <td>
+                            <button class="menu-action-btn edit" title="Edit Price/Details"><i
+                                    class="fas fa-edit"></i></button>
+                            <button class="menu-action-btn delete" title="Delete Item"><i
+                                    class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

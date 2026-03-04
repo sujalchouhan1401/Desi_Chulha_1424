@@ -1,0 +1,91 @@
+<!0-- admin/pages/combos.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combo Management</title>
+    <script src="/admin/utils/admin.js" type="module"></script>
+    <script src="/admin/js/pages/combos.js" type="module"></script>
+    <style>
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .combo-action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin: 0 5px;
+            font-size: 1rem;
+            color: var(--admin-text-muted);
+        }
+
+        .combo-action-btn.edit {
+            color: #4f46e5;
+        }
+
+        .combo-action-btn.delete {
+            color: #ef4444;
+        }
+
+        .combo-action-btn:hover {
+            color: var(--admin-text-main);
+        }
+    </style>
+</head>
+
+<body class="admin-body">
+    <div id="admin-root">
+        <div class="admin-card">
+            <div class="flex-between">
+                <h3>Combo Packages</h3>
+                <button class="admin-btn" id="add-combo-btn"><i class="fas fa-plus"></i> Create Combo</button>
+            </div>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Combo Name</th>
+                        <th>Items Included</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Student Special</td>
+                        <td>Aloo Paratha + Chai</td>
+                        <td>₹99</td>
+                        <td>
+                            <label><input type="checkbox" checked> Active</label>
+                        </td>
+                        <td>
+                            <button class="combo-action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="combo-action-btn delete" title="Delete"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Family Pack</td>
+                        <td>4x Chola Bhatura + 4x Lassi</td>
+                        <td>₹599</td>
+                        <td>
+                            <label><input type="checkbox" checked> Active</label>
+                        </td>
+                        <td>
+                            <button class="combo-action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="combo-action-btn delete" title="Delete"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

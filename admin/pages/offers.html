@@ -1,0 +1,91 @@
+<!-- admin/pages/offers.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offers & Discounts</title>
+    <script src="/admin/utils/admin.js" type="module"></script>
+    <script src="/admin/js/pages/offers.js" type="module"></script>
+    <style>
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .offer-action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin: 0 5px;
+            font-size: 1rem;
+            color: var(--admin-text-muted);
+        }
+
+        .offer-action-btn.edit {
+            color: #4f46e5;
+        }
+
+        .offer-action-btn.delete {
+            color: #ef4444;
+        }
+
+        .offer-action-btn:hover {
+            color: var(--admin-text-main);
+        }
+    </style>
+</head>
+
+<body class="admin-body">
+    <div id="admin-root">
+        <div class="admin-card">
+            <div class="flex-between">
+                <h3>Discount Offers</h3>
+                <button class="admin-btn" id="add-offer-btn"><i class="fas fa-plus"></i> Create Discount</button>
+            </div>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Offer Code</th>
+                        <th>Discount Value</th>
+                        <th>Expiry Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong style="color:#4f46e5">DIWALI50</strong></td>
+                        <td>50% OFF</td>
+                        <td>2026-11-12</td>
+                        <td>
+                            <label><input type="checkbox" checked> Active</label>
+                        </td>
+                        <td>
+                            <button class="offer-action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="offer-action-btn delete" title="Delete"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color:#4f46e5">WELCOME20</strong></td>
+                        <td>Flat ₹20</td>
+                        <td>2026-12-31</td>
+                        <td>
+                            <label><input type="checkbox" checked> Active</label>
+                        </td>
+                        <td>
+                            <button class="offer-action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="offer-action-btn delete" title="Delete"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
