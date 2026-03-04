@@ -1,91 +1,185 @@
 <!0-- admin/pages/combos.html -->
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combo Management</title>
-    <script src="/admin/utils/admin.js" type="module"></script>
-    <script src="/admin/js/pages/combos.js" type="module"></script>
-    <style>
-        .flex-between {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Combo Management</title>
+        <script src="../../utils/menuStorage.js"></script>
+        <script src="../../utils/comboStorage.js"></script>
+        <script src="../utils/admin.js"></script>
+        <script src="../js/pages/combos.js"></script>
+        <style>
+            .flex-between {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+            }
 
-        .combo-action-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            margin: 0 5px;
-            font-size: 1rem;
-            color: var(--admin-text-muted);
-        }
+            .combo-action-btn {
+                background: none;
+                border: none;
+                cursor: pointer;
+                margin: 0 5px;
+                font-size: 1rem;
+                color: var(--admin-text-muted);
+            }
 
-        .combo-action-btn.edit {
-            color: #4f46e5;
-        }
+            .combo-action-btn.edit {
+                color: #4f46e5;
+            }
 
-        .combo-action-btn.delete {
-            color: #ef4444;
-        }
+            .combo-action-btn.delete {
+                color: #ef4444;
+            }
 
-        .combo-action-btn:hover {
-            color: var(--admin-text-main);
-        }
-    </style>
-</head>
+            .combo-action-btn:hover {
+                color: var(--admin-text-main);
+            }
 
-<body class="admin-body">
-    <div id="admin-root">
-        <div class="admin-card">
-            <div class="flex-between">
-                <h3>Combo Packages</h3>
-                <button class="admin-btn" id="add-combo-btn"><i class="fas fa-plus"></i> Create Combo</button>
+            /* Modal Styles */
+            .modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: none;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+
+            .modal-content {
+                background: white;
+                padding: 25px;
+                border-radius: 12px;
+                width: 100%;
+                max-width: 500px;
+                position: relative;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+
+            .form-group input,
+            .form-group select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid var(--admin-border);
+                border-radius: 6px;
+            }
+
+            .items-selector {
+                max-height: 200px;
+                overflow-y: auto;
+                border: 1px solid var(--admin-border);
+                padding: 10px;
+                border-radius: 6px;
+            }
+
+            .item-checkbox {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 8px;
+                font-size: 0.9rem;
+            }
+
+            .item-checkbox input {
+                width: auto;
+            }
+
+            .price-summary {
+                background: #f8fafc;
+                padding: 10px;
+                border-radius: 6px;
+                margin-top: 10px;
+                font-size: 0.9rem;
+            }
+        </style>
+    </head>
+
+    <body class="admin-body">
+        <div id="admin-root">
+            <div class="admin-card">
+                <div class="flex-between">
+                    <div>
+                        <h3>Combo Packages</h3>
+                        <p style="font-size: 0.85rem; color: #666;">Bundle items together for a special price.</p>
+                    </div>
+                    <button class="admin-btn" id="add-combo-btn"><i class="fas fa-plus"></i> Create Combo</button>
+                </div>
+
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Combo Name</th>
+                            <th style="max-width: 300px;">Items Included</th>
+                            <th>Original Price</th>
+                            <th>Combo Price</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="combo-tbody">
+                        <!-- Dynamic rendering by combos.js -->
+                    </tbody>
+                </table>
             </div>
-
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>Combo Name</th>
-                        <th>Items Included</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Student Special</td>
-                        <td>Aloo Paratha + Chai</td>
-                        <td>₹99</td>
-                        <td>
-                            <label><input type="checkbox" checked> Active</label>
-                        </td>
-                        <td>
-                            <button class="combo-action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button class="combo-action-btn delete" title="Delete"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Family Pack</td>
-                        <td>4x Chola Bhatura + 4x Lassi</td>
-                        <td>₹599</td>
-                        <td>
-                            <label><input type="checkbox" checked> Active</label>
-                        </td>
-                        <td>
-                            <button class="combo-action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button class="combo-action-btn delete" title="Delete"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
-    </div>
-</body>
 
-</html>
+        <!-- Add/Edit Combo Modal -->
+        <div class="modal-overlay" id="combo-modal">
+            <div class="modal-content">
+                <button class="modal-close" id="modal-close-btn"
+                    style="position:absolute; right:15px; top:15px; border:none; background:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+                <h3 id="modal-title">Create New Combo</h3>
+                <form id="combo-form" style="margin-top: 20px;">
+                    <input type="hidden" id="edit-id">
+                    <div class="form-group">
+                        <label>Combo Name</label>
+                        <input type="text" id="combo-name" placeholder="e.g. Student Breakfast Combo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image URL (Optional)</label>
+                        <input type="text" id="combo-image" placeholder="../../images/menu/example.jpg">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Included Items</label>
+                        <div class="items-selector" id="menu-items-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="price-summary">
+                        <div style="display:flex; justify-content:space-between; margin-bottom: 5px;">
+                            <span>Original Total:</span>
+                            <span id="original-total">₹0</span>
+                        </div>
+                        <div class="form-group" style="margin-top: 10px;">
+                            <label>Special Combo Price (₹)</label>
+                            <input type="number" id="combo-price" placeholder="Enter discounted price" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="admin-btn" style="width: 100%; margin-top: 20px;">Save Combo
+                        Package</button>
+                </form>
+            </div>
+        </div>
+    </body>
+
+    </html>

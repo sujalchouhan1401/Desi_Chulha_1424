@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!document.querySelector('link[href*="sidebar.css"]')) {
         const styleLink = document.createElement('link');
         styleLink.rel = 'stylesheet';
-        styleLink.href = '/admin/layouts/sidebar.css';
+        styleLink.href = '../layouts/sidebar.css';
         document.head.appendChild(styleLink);
     }
 
@@ -23,14 +23,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!isLoginPage) {
         if (!token) {
-            window.location.href = '/admin/pages/login.html';
+            window.location.href = '../pages/login.html';
             return;
         }
         await initLayout();
     } else {
         if (token) {
             // Already logged in
-            window.location.href = '/admin/pages/dashboard.html';
+            window.location.href = '../pages/dashboard.html';
         }
     }
 });
@@ -42,7 +42,7 @@ async function initLayout() {
     // Fetch sidebar HTML
     let sidebarHtml = '';
     try {
-        const res = await fetch('/admin/layouts/sidebar.html');
+        const res = await fetch('../layouts/sidebar.html');
         if (res.ok) {
             sidebarHtml = await res.text();
         } else {
@@ -76,6 +76,9 @@ async function initLayout() {
         </div>
     `;
 
+    // Dispatch event to let page-specific scripts know they can now safely interact with the DOM
+    document.dispatchEvent(new CustomEvent('adminLayoutReady'));
+
     // Active link highlighting & Page Title
     const links = document.querySelectorAll('.sidebar-link');
     links.forEach(link => {
@@ -93,7 +96,7 @@ async function initLayout() {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
             localStorage.removeItem('admin_token');
-            window.location.href = '/admin/pages/login.html';
+            window.location.href = '../pages/login.html';
         });
     }
 }

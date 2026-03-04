@@ -1,76 +1,72 @@
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("User Combos Initializing...");
 
-    const addBtns = document.querySelectorAll(".btn-add-combo, .btn-add-combo-sm, .btn-add-circle");
-    const stickyCart = document.getElementById("combo-sticky-cart");
-    const emptyState = document.getElementById("empty-state"); // For future logic if items are removed
-    const cartCountEl = document.getElementById("cart-count");
-    const cartTotalEl = document.getElementById("cart-total");
-    const toastMsg = document.getElementById("toast-msg");
+    if (!window.comboStorage) {
+        console.error("comboStorage utility not found");
+        return;
+    }
 
-    let cart = {
-        items: 0,
-        totalPrice: 0
-    };
+    renderDynamicCombos();
+});
 
-    addBtns.forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            e.preventDefault();
+function renderDynamicCombos() {
+    const section = document.getElementById('dynamic-combos-section');
+    const grid = document.getElementById('dynamic-combos-grid');
+    if (!section || !grid) return;
 
-            // Get data
-            const price = parseInt(btn.getAttribute("data-price"));
-            if (!price) return;
+    const combos = window.comboStorage.getCombos().filter(c => c.active === true);
 
-            // Update state
-            cart.items += 1;
-            cart.totalPrice += price;
+    if (combos.length === 0) {
+        section.style.display = 'none';
+        return;
+    }
 
-            // Update UI
-            cartCountEl.textContent = cart.items === 1 ? "1 Combo" : `${cart.items} Combos`;
-            cartTotalEl.textContent = `₹${cart.totalPrice}`;
+    section.style.display = 'block';
+    let html = '';
 
-            // Show Cart Bar
-            if (stickyCart.classList.contains("hidden")) {
-                stickyCart.classList.remove("hidden");
-            } else {
-                // Bounce effect
-                stickyCart.style.transform = "translate(-50%, -8px)";
-                setTimeout(() => {
-                    stickyCart.style.transform = "translate(-50%, 0)";
-                }, 200);
-            }
+    combos.forEach(combo => {
+        const itemNames = combo.items.map(i => i.name).join(' + ');
+        const savings = combo.originalPrice - combo.comboPrice;
 
-            // Button visual feedback logic depending on button type
-            const originalText = btn.innerHTML;
+        const imageHtml = combo.image
+            ? `<img src="${combo.image}" style="width:100%; height:100%; object-fit:cover;" alt="${combo.name}">`
+            : `<div style="font-size:3rem;">🍱</div>`;
 
-            if (btn.classList.contains("btn-add-circle")) {
-                btn.innerHTML = "✓";
-                btn.style.backgroundColor = "var(--success-val)";
-                btn.style.color = "#fff";
-            } else {
-                btn.innerHTML = "Added ✓";
-                btn.style.backgroundColor = "var(--success-val)";
-                btn.style.color = "#fff";
-                btn.style.borderColor = "var(--success-val)";
-            }
-
-            // Show toast message
-            showToast();
-
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.style.backgroundColor = "";
-                btn.style.color = "";
-                btn.style.borderColor = "";
-            }, 1000);
-        });
+        html += `
+            <div class="food-card">
+                <div class="badge-ribbon" style="background:var(--success-val);">Save ₹${savings}</div>
+                <div class="food-img-wrap" style="background:#fdf2f0; display:flex; align-items:center; justify-content:center; height:160px; overflow:hidden;">
+                    ${imageHtml}
+                </div>
+                <div class="food-info">
+                    <h3>${combo.name}</h3>
+                    <p class="desc">${itemNames}</p>
+                    <div class="food-footer">
+                        <div style="display:flex; flex-direction:column;">
+                            <span style="text-decoration:line-through; color:#999; font-size:0.8rem;">₹${combo.originalPrice}</span>
+                            <span class="price">₹${combo.comboPrice}</span>
+                        </div>
+                        <button class="btn-add-cart dynamic-add-btn" 
+                            data-id="${combo.id}" 
+                            data-name="${combo.name}" 
+                            data-price="${combo.comboPrice}">
+                            Add Combo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
     });
 
-    let toastTimeout;
-    function showToast() {
-        toastMsg.classList.remove("hidden");
-        clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => {
-            toastMsg.classList.add("hidden");
-        }, 2000);
+    grid.innerHTML = html;
+
+    // Sync with home.js logic for quantity controls and add button states
+    if (window.syncHomeCartButtons) {
+        window.syncHomeCartButtons();
+    } else {
+        // Fallback if home.js finished first or is still loading
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.syncHomeCartButtons) window.syncHomeCartButtons();
+        });
     }
-});
+}

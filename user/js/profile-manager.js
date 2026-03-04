@@ -205,46 +205,76 @@ class ProfileManager {
             }
         }
 
-        // ── Order History ──
-        this.renderOrderHistory();
+        // Render Orders History
+        this.renderOrders();
 
         // ── Rewards ──
         this.renderRewards();
     }
 
-    renderOrderHistory() {
-        const emptyState = document.getElementById('orders-empty-state');
-        const orderList = document.getElementById('order-list');
-        if (!emptyState || !orderList) return;
+    renderOrders() {
+        if (!window.orderStorage) return;
 
-        const orders = JSON.parse(localStorage.getItem('desi_chulha_orders')) || [];
+        const orderList = document.querySelector('.order-list');
+        const emptyState = document.querySelector('.profile-section#my-orders .empty-state');
+        const userId = this.userData.phone;
+        const orders = window.orderStorage.getUserOrders(userId);
+
+        if (!orderList) return;
 
         if (orders.length === 0) {
-            emptyState.style.display = 'block';
             orderList.innerHTML = '';
+            if (emptyState) emptyState.classList.remove('hidden');
             return;
         }
 
-        emptyState.style.display = 'none';
-        orderList.innerHTML = orders.map(order => `
-            <div class="order-card">
-                <div class="order-info">
-                    <h4>Order #${order.id}</h4>
-                    <div class="order-meta">
-                        <span>📅 ${order.date}</span>
-                        <span>•</span>
-                        <span>💳 ₹${order.total} ${order.paymentMethod || ''}</span>
+        if (emptyState) emptyState.classList.add('hidden');
+
+        let html = '';
+        orders.forEach(order => {
+            const date = new Date(order.createdAt).toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const itemsText = order.items.map(i => `${i.quantity}x ${i.name}`).join(', ');
+            const statusClass = `status-${order.status.toLowerCase()}`;
+
+            html += `
+                <div class="order-card">
+                    <div class="order-info">
+                        <h4>Order ${order.id}</h4>
+                        <div class="order-meta">
+                            <span>📅 ${date}</span>
+                            <span>•</span>
+                            <span>💳 ₹${order.totalAmount} (${order.orderType})</span>
+                        </div>
+                        <div class="order-items">
+                            ${itemsText}
+                        </div>
                     </div>
-                    <div class="order-items">${order.items}</div>
+                    <div class="order-status-actions">
+                        <span class="status-badge ${statusClass}">${this.getStatusIcon(order.status)} ${order.status}</span>
+                        ${order.status === 'Pending' ? '<button class="btn-reorder" style="border-color:#F07A5D; color:#F07A5D;">Track Order</button>' : '<button class="btn-reorder">Reorder</button>'}
+                    </div>
                 </div>
-                <div class="order-status-actions">
-                    <span class="status-badge ${order.status === 'Delivered' ? 'status-delivered' : 'status-processing'}">
-                        ${order.status === 'Delivered' ? '✓ Delivered' : '⏳ ' + order.status}
-                    </span>
-                    <button class="btn-reorder">${order.status === 'Delivered' ? 'Reorder' : 'Track Order'}</button>
-                </div>
-            </div>
-        `).join('');
+            `;
+        });
+
+        orderList.innerHTML = html;
+    }
+
+    getStatusIcon(status) {
+        switch (status) {
+            case 'Pending': return '⏳';
+            case 'Preparing': return '🍳';
+            case 'Completed': return '✓';
+            case 'Cancelled': return '✕';
+            default: return '📦';
+        }
     }
 
     renderRewards() {

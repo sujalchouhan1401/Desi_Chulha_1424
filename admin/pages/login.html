@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Desi Chulha</title>
     <!-- Use the existing global styles plus admin specific ones -->
-    <script src="/admin/utils/admin.js" type="module"></script>
+    <script src="../utils/admin.js"></script>
     <style>
         body {
             background-color: #f4f6f8;
@@ -108,7 +108,7 @@
             // Simple mock auth for demonstration
             if (email === 'admin@desichulha.com' && pass === 'admin123') {
                 localStorage.setItem('admin_token', 'mock_admin_token_123');
-                window.location.href = '/admin/pages/dashboard.html';
+                window.location.href = 'dashboard.html';
             } else {
                 document.getElementById('login-error').style.display = 'block';
             }
@@ -117,3 +117,5 @@
 </body>
 
 </html>
+
+

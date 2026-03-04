@@ -1,17 +1,40 @@
-import { AdminAPI } from '../api.js';
+// Removed AdminAPI import as we use orderStorage utility (via localStorage)
+// import { AdminAPI } from '../api.js';
 
 let ordersCache = [];
 
-document.addEventListener('DOMContentLoaded', async () => {
+// Initialization function
+async function init() {
     try {
         await loadOrders();
     } catch (e) {
         console.error("Error loading orders", e);
     }
+}
+
+// Ensure layout and workspace exist before rendering
+if (document.querySelector('.admin-workspace')) {
+    init();
+} else {
+    document.addEventListener('adminLayoutReady', init);
+}
+
+// Storage sync should work even if layout is loading
+document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'orders') {
+            loadOrders();
+        }
+    });
 });
 
 async function loadOrders() {
-    ordersCache = await AdminAPI.getOrders();
+    if (!window.orderStorage) {
+        console.error("orderStorage utility not found");
+        return;
+    }
+
+    ordersCache = window.orderStorage.getOrders();
     renderOrders();
 }
 
@@ -21,20 +44,26 @@ function renderOrders() {
 
     tbody.innerHTML = '';
 
-    // Add filtering logic easily later via array filter
+    if (ordersCache.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:40px; color:#666;">No orders placed yet.</td></tr>';
+        return;
+    }
+
     ordersCache.forEach(order => {
+        const dateStr = order.createdAt ? new Date(order.createdAt).toLocaleString('en-GB') : 'N/A';
         const tr = document.createElement('tr');
+
         tr.innerHTML = `
-            <td>${order.id}</td>
-            <td>${order.date}</td>
-            <td>${order.customer}</td>
-            <td>₹${order.amount.toLocaleString()}</td>
+            <td>#${order.id.split('-').pop()}</td>
+            <td>${dateStr}</td>
+            <td>${order.customerName || 'Guest'}</td>
+            <td>₹${(order.totalAmount || 0).toLocaleString()}</td>
             <td>
                 <select class="status-select" data-id="${order.id}" style="padding:5px; border-radius:4px; ${getStatusColor(order.status)}">
-                    <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option>
-                    <option value="processing" ${order.status === 'processing' ? 'selected' : ''}>Processing</option>
-                    <option value="completed" ${order.status === 'completed' ? 'selected' : ''}>Completed</option>
-                    <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+                    <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                    <option value="Preparing" ${order.status === 'Preparing' ? 'selected' : ''}>Preparing</option>
+                    <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                    <option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
                 </select>
             </td>
             <td>
@@ -45,13 +74,35 @@ function renderOrders() {
     });
 
     attachEventListeners();
+    checkUrlParams();
+}
+
+function checkUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('id');
+    if (orderId) {
+        // Give a tiny delay for final DOM settling
+        setTimeout(() => {
+            const rows = document.querySelectorAll('.admin-table tbody tr');
+            rows.forEach(row => {
+                if (row.innerHTML.includes(orderId.split('-').pop())) {
+                    row.style.backgroundColor = '#fffbeb';
+                    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    setTimeout(() => { row.style.backgroundColor = ''; }, 3000);
+                }
+            });
+        }, 100);
+    }
 }
 
 function getStatusColor(status) {
-    if (status === 'completed') return "background:#d1fae5; color:#059669; border-color:#d1fae5;";
-    if (status === 'pending') return "background:#fef3c7; color:#d97706; border-color:#fef3c7;";
-    if (status === 'cancelled') return "background:#fee2e2; color:#dc2626; border-color:#fee2e2;";
-    return "background:#e0e7ff; color:#4f46e5; border-color:#e0e7ff;"; // processing
+    switch (status) {
+        case 'Completed': return "background:#d1fae5; color:#059669; border-color:#d1fae5;";
+        case 'Pending': return "background:#fef3c7; color:#d97706; border-color:#fef3c7;";
+        case 'Cancelled': return "background:#fee2e2; color:#dc2626; border-color:#fee2e2;";
+        case 'Preparing': return "background:#e0e7ff; color:#4f46e5; border-color:#e0e7ff;";
+        default: return "";
+    }
 }
 
 function attachEventListeners() {
@@ -62,13 +113,20 @@ function attachEventListeners() {
             const newStatus = e.target.value;
             e.target.disabled = true; // prevent multiclick
 
-            await AdminAPI.updateOrderStatus(id, newStatus);
-            // Updating cache locally
-            const order = ordersCache.find(o => o.id === id);
-            if (order) order.status = newStatus;
+            if (window.orderStorage) {
+                const success = window.orderStorage.updateOrderStatus(id, newStatus);
+                if (success) {
+                    // Update cache local to this tab
+                    const orderInCache = ordersCache.find(o => o.id === id);
+                    if (orderInCache) orderInCache.status = newStatus;
 
-            // Re-render
-            renderOrders();
+                    // Refresh UI instantly
+                    renderOrders();
+                } else {
+                    alert("Order update failed!");
+                    e.target.disabled = false;
+                }
+            }
         });
     });
 
@@ -78,7 +136,8 @@ function attachEventListeners() {
             const id = e.target.getAttribute('data-id');
             const order = ordersCache.find(o => o.id === id);
             if (order) {
-                alert(`Order Details Modal (Mock)\n\nID: ${order.id}\nCustomer: ${order.customer}\nAmount: ₹${order.amount}\nStatus: ${order.status}`);
+                const itemsText = order.items.map(i => `${i.quantity}x ${i.name}`).join('\n');
+                alert(`Order Full Details\n\nID: ${order.id}\nCustomer: ${order.customerName}\nPhone: ${order.customerPhone}\nType: ${order.orderType}\nAmount: ₹${order.totalAmount}\nStatus: ${order.status}\n\nItems:\n${itemsText}`);
             }
         });
     });

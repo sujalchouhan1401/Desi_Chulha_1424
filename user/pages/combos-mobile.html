@@ -28,200 +28,13 @@
             <p>Try our delicious value combos built to satisfy your cravings.</p>
         </div>
 
-        <!-- Section: Daily Thali Combos -->
-        <section class="combo-category">
-            <h2 class="category-title">Daily Thali Combos</h2>
-
-            <!-- Highlight Card 1 -->
-            <div class="thali-card">
-                <div class="card-badge bg-tag-bestseller">🏆 Best Seller</div>
-                <div class="thali-content">
-                    <div class="thali-info">
-                        <h3>Regular Veg Thali</h3>
-                        <ul class="thali-items">
-                            <li>✓ Roti, Chaval</li>
-                            <li>✓ Sabji, Daal</li>
-                            <li>✓ Salad</li>
-                        </ul>
-                        <div class="price-row">
-                            <span class="price">₹100</span>
-                            <span class="savings">Save ₹40</span>
-                        </div>
-                    </div>
-                    <div class="thali-action">
-                        <img src="../../images/menu/regular-thali.jpg" alt="Veg Thali" class="thali-img">
-                        <button class="btn-add-combo" data-price="100" data-name="Regular Veg Thali">Add</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Highlight Card 2 -->
-            <div class="thali-card">
-                <div class="card-badge bg-tag-popular">🔥 Popular</div>
-                <div class="thali-content">
-                    <div class="thali-info">
-                        <h3>Special Thali</h3>
-                        <ul class="thali-items">
-                            <li>✓ Roti, Chaval</li>
-                            <li>✓ Special Sabji</li>
-                            <li>✓ Daal/Kadi, Sweet</li>
-                            <li>✓ Dahi, Salad</li>
-                        </ul>
-                        <div class="price-row">
-                            <span class="price">₹130</span>
-                            <span class="savings">Save ₹65</span>
-                        </div>
-                    </div>
-                    <div class="thali-action">
-                        <img src="../../images/menu/special-thali.jpg" alt="Paneer Thali" class="thali-img">
-                        <button class="btn-add-combo" data-price="130" data-name="Special Thali">Add</button>
-                    </div>
-                </div>
+        <!-- Dynamic Admin Combos (Single Source of Truth) -->
+        <section class="combo-category" id="dynamic-combos-section" style="display: none;">
+            <h2 class="category-title">Special Combo Offers 🍱</h2>
+            <div id="dynamic-combos-grid">
+                <!-- Injected via combos.js -->
             </div>
         </section>
-
-        <!-- Section: Family / Value Combos -->
-        <section class="combo-category">
-            <h2 class="category-title">Family / Value Combos</h2>
-
-            <div class="value-combo-list">
-                <!-- Value Item 1 -->
-                <div class="value-card">
-                    <div class="v-card-top">
-                        <div class="v-card-text">
-                            <h3>2 Pav Bhaji + 2 Cold Coffee</h3>
-                            <p>2 Plates pure amul butter Pav Bhaji with 2 Creamy Cold Coffees.</p>
-                            <span class="tag-label">Best for 2</span>
-                        </div>
-                        <div class="v-card-visual"
-                            style="width: 100px; height: 100px; overflow: hidden; border-radius: 8px; display: flex;">
-                            <img src="../../images/menu/pav-bhaji.png"
-                                style="width: 50%; height: 100%; object-fit: cover;" alt="Pav Bhaji">
-                            <img src="../../images/menu/cold-coffee.jpg"
-                                style="width: 50%; height: 100%; object-fit: cover;" alt="Cold Coffee">
-                        </div>
-                    </div>
-                    <div class="v-card-bottom">
-                        <span class="price">₹210</span>
-                        <button class="btn-add-combo-sm" data-price="210" data-name="2 Pav Bhaji + 2 Cold Coffee">Add
-                            Combo</button>
-                    </div>
-                </div>
-
-                <!-- Value Item 2 -->
-                <div class="value-card">
-                    <div class="v-card-top">
-                        <div class="v-card-text">
-                            <h3>2 Chole Bhature + 2 Lassi</h3>
-                            <p>2 Plates Delhi style Chole Bhature with 2 Sweet Punjabi Lassi.</p>
-                            <span class="tag-label">Best for 2</span>
-                        </div>
-                        <div class="v-card-visual"
-                            style="width: 100px; height: 100px; overflow: hidden; border-radius: 8px; display: flex;">
-                            <img src="../../images/menu/chole-bhature.jpg"
-                                style="width: 50%; height: 100%; object-fit: cover;" alt="Chole Bhature">
-                            <img src="../../images/menu/lassi.png" style="width: 50%; height: 100%; object-fit: cover;"
-                                alt="Lassi">
-                        </div>
-                    </div>
-                    <div class="v-card-bottom">
-                        <span class="price">₹210</span>
-                        <button class="btn-add-combo-sm" data-price="210" data-name="2 Chole Bhature + 2 Lassi">Add
-                            Combo</button>
-                    </div>
-                </div>
-
-                <!-- Value Item 3 -->
-                <div class="value-card">
-                    <div class="v-card-top">
-                        <div class="v-card-text">
-                            <h3>2 Aloo Paratha + Sabzi + Curd</h3>
-                            <p>Aloo Parathas with homestyle Mix Veg and fresh thick curd.</p>
-                            <span class="tag-label">Solo Value</span>
-                        </div>
-                        <div class="v-card-visual"
-                            style="width: 100px; height: 100px; overflow: hidden; border-radius: 8px;">
-                            <img src="../../images/menu/aloo-paratha.jpg"
-                                style="width: 100%; height: 100%; object-fit: cover;" alt="Paratha Thali">
-                        </div>
-                    </div>
-                    <div class="v-card-bottom">
-                        <span class="price">₹99</span>
-                        <button class="btn-add-combo-sm" data-price="99" data-name="2 Aloo Paratha Combo">Add
-                            Combo</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section: Snacks Combos & Student Budget Combos -->
-        <div class="split-categories">
-
-            <!-- Left: Snacks Combos -->
-            <section class="half-category">
-                <h2 class="category-title-sm">Snacks Combos</h2>
-
-                <div class="mini-card">
-                    <div class="mini-info">
-                        <h4>DA Bell EHHH</h4>
-                        <p style="font-size: 10px; color: var(--text-muted); margin-bottom: 4px;">dabeli + chai</p>
-                        <span class="price">₹35</span>
-                    </div>
-                    <button class="btn-add-circle" data-price="35" data-name="DA Bell EHHH">+</button>
-                </div>
-
-                <div class="mini-card">
-                    <div class="mini-info">
-                        <h4>Sandwich + Coffee</h4>
-                        <span class="price">₹85</span>
-                    </div>
-                    <button class="btn-add-circle" data-price="85" data-name="Sandwich + Coffee">+</button>
-                </div>
-
-                <div class="mini-card">
-                    <div class="mini-info">
-                        <h4>Maggi + Cold Coffee</h4>
-                        <span class="price">₹99</span>
-                    </div>
-                    <button class="btn-add-circle" data-price="99" data-name="Maggi + Cold Coffee">+</button>
-                </div>
-            </section>
-
-            <!-- Right: Student Budget -->
-            <section class="half-category">
-                <h2 class="category-title-sm">Student Budget</h2>
-
-                <div class="mini-card pocket-friendly">
-                    <span class="pocket-tag">Cheesy</span>
-                    <div class="mini-info">
-                        <h4>Cheese Blast Combo</h4>
-                        <p style="font-size: 10px; color: var(--text-muted); margin-bottom: 4px;">Cheese Maggi + Veg
-                            Cheese Sandwich</p>
-                        <span class="price">₹99</span>
-                    </div>
-                    <button class="btn-add-circle" data-price="99" data-name="Cheese Blast Combo">+</button>
-                </div>
-
-                <div class="mini-card pocket-friendly">
-                    <div class="pocket-tag">Pocket Friendly</div>
-                    <div class="mini-info mt-12">
-                        <h4>Chowmein + Drink</h4>
-                        <span class="price">₹70</span>
-                    </div>
-                    <button class="btn-add-circle" data-price="70" data-name="Chowmein + Drink">+</button>
-                </div>
-
-                <div class="mini-card pocket-friendly">
-                    <div class="pocket-tag">Pocket Friendly</div>
-                    <div class="mini-info mt-12">
-                        <h4>Bread Butter + Coffee</h4>
-                        <span class="price">₹60</span>
-                    </div>
-                    <button class="btn-add-circle" data-price="60" data-name="Bread Butter + Coffee">+</button>
-                </div>
-            </section>
-
-        </div>
 
         <div class="bottom-spacer"></div>
     </main>
@@ -240,6 +53,8 @@
     <!-- Success Floating Toast Animation -->
     <div id="toast-msg" class="toast hidden">Added to cart ✨</div>
 
+    <script src="../../utils/comboStorage.js"></script>
+    <script src="../js/cart-manager.js"></script>
     <script src="../js/combos.js"></script>
 </body>
 

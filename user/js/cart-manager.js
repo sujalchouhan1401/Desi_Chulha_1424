@@ -123,6 +123,63 @@ class CartManager {
         this.saveCart();
     }
 
+    /**
+     * Places a new order from the current cart
+     * @returns {boolean} Success status
+     */
+    placeOrder() {
+        if (this.cart.length === 0) {
+            alert("Your cart is empty!");
+            return false;
+        }
+
+        if (!window.orderStorage) {
+            console.error("orderStorage utility not found!");
+            alert("Order system error. Please try again later.");
+            return false;
+        }
+
+        // Get user data from profileManager if available
+        const userProfile = window.profileManager ? window.profileManager.userData : {
+            fullName: 'Guest User',
+            phone: '+91 0000000000'
+        };
+
+        const totals = this.getTotals();
+        const deliveryFee = (this.orderType === 'delivery') ? 40 : 0;
+        const taxes = 35;
+        const grandTotal = totals.itemTotal + deliveryFee - totals.discount + taxes;
+
+        // Create standard order object
+        const newOrder = {
+            id: "ORD-" + Date.now(),
+            userId: userProfile.phone, // Using phone as unique ID for this simulation
+            customerName: userProfile.fullName,
+            customerPhone: userProfile.phone,
+            items: this.cart.map(item => ({
+                id: item.id,
+                name: item.name,
+                quantity: item.qty,
+                price: item.price
+            })),
+            totalAmount: grandTotal,
+            status: "Pending",
+            orderType: this.orderType,
+            createdAt: new Date().toISOString()
+        };
+
+        // Save order via central storage
+        window.orderStorage.addOrder(newOrder);
+
+        // Clear local cart
+        this.clearCart();
+
+        // Redirect to profile (orders section)
+        alert("Order placed successfully! Redirecting to your orders...");
+        window.location.href = 'profile.html#my-orders';
+        return true;
+    }
+
     updateGlobalWidget() {
         // Support header cart badges
         const headerBadges = document.querySelectorAll("#header-cart-badge");

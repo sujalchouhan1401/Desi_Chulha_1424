@@ -201,8 +201,9 @@
                         <a href="menu.html" class="btn-save" style="text-decoration: none;">Explore Menu</a>
                     </div>
 
-                    <!-- Orders rendered dynamically by profile-manager.js -->
-                    <div class="order-list" id="order-list"></div>
+                    <div class="order-list">
+                        <!-- Orders are rendered dynamically from localStorage by profile-manager.js -->
+                    </div>
                 </section>
 
                 <!-- Section: My Rewards -->
@@ -317,6 +318,7 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="../../utils/orderStorage.js"></script>
     <script src="../js/profile-manager.js"></script>
     <script src="../js/cart-manager.js"></script>
     <script src="../js/geolocation-manager.js"></script>
@@ -360,13 +362,19 @@
             });
         });
 
-        // Init visual
-        document.querySelectorAll('.profile-section').forEach(sec => {
-            if (sec.id !== 'my-profile') {
-                sec.classList.add('hidden');
-                sec.style.display = 'none';
-            } else {
-                sec.style.display = 'flex';
+        // Handle hash-based navigation for deep links
+        document.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const targetLink = document.querySelector(`.profile-nav a[href="${hash}"]`);
+                if (targetLink) targetLink.click();
+            }
+        });
+
+        // Listen for storage changes to update orders history across tabs
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'orders') {
+                if (window.profileManager) window.profileManager.renderOrders();
             }
         });
 

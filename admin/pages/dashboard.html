@@ -7,49 +7,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <!-- CSS and Layout injection managed by admin.js -->
-    <script src="/admin/utils/admin.js" type="module"></script>
-    <script src="/admin/js/pages/dashboard.js" type="module"></script>
+    <script src="../../utils/orderStorage.js"></script>
+    <script src="../../utils/menuStorage.js"></script>
+    <script src="../../utils/comboStorage.js"></script>
+    <script src="../../utils/dashboardStats.js"></script>
+    <script src="../utils/admin.js"></script>
+    <script src="../js/pages/dashboard.js"></script>
 </head>
 
 <body class="admin-body">
     <!-- Main Content Area Container where admin layout wrapper will be injected -->
     <div id="admin-root">
         <div class="admin-stats-grid">
+            <!-- Total Orders -->
             <div class="admin-card stat-card">
                 <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
                 <div class="stat-info">
-                    <h3>124</h3>
-                    <p>Total Orders (Today)</p>
+                    <h3 id="stat-total-orders">0</h3>
+                    <p>Total Orders</p>
                 </div>
             </div>
+
+            <!-- Pending Orders -->
             <div class="admin-card stat-card">
                 <div class="stat-icon" style="background:#fef3c7; color:#d97706;"><i class="fas fa-clock"></i></div>
                 <div class="stat-info">
-                    <h3>12</h3>
+                    <h3 id="stat-pending-orders">0</h3>
                     <p>Pending Orders</p>
                 </div>
             </div>
+
+            <!-- Total Sales -->
             <div class="admin-card stat-card">
                 <div class="stat-icon" style="background:#d1fae5; color:#059669;"><i class="fas fa-rupee-sign"></i>
                 </div>
                 <div class="stat-info">
-                    <h3>₹34,500</h3>
+                    <h3 id="stat-total-sales">₹0</h3>
                     <p>Total Sales</p>
                 </div>
             </div>
+
+            <!-- Completed Orders -->
             <div class="admin-card stat-card">
-                <div class="stat-icon" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-chart-bar"></i></div>
-                <div class="stat-info">
-                    <h3>₹1.2L</h3>
-                    <p>Revenue Summary</p>
+                <div class="stat-icon" style="background:#e0f2fe; color:#0284c7;"><i class="fas fa-check-circle"></i>
                 </div>
+                <div class="stat-info">
+                    <h3 id="stat-completed-orders">0</h3>
+                    <p>Completed Orders</p>
+                </div>
+            </div>
+
+            <!-- Menu Items -->
+            <div class="admin-card stat-card">
+                <div class="stat-icon" style="background:#f3e8ff; color:#7e22ce;"><i class="fas fa-utensils"></i></div>
+                <div class="stat-info">
+                    <h3 id="stat-menu-items">0</h3>
+                    <p>Menu Items</p>
+                </div>
+            </div>
+
+            <!-- Active Combos -->
+            <div class="admin-card stat-card">
+                <div class="stat-icon" style="background:#ffedd5; color:#ea580c;"><i class="fas fa-box"></i></div>
+                <div class="stat-info">
+                    <h3 id="stat-active-combos">0</h3>
+                    <p>Active Combos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Summary Section -->
+        <div class="admin-stats-grid" style="margin-top: 20px; grid-template-columns: repeat(2, 1fr);">
+            <div class="admin-card">
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 5px;">Sales Today</p>
+                <h2 id="stat-today-sales" style="color: var(--admin-text-main);">₹0</h2>
+            </div>
+            <div class="admin-card">
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 5px;">Avg. Order Value</p>
+                <h2 id="stat-avg-value" style="color: var(--admin-text-main);">₹0</h2>
             </div>
         </div>
 
         <div class="admin-card" style="margin-top:20px;">
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <h3>Recent Orders Tracker</h3>
-                <button class="admin-btn">View All</button>
+                <button class="admin-btn" onclick="window.location.href='orders.html'">View All</button>
             </div>
             <table class="admin-table">
                 <thead>

@@ -94,13 +94,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const titleEl = parentCard.querySelector('h3') || parentCard.querySelector('.slide-title');
             if (!titleEl) return;
 
-            const itemName = titleEl.textContent;
-            const itemId = 'item-' + itemName.toLowerCase().replace(/\s+/g, '-');
-            const cartItem = cartItems.find(i => i.id === itemId);
-
             const addBtn = container.querySelector('.btn-add-cart, .btn-combo-add');
-            // If it doesn't have an add btn that we control, skip
             if (!addBtn && !container.querySelector('.qty-control-wrapper')) return;
+
+            const itemName = titleEl.textContent;
+            const itemId = (addBtn && addBtn.getAttribute('data-id')) ||
+                'item-' + itemName.toLowerCase().replace(/\s+/g, '-');
+
+            const cartItem = cartItems.find(i => i.id === itemId);
 
             let qtyControl = container.querySelector('.qty-control-wrapper');
 
@@ -181,10 +182,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const price = parseInt(btn.getAttribute("data-price"));
+            const explicitId = btn.getAttribute("data-id");
             if (!price) return;
 
             if (window.cartManager) {
                 window.cartManager.addItem({
+                    id: explicitId,
                     name: itemName,
                     price: price,
                     isVeg: isVeg
