@@ -254,31 +254,31 @@ function openOrdersModal() {
         html += `
             <div class="empty-orders">
                 <span class="icon">🍱</span>
-                <p>Nothing selected yet!</p>
-                <p style="font-size: 14px; margin-top: 10px;">Select something delicious from the menu.</p>
+                <p style="color: var(--text-main);">Nothing selected yet!</p>
+                <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px;">Select something delicious from the menu.</p>
             </div>
         `;
     } else {
         html += '<div class="orders-list">';
         cart.forEach(item => {
             html += `
-                <div class="order-modal-item">
-                    <div class="item-info">
-                        <strong>${item.name}</strong> x ${item.qty}
+                <div class="order-modal-item" style="border-bottom: 1px solid var(--border-color);">
+                    <div class="item-info" style="color: var(--text-main);">
+                        <strong style="color: var(--text-main);">${item.name}</strong> x ${item.qty}
                     </div>
-                    <div class="item-total">₹${item.price * item.qty}</div>
+                    <div class="item-total" style="color: var(--text-main);">₹${item.price * item.qty}</div>
                 </div>
             `;
         });
         const totals = window.cartManager.getTotals();
         html += `
-            <div class="modal-footer" style="margin-top: 20px; border-top: 2px solid #fdf2f0; padding-top: 15px;">
-                <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 18px;">
+            <div class="modal-footer" style="margin-top: 20px; border-top: 2px solid var(--border-color); padding-top: 15px;">
+                <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 18px; color: var(--text-main);">
                     <span>Grand Total</span>
                     <span>₹${totals.itemTotal}</span>
                 </div>
                 <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button class="btn-outline" style="flex: 1; border-color: #666; color: #666;" onclick="clearCartHandler()">Clear Cart</button>
+                    <button class="btn-outline" style="flex: 1; border-color: var(--text-muted); color: var(--text-muted);" onclick="clearCartHandler()">Clear Cart</button>
                     <button class="btn-checkout-full" style="flex: 2; margin-top: 0;" onclick="window.location.href='cart.html'">Go to Checkout</button>
                 </div>
             </div>

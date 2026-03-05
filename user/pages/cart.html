@@ -137,7 +137,7 @@
                         style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
                         <h3 style="margin-bottom: 0;">🛒 Order Summary</h3>
                         <button class="btn-outline"
-                            style="font-size: 12px; padding: 6px 16px; border-color: #666; color: #666;"
+                            style="font-size: 12px; padding: 6px 16px; border-color: var(--text-muted); color: var(--text-muted);"
                             onclick="clearCartPageHandler()">Clear Cart</button>
                     </div>
 
@@ -208,7 +208,7 @@
                                 <span style="font-weight: 600; color: var(--success-val); font-size: 14px;">🎁 Promo
                                     SUJAL1401 Applied!</span>
                                 <button onclick="window.cartManager.removePromoCode(); renderCartPage()"
-                                    style="background: none; border: none; color: #666; cursor: pointer; font-size: 12px; text-decoration: underline;">Remove</button>
+                                    style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 12px; text-decoration: underline;">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -564,31 +564,31 @@
                 html += `
                     <div class="empty-orders" style="text-align: center; padding: 40px 0;">
                         <span class="icon" style="font-size: 48px; display: block; margin-bottom: 10px;">🍱</span>
-                        <p>Nothing selected yet!</p>
-                        <p style="font-size: 14px; margin-top: 10px; color: #666;">Select something delicious from the menu.</p>
+                        <p style="color: var(--text-main);">Nothing selected yet!</p>
+                        <p style="font-size: 14px; margin-top: 10px; color: var(--text-muted);">Select something delicious from the menu.</p>
                     </div>
                 `;
             } else {
                 html += '<div class="orders-list" style="margin-top: 20px;">';
                 cart.forEach(item => {
                     html += `
-                        <div class="order-modal-item" style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #fdf2f0;">
+                        <div class="order-modal-item" style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-color); color: var(--text-main);">
                             <div class="item-info">
-                                <strong>${item.name}</strong> x ${item.qty}
+                                <strong style="color: var(--text-main);">${item.name}</strong> x ${item.qty}
                             </div>
-                            <div class="item-total">₹${item.price * item.qty}</div>
+                            <div class="item-total" style="color: var(--text-main);">₹${item.price * item.qty}</div>
                         </div>
                     `;
                 });
                 const totals = window.cartManager.getTotals();
                 html += `
-                    <div class="modal-footer" style="margin-top: 20px; border-top: 2px solid #fdf2f0; padding-top: 15px;">
-                        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 18px;">
+                    <div class="modal-footer" style="margin-top: 20px; border-top: 2px solid var(--border-color); padding-top: 15px;">
+                        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 18px; color: var(--text-main);">
                             <span>Grand Total</span>
                             <span>₹${totals.itemTotal}</span>
                         </div>
                         <div style="display: flex; gap: 10px; margin-top: 20px;">
-                            <button class="btn-outline" style="flex: 1; border-color: #666; color: #666; padding: 12px; border-radius: 12px; cursor: pointer;" onclick="clearCartHandlerByModal()">Clear Cart</button>
+                            <button class="btn-outline" style="flex: 1; border-color: var(--text-muted); color: var(--text-muted); padding: 12px; border-radius: 12px; cursor: pointer;" onclick="clearCartHandlerByModal()">Clear Cart</button>
                             <button class="btn-primary" style="flex: 2; border-radius: 12px; padding: 12px; box-shadow: none;" onclick="closeModal('orders-modal')">Close</button>
                         </div>
                     </div>

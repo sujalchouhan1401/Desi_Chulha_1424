@@ -219,4 +219,35 @@ window.cartManager = new CartManager();
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize widget on load
     window.cartManager.updateGlobalWidget();
+
+    // Dark Mode Toggle Logic
+    const initDarkMode = () => {
+        const isDark = localStorage.getItem('desi_chulha_dark_mode') === 'true';
+        if (isDark) document.body.classList.add('dark-mode');
+
+        const profileContainer = document.querySelector('.header-profile-container');
+        if (profileContainer) {
+            const toggleWrapper = document.createElement('div');
+            toggleWrapper.className = 'dark-mode-toggle';
+            toggleWrapper.innerHTML = `<span class="icon">${isDark ? '☀️' : '🌙'}</span>`;
+
+            toggleWrapper.style.cssText = `
+                display: flex; align-items: center; justify-content: center;
+                background: var(--card-bg); height: 40px; width: 40px;
+                border-radius: 50%; cursor: pointer; box-shadow: var(--shadow-card);
+                margin-right: 16px; font-size: 18px; transition: all 0.3s ease;
+                border: 1px solid var(--border-color);
+            `;
+
+            toggleWrapper.addEventListener('click', () => {
+                const currentlyDark = document.body.classList.toggle('dark-mode');
+                localStorage.setItem('desi_chulha_dark_mode', currentlyDark);
+                toggleWrapper.querySelector('.icon').textContent = currentlyDark ? '☀️' : '🌙';
+            });
+
+            // Insert before the profile container
+            profileContainer.parentNode.insertBefore(toggleWrapper, profileContainer);
+        }
+    };
+    initDarkMode();
 });

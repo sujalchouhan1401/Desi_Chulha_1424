@@ -30,6 +30,54 @@
     --desktop-max: 1240px;
 }
 
+/* ======== Dark Mode Variables ======== */
+body.dark-mode {
+    --bg-color: #121212;
+    --card-bg: #1E1E1E;
+    --text-main: #E0E0E0;
+    --text-muted: #A0A0A0;
+    --border-color: #333333;
+    --primary-light: #2A1A17;
+    --shadow-soft: 0 12px 32px rgba(0, 0, 0, 0.5);
+    --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .bg-slight {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .desktop-nav {
+    background: rgba(30, 30, 30, 0.9);
+}
+
+body.dark-mode .floating-badge,
+body.dark-mode .offer-badge,
+body.dark-mode .promo-pill-slider {
+    background: #2A2A2A;
+    color: #E0E0E0;
+}
+
+body.dark-mode .btn-slide {
+    background: #333;
+    color: #fff;
+}
+
+body.dark-mode .btn-slide:hover {
+    background: var(--primary-color);
+}
+
+body.dark-mode .btn-checkout-full,
+body.dark-mode .btn-primary {
+    background: var(--text-main);
+    color: var(--bg-color);
+}
+
+body.dark-mode .btn-checkout-full:hover,
+body.dark-mode .btn-primary:hover {
+    background: #fff;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -157,7 +205,7 @@ h4,
     top: 120%;
     right: 0;
     margin-top: 8px;
-    background: #fff;
+    background: var(--card-bg);
     min-width: 220px;
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-soft);
@@ -315,7 +363,7 @@ h4,
 }
 
 /* ======== Inaugural Slide Styling ======== */
-.inaugural-slide .slide-content {
+.slide.inaugural-slide::after {
     background: linear-gradient(135deg, rgba(240, 122, 93, 0.95) 0%, rgba(224, 53, 70, 0.95) 100%);
 }
 
@@ -882,8 +930,7 @@ h4,
 
 /* ======== Fat Desktop Footer ======== */
 .desktop-footer {
-    background: #FFFAF5;
-    /* Extremely light warm tone */
+    background: var(--card-bg);
     border-top: 1px solid var(--border-color);
     padding: 80px 40px 24px;
     margin-top: 60px;
@@ -1182,7 +1229,7 @@ h4,
 }
 
 .modal-content {
-    background: white;
+    background: var(--card-bg);
     width: 90%;
     max-width: 500px;
     border-radius: 20px;
@@ -1205,17 +1252,17 @@ h4,
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: #666;
+    color: var(--text-muted);
 }
 
 .modal-header {
     margin-bottom: 20px;
-    border-bottom: 2px solid #fdf2f0;
+    border-bottom: 2px solid var(--border-color);
     padding-bottom: 15px;
 }
 
 .modal-header h2 {
-    color: #2d2d2d;
+    color: var(--text-main);
     font-size: 24px;
 }
 
@@ -1229,7 +1276,8 @@ h4,
     justify-content: space-between;
     align-items: center;
     padding: 12px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
 }
 
 .order-modal-item:last-child {
@@ -1239,7 +1287,7 @@ h4,
 .empty-orders {
     text-align: center;
     padding: 40px 20px;
-    color: #666;
+    color: var(--text-muted);
 }
 
 .empty-orders .icon {
@@ -1250,7 +1298,7 @@ h4,
 
 /* Contact Modal specific */
 .contact-info-card {
-    background: #fdf2f0;
+    background: var(--primary-light);
     padding: 20px;
     border-radius: 12px;
     margin-top: 10px;
@@ -1267,7 +1315,7 @@ h4,
     font-size: 24px;
     width: 40px;
     height: 40px;
-    background: white;
+    background: var(--card-bg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1277,7 +1325,7 @@ h4,
 
 .contact-val {
     font-weight: 500;
-    color: #2d2d2d;
+    color: var(--text-main);
 }
 
 /* Order Type Switcher inside Modal */
