@@ -336,7 +336,7 @@ class ProfileManager {
         localStorage.removeItem('desi_chulha_coin_history');
 
         // Redirect to login/index
-        window.location.href = '../../index.html';
+        window.location.href = '../index.html';
     }
 }
 

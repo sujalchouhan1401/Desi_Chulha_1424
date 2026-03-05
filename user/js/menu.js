@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const categories = [
         { id: "beverage", name: "Beverage", icon: "☕" },
         { id: "chaat", name: "Chaat", icon: "🥟" },
-        { id: "street-food", name: "Street Food", icon: "🥙" },
+        { id: "indian-street-delight", name: "Indian Street Delight", icon: "🥙" },
         { id: "paratha", name: "Paratha", icon: "🫓" },
         { id: "south-indian", name: "South Indian", icon: "🌮" },
         { id: "thali", name: "Thali", icon: "🍱" },
@@ -51,6 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMenu();
     setupFilters();
     setupIntersectionObserver();
+
+    // Scroll to hash anchor after menu is rendered (sections are injected dynamically)
+    if (window.location.hash) {
+        const targetId = window.location.hash.substring(1); // e.g. "cat-thali"
+        setTimeout(() => {
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 150); // Small delay to ensure DOM is painted
+    }
 });
 
 function renderSidebar() {
@@ -145,7 +156,7 @@ function renderMenu() {
                                 <h3 class="dish-name">${item.name}</h3>
                             </div>
                             <div class="dish-price">₹${item.price}</div>
-                            <p class="dish-desc">Authentic taste made with pure ingredients.</p>
+                            <p class="dish-desc">${item.description || 'Authentic taste made with pure ingredients.'}</p>
                             ${item.bestseller ? `<div class="dish-tags"><span class="dish-tag">Bestseller ⭐</span></div>` : ''}
                         </div>
                         <div class="dish-visual">

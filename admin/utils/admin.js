@@ -3,13 +3,15 @@
 document.addEventListener("DOMContentLoaded", async () => {
     // Basic auth check logic based on localStorage (replace with real auth as needed)
     const token = localStorage.getItem('admin_token');
-    const isLoginPage = window.location.pathname.includes('/login');
+    const isLoginPage = window.location.pathname.endsWith('/index.html') || window.location.pathname.endsWith('/') || window.location.pathname.includes('/login');
+
+    const pathPrefix = isLoginPage ? '' : '../';
 
     // Add Global CSS dynamically if not present
     if (!document.querySelector('link[href*="sidebar.css"]')) {
         const styleLink = document.createElement('link');
         styleLink.rel = 'stylesheet';
-        styleLink.href = '../layouts/sidebar.css';
+        styleLink.href = pathPrefix + 'layouts/sidebar.css';
         document.head.appendChild(styleLink);
     }
 
@@ -23,26 +25,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!isLoginPage) {
         if (!token) {
-            window.location.href = '../pages/login.html';
+            window.location.href = pathPrefix + 'index.html';
             return;
         }
-        await initLayout();
+        await initLayout(pathPrefix);
     } else {
         if (token) {
             // Already logged in
-            window.location.href = '../pages/dashboard.html';
+            window.location.href = pathPrefix + 'pages/dashboard.html';
         }
     }
 });
 
-async function initLayout() {
+async function initLayout(pathPrefix) {
     const root = document.getElementById('admin-root');
     if (!root) return;
 
     // Fetch sidebar HTML
     let sidebarHtml = '';
     try {
-        const res = await fetch('../layouts/sidebar.html');
+        const res = await fetch(pathPrefix + 'layouts/sidebar.html');
         if (res.ok) {
             sidebarHtml = await res.text();
         } else {
@@ -96,7 +98,7 @@ async function initLayout() {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
             localStorage.removeItem('admin_token');
-            window.location.href = '../pages/login.html';
+            window.location.href = pathPrefix + 'index.html';
         });
     }
 }
