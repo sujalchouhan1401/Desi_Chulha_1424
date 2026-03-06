@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .btn { padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer; margin: 5px; }
+        .success { color: green; margin: 10px 0; }
+        .error { color: red; margin: 10px 0; }
+        .order { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Admin Dashboard Test</h1>
+    
+    <button class="btn" onclick="testLoadOrders()">Load Orders</button>
+    <button class="btn" onclick="testUpdateOrder()">Update First Order</button>
+    
+    <div id="result"></div>
+
+    <script>
+        let orders = [];
+
+        async function testLoadOrders() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Loading orders...';
+            
+            try {
+                console.log('🔄 Testing orders endpoint...');
+                
+                const response = await fetch('http://localhost:5000/api/orders-test');
+                console.log('📡 Response status:', response.status);
+                
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${text}`);
+                }
+                
+                orders = await response.json();
+                console.log('✅ Orders loaded:', orders.length);
+                
+                let html = `<div class="success">✅ Found ${orders.length} orders</div>`;
+                
+                orders.forEach((order, index) => {
+                    const date = new Date(order.createdAt).toLocaleString();
+                    const itemsText = order.items.map(i => `${i.quantity}x ${i.name}`).join(', ');
+                    
+                    html += `
+                        <div class="order">
+                            <strong>Order ${index + 1}: ${order.orderId || order._id}</strong><br>
+                            Customer: ${order.customerName}<br>
+                            Phone: ${order.phone}<br>
+                            Items: ${itemsText}<br>
+                            Total: ₹${order.totalAmount}<br>
+                            Status: <select onchange="updateStatus('${order._id}', this.value)">
+                                <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                <option value="Preparing" ${order.status === 'Preparing' ? 'selected' : ''}>Preparing</option>
+                                <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                                <option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                            </select><br>
+                            <small>Date: ${date}</small>
+                        </div>
+                    `;
+                });
+                
+                result.innerHTML = html;
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                result.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function updateStatus(orderId, newStatus) {
+            try {
+                console.log('🔄 Updating order:', orderId, 'to', newStatus);
+                
+                const response = await fetch(`http://localhost:5000/api/orders-test/${orderId}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                });
+                
+                console.log('📡 Update response status:', response.status);
+                
+                if (response.ok) {
+                    const updatedOrder = await response.json();
+                    console.log('✅ Order updated:', updatedOrder);
+                    
+                    // Update local cache
+                    const orderIndex = orders.findIndex(o => o._id === orderId);
+                    if (orderIndex !== -1) {
+                        orders[orderIndex].status = newStatus;
+                    }
+                    
+                    // Refresh display
+                    testLoadOrders();
+                    
+                } else {
+                    const errorText = await response.text();
+                    console.error('❌ Update failed:', errorText);
+                    alert('Update failed: ' + errorText);
+                }
+                
+            } catch (error) {
+                console.error('❌ Update error:', error);
+                alert('Update error: ' + error.message);
+            }
+        }
+
+        async function testUpdateOrder() {
+            if (orders.length === 0) {
+                await testLoadOrders();
+            }
+            
+            if (orders.length > 0) {
+                await updateStatus(orders[0]._id, 'Completed');
+            }
+        }
+
+        // Auto-load on page load
+        window.onload = () => {
+            testLoadOrders();
+        };
+    </script>
+</body>
+</html>

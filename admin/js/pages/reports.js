@@ -1,54 +1,175 @@
 /**
- * Admin Reports & Analytics - Logic
+ * Admin Reports & Analytics - MongoDB Backend Integration
  */
 
 let salesChart = null;
 let statusChart = null;
+let ordersCache = [];
+let analyticsData = {};
 
 // Initialize after admin layout is ready
 if (document.querySelector('.admin-workspace')) {
+    console.log("🚀 Admin workspace found, initializing reports...");
     init();
 } else {
+    console.log("⏳ Waiting for admin layout to be ready...");
     document.addEventListener('adminLayoutReady', init);
+    
+    // Fallback: try again after a short delay
+    setTimeout(() => {
+        if (document.querySelector('.admin-workspace')) {
+            console.log("🔄 Fallback: Admin workspace found, initializing reports...");
+            init();
+        } else {
+            console.log("❌ Admin workspace not found after timeout");
+        }
+    }, 1000);
 }
-
-// Auto refresh on orders change
-window.addEventListener('storage', (e) => {
-    if (e.key === 'orders') {
-        loadReportData();
-    }
-});
 
 function init() {
-    console.log("Admin Reports UI Initializing...");
-
-    if (!window.reportStats) {
-        console.error("Required storage utilities NOT found on window.");
-        return;
+    console.log("🚀 Admin Reports UI Initializing...");
+    
+    try {
+        loadReportData();
+        console.log("✅ Admin Reports initialization complete");
+    } catch (error) {
+        console.error("❌ Error initializing reports:", error);
     }
-
-    loadReportData();
 }
 
-function loadReportData() {
-    renderSummaryStats();
-    renderSalesTrend();
-    renderStatusBreakdown();
-    renderTopSellingItems();
+async function loadReportData() {
+    try {
+        console.log("📊 Loading analytics data from MongoDB backend...");
+        
+        // Load orders data
+        console.log("📦 Fetching orders from /api/orders-test...");
+        const ordersResponse = await fetch('http://localhost:5000/api/orders-test');
+        if (ordersResponse.ok) {
+            ordersCache = await ordersResponse.json();
+            console.log("✅ Orders loaded for reports:", ordersCache.length);
+            console.log("📋 Sample order:", ordersCache[0] ? {
+                id: ordersCache[0]._id || ordersCache[0].id,
+                total: ordersCache[0].totalAmount,
+                status: ordersResponse[0]?.status
+            } : 'No orders');
+        } else {
+            console.error("❌ Failed to load orders for reports, status:", ordersResponse.status);
+            ordersCache = [];
+        }
+        
+        // Load analytics data
+        console.log("📈 Fetching analytics from /api/analytics...");
+        const analyticsResponse = await fetch('http://localhost:5000/api/analytics');
+        if (analyticsResponse.ok) {
+            analyticsData = await analyticsResponse.json();
+            console.log("✅ Analytics data loaded from MongoDB");
+            console.log("📊 Analytics keys:", Object.keys(analyticsData));
+        } else {
+            console.error("❌ Failed to load analytics data, status:", analyticsResponse.status);
+            analyticsData = {};
+        }
+        
+        console.log("🔄 Rendering report components...");
+        renderSummaryStats();
+        renderSalesTrend();
+        renderStatusBreakdown();
+        renderTopSellingItems();
+        console.log("✅ All report components rendered");
+        
+    } catch (error) {
+        console.error("❌ Error loading report data:", error);
+        console.error("📍 Stack trace:", error.stack);
+        ordersCache = [];
+        analyticsData = {};
+        renderSummaryStats();
+        renderSalesTrend();
+        renderStatusBreakdown();
+        renderTopSellingItems();
+    }
 }
 
 /**
  * Update the numeric summary cards
  */
 function renderSummaryStats() {
-    const stats = window.reportStats;
-    const totalRev = stats.getTotalRevenue();
-    const totalOrders = stats.getOrders().length;
-    const aov = stats.getAverageOrderValue();
+    console.log("📊 Rendering summary stats...");
+    
+    // Calculate stats from MongoDB data
+    const totalRev = ordersCache.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
+    const totalOrders = ordersCache.length;
+    const aov = totalOrders > 0 ? totalRev / totalOrders : 0;
 
-    document.getElementById('rep-total-revenue').textContent = `₹${totalRev.toLocaleString()}`;
-    document.getElementById('rep-total-orders').textContent = totalOrders;
-    document.getElementById('rep-aov').textContent = `₹${Math.round(aov).toLocaleString()}`;
+    console.log("💰 Calculated stats:", {
+        totalRevenue: totalRev,
+        totalOrders: totalOrders,
+        avgOrderValue: aov
+    });
+
+    // Check if elements exist
+    const revenueEl = document.getElementById('rep-total-revenue');
+    const ordersEl = document.getElementById('rep-total-orders');
+    const aovEl = document.getElementById('rep-avg-order-value');
+
+    console.log("🔍 Element check:", {
+        revenueEl: !!revenueEl,
+        ordersEl: !!ordersEl,
+        aovEl: !!aovEl
+    });
+
+    if (revenueEl) {
+        revenueEl.textContent = `₹${totalRev.toLocaleString()}`;
+        console.log("✅ Updated revenue element");
+    } else {
+        console.error("❌ Revenue element not found");
+    }
+
+    if (ordersEl) {
+        ordersEl.textContent = totalOrders;
+        console.log("✅ Updated orders element");
+    } else {
+        console.error("❌ Orders element not found");
+    }
+
+    if (aovEl) {
+        aovEl.textContent = `₹${aov.toFixed(2)}`;
+        console.log("✅ Updated AOV element");
+    } else {
+        console.error("❌ AOV element not found");
+    }
+
+    // Update growth status with real data
+    const growthEl = document.querySelector('.trend-up');
+    if (growthEl) {
+        // Calculate growth based on completed orders vs total orders
+        const completedOrders = ordersCache.filter(order => order.status === 'completed').length;
+        const growthRate = totalOrders > 0 ? (completedOrders / totalOrders * 100) : 0;
+        
+        let growthIcon = '';
+        let growthText = '';
+        let growthColor = '';
+        
+        if (growthRate >= 80) {
+            growthIcon = '🔥';
+            growthText = `Excellent ${growthRate.toFixed(0)}%`;
+            growthColor = '#dc2626';
+        } else if (growthRate >= 60) {
+            growthIcon = '⭐';
+            growthText = `Good ${growthRate.toFixed(0)}%`;
+            growthColor = '#059669';
+        } else if (growthRate >= 40) {
+            growthIcon = '📈';
+            growthText = `${growthRate.toFixed(0)}%`;
+            growthColor = '#3b82f6';
+        } else {
+            growthIcon = '📊';
+            growthText = `${growthRate.toFixed(0)}%`;
+            growthColor = '#6b7280';
+        }
+        
+        growthEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${growthText}`;
+        growthEl.style.color = growthColor;
+        console.log("✅ Updated growth status:", growthText);
+    }
 }
 
 /**
@@ -58,157 +179,215 @@ function renderSalesTrend() {
     const canvas = document.getElementById('salesTrendChart');
     if (!canvas) return;
 
-    const salesData = window.reportStats.getDailySalesLast7Days();
-    const labels = Object.keys(salesData).map(d => {
-        // Parse the YYYY-MM-DD string back to date object for formatting
-        const parts = d.split('-');
-        const date = new Date(parts[0], parts[1] - 1, parts[2]);
-        return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
-    });
-    const values = Object.values(salesData);
+    // Use analytics data from MongoDB or calculate from orders
+    const salesData = analyticsData.weeklySales || calculateWeeklySales();
+    const ctx = canvas.getContext('2d');
+    
+    // Clear previous chart
+    if (salesChart) {
+        salesChart.destroy();
+    }
 
-    if (salesChart) salesChart.destroy();
+    // Set canvas dimensions to prevent infinite resizing
+    canvas.style.maxHeight = '300px';
+    canvas.style.height = '300px';
 
-    salesChart = new Chart(canvas, {
+    salesChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: salesData.map(d => d.day),
             datasets: [{
-                label: 'Daily Sales (₹)',
-                data: values,
+                label: 'Sales (₹)',
+                data: salesData.map(d => d.sales),
                 backgroundColor: '#4f46e5',
-                borderRadius: 4,
-                hoverBackgroundColor: '#4338ca'
+                borderColor: '#4f46e5',
+                borderWidth: 1
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    callbacks: {
-                        label: (context) => ` Sales: ₹${context.raw}`
-                    }
-                }
-            },
+            resizeDelay: 0,
+            events: ['click', 'mousemove'], // Remove resize event
             scales: {
                 y: {
                     beginAtZero: true,
-                    grid: { color: '#f1f5f9' },
                     ticks: {
-                        display: true,
-                        callback: (v) => '₹' + v
+                        callback: function(value) {
+                            return '₹' + value.toLocaleString();
+                        }
                     }
-                },
-                x: {
-                    grid: { display: false }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
                 }
             }
         }
     });
 }
 
-/**
- * Render Order Status Breakdown (Doughnut)
+function calculateWeeklySales() {
+    // Calculate weekly sales from orders data
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const today = new Date();
+    const weekData = days.map((day, index) => {
+        const dayDate = new Date(today);
+        dayDate.setDate(today.getDate() - today.getDay() + index);
+        
+        const dayOrders = ordersCache.filter(order => {
+            const orderDate = new Date(order.createdAt);
+            return orderDate.toDateString() === dayDate.toDateString();
+        });
+        
+        const daySales = dayOrders.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
+        
+        return { day, sales: daySales };
+    });
+    
+    return weekData;
+}
+
+    /**
+ * Render Order Status Breakdown Chart (Doughnut)
  */
 function renderStatusBreakdown() {
-    const canvas = document.getElementById('statusDistributionChart');
+    const canvas = document.getElementById('statusChart');
     if (!canvas) return;
 
-    const breakdown = window.reportStats.getOrderStatusBreakdown();
-    const labels = Object.keys(breakdown);
-    const values = Object.values(breakdown);
-    const total = values.reduce((s, v) => s + v, 0);
+    // Calculate status breakdown from MongoDB orders
+    const statusCounts = {};
+    ordersCache.forEach(order => {
+        const status = order.status || 'pending';
+        statusCounts[status] = (statusCounts[status] || 0) + 1;
+    });
 
-    if (statusChart) statusChart.destroy();
-
-    // If no data, show a placeholder
-    if (total === 0) {
-        statusChart = new Chart(canvas, {
-            type: 'doughnut',
-            data: {
-                labels: ['No Orders Yet'],
-                datasets: [{
-                    data: [1],
-                    backgroundColor: ['#e2e8f0'],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom' },
-                    tooltip: { enabled: false }
-                },
-                cutout: '65%'
-            }
-        });
-        return;
+    const ctx = canvas.getContext('2d');
+    
+    if (statusChart) {
+        statusChart.destroy();
     }
 
-    statusChart = new Chart(canvas, {
+    // Set canvas dimensions to prevent infinite resizing
+    canvas.style.maxHeight = '300px';
+    canvas.style.height = '300px';
+
+    const labels = Object.keys(statusCounts);
+    const data = Object.values(statusCounts);
+    const colors = {
+        'pending': '#f59e0b',
+        'confirmed': '#3b82f6', 
+        'preparing': '#8b5cf6',
+        'ready': '#06b6d4',
+        'completed': '#10b981',
+        'cancelled': '#ef4444'
+    };
+
+    statusChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: labels,
+            labels: labels.map(label => label.charAt(0).toUpperCase() + label.slice(1)),
             datasets: [{
-                data: values,
-                backgroundColor: [
-                    '#fbbf24', // Pending (yellow)
-                    '#3b82f6', // Preparing (blue)
-                    '#10b981', // Completed (green)
-                    '#ef4444'  // Cancelled (red)
-                ],
-                borderWidth: 0,
-                hoverOffset: 10
+                data: data,
+                backgroundColor: labels.map(label => colors[label] || '#6b7280'),
+                borderWidth: 2,
+                borderColor: '#fff'
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            resizeDelay: 0,
+            events: ['click', 'mousemove'], // Remove resize event
             plugins: {
                 legend: {
                     position: 'bottom',
                     labels: {
-                        padding: 20,
+                        padding: 15,
                         usePointStyle: true,
-                        font: { size: 12 }
+                        font: { size: 11 }
                     }
                 },
                 tooltip: {
                     callbacks: {
-                        label: (item) => ` ${item.label}: ${item.raw} orders`
+                        label: function(context) {
+                            return context.label + ': ' + context.raw + ' orders';
+                        }
                     }
                 }
-            },
-            cutout: '65%'
+            }
         }
     });
 }
 
 /**
- * Render Top Items Table
+ * Render Top Selling Items Table
  */
 function renderTopSellingItems() {
     const tbody = document.getElementById('top-items-tbody');
     if (!tbody) return;
 
-    const topItems = window.reportStats.getTopSellingItems();
-    tbody.innerHTML = '';
+    // Calculate top items from MongoDB orders
+    const itemCounts = {};
+    const itemRevenue = {};
+    
+    ordersCache.forEach(order => {
+        if (order.items && Array.isArray(order.items)) {
+            order.items.forEach(item => {
+                const name = item.name || 'Unknown Item';
+                const quantity = item.quantity || 1;
+                const price = item.price || 0;
+                
+                itemCounts[name] = (itemCounts[name] || 0) + quantity;
+                itemRevenue[name] = (itemRevenue[name] || 0) + (price * quantity);
+            });
+        }
+    });
 
+    // Sort by quantity and get top 5
+    const topItems = Object.entries(itemCounts)
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 5);
+
+    tbody.innerHTML = '';
+    
     if (topItems.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; color:#666;">No completed sales yet to analyze.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:20px; color:#666;">No data available</td></tr>';
         return;
     }
 
-    topItems.forEach(item => {
+    // Calculate total revenue for percentage calculations
+    const totalRevenue = Object.values(itemRevenue).reduce((sum, rev) => sum + rev, 0);
+
+    topItems.forEach(([name, quantity], index) => {
+        const revenue = itemRevenue[name] || 0;
+        const revenuePercentage = totalRevenue > 0 ? (revenue / totalRevenue * 100).toFixed(1) : 0;
+        
+        // Determine performance badge
+        let performanceBadge = '';
+        let performanceColor = '';
+        
+        if (quantity >= 10) {
+            performanceBadge = '🔥 Hot';
+            performanceColor = '#dc2626';
+        } else if (quantity >= 5) {
+            performanceBadge = '⭐ Popular';
+            performanceColor = '#059669';
+        } else if (quantity >= 2) {
+            performanceBadge = '📈 Rising';
+            performanceColor = '#3b82f6';
+        } else {
+            performanceBadge = '🆕 New';
+            performanceColor = '#6b7280';
+        }
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td style="font-weight:600;">${item.name}</td>
-            <td>${item.count} orders</td>
-            <td style="font-weight:700; color:#059669;">₹${item.revenue.toLocaleString()}</td>
-            <td><span class="trend-up" style="background:#dcfce7; padding:4px 8px; border-radius:10px; font-size:0.75rem;">Premium Item</span></td>
+            <td><strong>${name}</strong></td>
+            <td><span class="badge" style="background:#4f46e5; color:white;">${quantity} orders</span></td>
+            <td style="font-weight:700; color:#059669;">₹${revenue.toLocaleString()} (${revenuePercentage}%)</td>
+            <td><span class="trend-up" style="background:${performanceColor}20; color:${performanceColor}; padding:4px 8px; border-radius:10px; font-size:0.75rem; font-weight:600;">${performanceBadge}</span></td>
         `;
         tbody.appendChild(tr);
     });

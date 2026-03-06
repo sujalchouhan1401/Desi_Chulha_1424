@@ -327,6 +327,7 @@
     </footer>
 
     <script src="../utils/orderStorage.js"></script>
+    <script src="../utils/orderApi.js"></script>
     <script src="../js/profile-manager.js"></script>
     <script src="../js/geolocation-manager.js"></script>
     <script src="../js/cart-manager.js"></script>
@@ -462,7 +463,7 @@
         }
 
         // ── Place Order ──
-        window.placeOrder = function () {
+        window.placeOrder = async function () {
             if (!currentOrderType) {
                 alert('⚠️ Please select an order type first (Delivery / Dine In / Pickup).');
                 return;
@@ -472,41 +473,94 @@
                 return;
             }
 
-            const totals = window.cartManager.getTotals();
-            const itemTotal = totals.itemTotal;
-            const deliveryFee = currentOrderType === 'delivery' ? 40 : 0;
-            const taxes = parseFloat((itemTotal * 0.05).toFixed(2));
-            const grandTotal = parseFloat((itemTotal + deliveryFee - (totals.discount || 0) + taxes).toFixed(2));
+            try {
+                const totals = window.cartManager.getTotals();
+                const itemTotal = totals.itemTotal;
+                const deliveryFee = currentOrderType === 'delivery' ? 40 : 0;
+                const taxes = parseFloat((itemTotal * 0.05).toFixed(2));
+                const grandTotal = parseFloat((itemTotal + deliveryFee - (totals.discount || 0) + taxes).toFixed(2));
 
-            // Earn DC Coins: 1 coin per ₹10 of item total
-            const coinsEarned = Math.floor(itemTotal / 10);
-            if (window.profileManager) {
-                window.profileManager.earnCoins(itemTotal);
+                // Earn DC Coins: 1 coin per ₹10 of item total
+                const coinsEarned = Math.floor(itemTotal / 10);
+                if (window.profileManager) {
+                    window.profileManager.earnCoins(itemTotal);
+                }
+
+                // Prepare order data for API
+                const cart = window.cartManager.getCart();
+                const orderData = {
+                    customerName: 'Guest User',
+                    phone: '9876543210', // Default phone for guest users
+                    items: cart.map(item => ({
+                        name: item.name,
+                        quantity: item.qty,
+                        price: item.price
+                    })),
+                    totalAmount: grandTotal
+                };
+
+                // Get JWT token (for authenticated users)
+                const token = localStorage.getItem('desi_auth_token');
+                
+                // Show loading state
+                const btnPay = document.getElementById('btn-proceed-pay');
+                if (btnPay) {
+                    btnPay.textContent = 'Placing Order...';
+                    btnPay.disabled = true;
+                }
+
+                // Call API to create order
+                console.log('🚀 Sending order request to backend');
+                console.log('📦 Order data:', JSON.stringify(orderData, null, 2));
+
+                try {
+                    const res = await fetch("http://localhost:5000/api/orders", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(orderData)
+                    });
+
+                    console.log('📡 Response status:', res.status);
+                    console.log('📡 Response headers:', res.headers);
+
+                    if (!res.ok) {
+                        const text = await res.text();
+                        console.error('❌ Error response text:', text);
+                        throw new Error(text || "Order failed");
+                    }
+
+                    const data = await res.json();
+                    console.log('✅ Order created successfully:', data);
+
+                } catch (fetchError) {
+                    console.error('❌ Fetch error:', fetchError);
+                    console.error('❌ Fetch error details:', fetchError.message);
+                    throw new Error('Network error: ' + fetchError.message);
+                }
+
+                // Clear cart & order type for next session
+                window.cartManager.clearCart();
+                localStorage.removeItem('desi_chulha_order_type');
+
+                // Show success message
+                const coinMsg = coinsEarned > 0 ? `\n🪙 +${coinsEarned} DC Coins earned!` : '';
+                alert(`✅ Order placed successfully!${coinMsg}\n\nThank you for ordering from Desi Chulha 🔥`);
+                
+                window.location.href = 'home.html';
+
+            } catch (error) {
+                console.error('Error placing order:', error);
+                alert('❌ Failed to place order: ' + error.message);
+                
+                // Reset button state
+                const btnPay = document.getElementById('btn-proceed-pay');
+                if (btnPay) {
+                    btnPay.textContent = 'Proceed to Pay';
+                    btnPay.disabled = false;
+                }
             }
-
-            // Save order to history
-            const cart = window.cartManager.getCart();
-            const orders = JSON.parse(localStorage.getItem('desi_chulha_orders')) || [];
-            const now = new Date();
-            orders.push({
-                id: 'DC-' + Math.floor(1000 + Math.random() * 9000),
-                date: now.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) +
-                    ', ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
-                items: cart.map(i => `${i.qty}x ${i.name}`).join(', '),
-                total: grandTotal,
-                paymentMethod: orderTypeLabel(),
-                status: 'Preparing'
-            });
-            localStorage.setItem('desi_chulha_orders', JSON.stringify(orders));
-
-            // Clear cart & order type for next session
-            window.cartManager.clearCart();
-            localStorage.removeItem('desi_chulha_order_type');
-
-            // Show success message
-            const coinMsg = coinsEarned > 0 ? `\n🪙 +${coinsEarned} DC Coins earned!` : '';
-            alert(`✅ Order placed successfully!${coinMsg}\n\nThank you for ordering from Desi Chulha 🔥`);
-            window.location.href = 'home.html';
         };
 
         function orderTypeLabel() {

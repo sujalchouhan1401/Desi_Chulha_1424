@@ -8,8 +8,6 @@
     <title>Business Analytics & Reports</title>
     <!-- Chart.js for data visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../utils/orderStorage.js"></script>
-    <script src="../utils/reportStats.js"></script>
     <script src="../utils/admin.js"></script>
     <script src="../js/pages/reports.js"></script>
     <style>
@@ -25,6 +23,7 @@
             grid-template-columns: 1.5fr 1fr;
             gap: 20px;
             margin-bottom: 25px;
+            min-height: 400px;
         }
 
         .chart-container {
@@ -33,6 +32,21 @@
             border-radius: 12px;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
             min-height: 350px;
+            max-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-container canvas {
+            max-height: 300px !important;
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        .chart-container h4 {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #374151;
         }
 
         .report-card {
@@ -100,7 +114,7 @@
             </div>
             <div class="report-card">
                 <span class="label">Avg. Order Value</span>
-                <div class="value" id="rep-aov">₹0</div>
+                <div class="value" id="rep-avg-order-value">₹0</div>
             </div>
             <div class="report-card">
                 <span class="label">Growth Status</span>
@@ -116,7 +130,7 @@
             </div>
             <div class="chart-container">
                 <h4 style="margin-bottom: 15px;">Order Status Distribution</h4>
-                <canvas id="statusDistributionChart"></canvas>
+                <canvas id="statusChart"></canvas>
             </div>
         </div>
 

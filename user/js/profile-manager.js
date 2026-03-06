@@ -208,19 +208,180 @@ class ProfileManager {
         // Render Orders History
         this.renderOrders();
 
-        // ── Rewards ──
-        this.renderRewards();
+    }
+}
+
+saveAddress(form) {
+    const label = form.querySelector('select').value;
+    const street = document.getElementById('addr-street').value;
+    const city = document.getElementById('addr-city').value;
+    const pincode = document.getElementById('addr-pincode').value;
+
+    const newAddress = {
+        id: Date.now(),
+        label,
+        street,
+        city,
+        pincode,
+        isDefault: this.addresses.length === 0
+    };
+
+    this.addresses.push(newAddress);
+    this.persistAddresses();
+    this.renderProfileUI();
+
+    form.reset();
+    if (window.closeAddressModal) window.closeAddressModal();
+}
+
+deleteAddress(id) {
+    if (confirm('Are you sure you want to delete this address?')) {
+        this.addresses = this.addresses.filter(addr => addr.id !== id);
+        this.persistAddresses();
+        this.renderProfileUI();
+    }
+}
+
+setDefaultAddress(id) {
+    this.addresses.forEach(addr => { addr.isDefault = (addr.id === id); });
+    this.persistAddresses();
+    this.renderProfileUI();
+}
+
+persistAddresses() {
+    localStorage.setItem('desi_user_addresses', JSON.stringify(this.addresses));
+}
+
+renderProfileUI() {
+    const displayName = this.userData.fullName || 'Your Name';
+    const smallPic = this.userData.profilePic || this._avatarUrl(this.userData.fullName, 40);
+    const largePic = this.userData.profilePic || this._avatarUrl(this.userData.fullName, 100);
+
+    // ── Large profile pic (profile page form preview) ──
+    const formPic = document.getElementById('profile-pic-preview');
+    if (formPic) formPic.src = largePic;
+
+    // ── Sidebar avatar (profile page) ──
+    const sidebarAvatar = document.querySelector('.user-summary .avatar-lg');
+    if (sidebarAvatar) sidebarAvatar.src = largePic;
+
+    // ── All nav avatars on ANY page ──
+    document.querySelectorAll(
+        '.nav-profile .avatar-wrap img, .header-profile-container .avatar-wrap img'
+    ).forEach(img => { img.src = smallPic; });
+
+    // ── Username span on home page nav ──
+    const userNameSpan = document.querySelector('.user-name');
+    if (userNameSpan) userNameSpan.textContent = displayName;
+
+    // ── Sidebar text (profile page) ──
+    const sidebarName = document.querySelector('.user-summary h3');
+    const sidebarPhone = document.querySelector('.user-summary p');
+    if (sidebarName) sidebarName.textContent = displayName;
+    if (sidebarPhone) sidebarPhone.textContent = this.userData.phone || 'No phone saved';
+
+    // ── Inline name preview above form pic ──
+    const inlineName = document.getElementById('sidebar-name-preview');
+    if (inlineName) inlineName.textContent = displayName;
+
+    // ── Form fields ──
+    const nameInput = document.getElementById('fullName');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const addrInput = document.getElementById('deliveryAddress');
+
+    if (nameInput) nameInput.value = this.userData.fullName || '';
+    if (emailInput) emailInput.value = this.userData.email || '';
+    if (phoneInput) phoneInput.value = this.userData.phone || '';
+    if (addrInput) addrInput.value = this.userData.deliveryAddress || '';
+
+    // ── Address cards ──
+    const addressGrid = document.querySelector('.address-grid');
+    if (addressGrid) {
+        const addBtn = addressGrid.querySelector('.add-new-address');
+        addressGrid.querySelectorAll('.address-card').forEach(c => c.remove());
+
+        this.addresses.forEach(addr => {
+            const card = document.createElement('div');
+            card.className = 'address-card';
+            card.innerHTML = `
+                <div class="address-tag">${addr.label}</div>
+                <h4>${this.userData.fullName || 'Customer'}</h4>
+                <p>${addr.street}<br>${addr.city}, Rajasthan ${addr.pincode}</p>
+                <div class="address-actions" style="justify-content:space-between; align-items:center;">
+                    <div style="display:flex; gap:16px;">
+                        <button type="button" onclick="window.profileManager.deleteAddress(${addr.id})" class="delete-btn">Delete</button>
+                    </div>
+                    <label style="font-size:13px; color:var(--text-muted); display:flex; gap:6px; cursor:pointer;">
+                        <input type="radio" name="default_addr" ${addr.isDefault ? 'checked' : ''} onchange="window.profileManager.setDefaultAddress(${addr.id})"> Set as Default
+                    </label>
+                </div>
+            `;
+            addressGrid.insertBefore(card, addBtn);
+        });
     }
 
-    renderOrders() {
-        if (!window.orderStorage) return;
+    // ── Sync default delivery address to cart page if present ──
+    const cartAddrDisplay = document.getElementById('addr-display');
+    if (cartAddrDisplay) {
+        const defaultAddr = this.addresses.find(a => a.isDefault);
+        if (defaultAddr) {
+            cartAddrDisplay.textContent = `${defaultAddr.street}, ${defaultAddr.city}, Rajasthan ${defaultAddr.pincode}`;
+        } else if (this.userData.deliveryAddress) {
+            cartAddrDisplay.textContent = this.userData.deliveryAddress;
+        }
+    }
 
-        const orderList = document.querySelector('.order-list');
-        const emptyState = document.querySelector('.profile-section#my-orders .empty-state');
-        const userId = this.userData.phone;
-        const orders = window.orderStorage.getUserOrders(userId);
+    // Render Orders History
+    this.renderOrders();
 
-        if (!orderList) return;
+    // ── Rewards ──
+    this.renderRewards();
+}
+
+renderOrders() {
+    const orderList = document.querySelector('.order-list');
+    const emptyState = document.querySelector('.profile-section#my-orders .empty-state');
+    
+    if (!orderList) return;
+
+    // Load orders from API
+    this.loadOrdersFromAPI();
+}
+
+async loadOrdersFromAPI() {
+    const orderList = document.querySelector('.order-list');
+    const emptyState = document.querySelector('.profile-section#my-orders .empty-state');
+    
+    if (!orderList) return;
+    
+    try {
+        // Get JWT token (for authenticated users)
+        const token = localStorage.getItem('desi_auth_token');
+        
+        console.log('📋 Loading user orders from backend...');
+        
+        // Show loading state
+        orderList.innerHTML = '<div style="text-align: center; padding: 20px;">Loading orders...</div>';
+
+        // Call API to get all orders (using test endpoint for now)
+        const response = await fetch('http://localhost:5000/api/orders-test', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        console.log('📡 Orders response status:', response.status);
+
+        if (!response.ok) {
+            const text = await response.text();
+            console.error('❌ Orders error response:', text);
+            throw new Error('Failed to load orders');
+        }
+
+        const orders = await response.json();
+        console.log('📋 Orders loaded:', orders.length);
 
         if (orders.length === 0) {
             orderList.innerHTML = '';
@@ -246,25 +407,32 @@ class ProfileManager {
             html += `
                 <div class="order-card">
                     <div class="order-info">
-                        <h4>Order ${order.id}</h4>
-                        <div class="order-meta">
-                            <span>📅 ${date}</span>
-                            <span>•</span>
-                            <span>💳 ₹${order.totalAmount} (${order.orderType})</span>
-                        </div>
-                        <div class="order-items">
-                            ${itemsText}
-                        </div>
+                        <h4>Order ${order.orderId || order._id}</h4>
+                        <p class="order-date">${date}</p>
+                        <p class="order-items">${itemsText}</p>
+                        <p class="order-total">₹${order.totalAmount}</p>
                     </div>
-                    <div class="order-status-actions">
-                        <span class="status-badge ${statusClass}">${this.getStatusIcon(order.status)} ${order.status}</span>
-                        ${order.status === 'Pending' ? '<button class="btn-reorder" style="border-color:#F07A5D; color:#F07A5D;">Track Order</button>' : '<button class="btn-reorder">Reorder</button>'}
+                    <div class="order-status">
+                        <span class="${statusClass}">${order.status}</span>
                     </div>
                 </div>
             `;
         });
 
         orderList.innerHTML = html;
+
+    } catch (error) {
+        console.error('Error loading orders:', error);
+        orderList.innerHTML = '<div style="text-align: center; padding: 20px; color: red;">Failed to load orders</div>';
+        if (emptyState) emptyState.classList.add('hidden');
+    }
+}
+
+        } catch (error) {
+            console.error('Error loading orders:', error);
+            orderList.innerHTML = '<div style="text-align: center; padding: 20px; color: red;">Failed to load orders</div>';
+            if (emptyState) emptyState.classList.add('hidden');
+        }
     }
 
     getStatusIcon(status) {
