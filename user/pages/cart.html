@@ -488,9 +488,18 @@
 
                 // Prepare order data for API
                 const cart = window.cartManager.getCart();
+                let deliveryAddress = '';
+                if (currentOrderType === 'delivery') {
+                    const addrDisplay = document.getElementById('addr-display');
+                    if (addrDisplay) {
+                        deliveryAddress = addrDisplay.textContent;
+                    }
+                }
+
                 const orderData = {
-                    customerName: 'Guest User',
-                    phone: '9876543210', // Default phone for guest users
+                    customerName: window.profileManager?.userData?.fullName || 'Guest User',
+                    phone: window.profileManager?.userData?.phone || '9876543210',
+                    deliveryAddress: deliveryAddress,
                     items: cart.map(item => ({
                         name: item.name,
                         quantity: item.qty,
@@ -501,7 +510,7 @@
 
                 // Get JWT token (for authenticated users)
                 const token = localStorage.getItem('desi_auth_token');
-                
+
                 // Show loading state
                 const btnPay = document.getElementById('btn-proceed-pay');
                 if (btnPay) {
@@ -547,13 +556,13 @@
                 // Show success message
                 const coinMsg = coinsEarned > 0 ? `\n🪙 +${coinsEarned} DC Coins earned!` : '';
                 alert(`✅ Order placed successfully!${coinMsg}\n\nThank you for ordering from Desi Chulha 🔥`);
-                
+
                 window.location.href = 'home.html';
 
             } catch (error) {
                 console.error('Error placing order:', error);
                 alert('❌ Failed to place order: ' + error.message);
-                
+
                 // Reset button state
                 const btnPay = document.getElementById('btn-proceed-pay');
                 if (btnPay) {

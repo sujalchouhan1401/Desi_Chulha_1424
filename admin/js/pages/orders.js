@@ -7,13 +7,13 @@ async function init() {
     console.log('🔍 Checking for admin workspace...');
     console.log('📋 Document ready state:', document.readyState);
     console.log('🔍 Admin workspace found:', !!document.querySelector('.admin-workspace'));
-    
+
     try {
         await loadOrders();
-        
+
         // Use event delegation for filter buttons
         setupEventDelegation();
-        
+
         console.log('✅ Admin orders initialization complete');
     } catch (e) {
         console.error("❌ Error loading orders", e);
@@ -23,7 +23,7 @@ async function init() {
 
 function setupEventDelegation() {
     console.log('🔧 Setting up event delegation...');
-    
+
     // Handle filter button clicks via event delegation
     document.addEventListener('click', (e) => {
         if (e.target.tagName === 'BUTTON') {
@@ -36,7 +36,7 @@ function setupEventDelegation() {
             }
         }
     });
-    
+
     // Handle input changes via event delegation
     document.addEventListener('input', (e) => {
         if (e.target.id === 'search-order') {
@@ -44,7 +44,7 @@ function setupEventDelegation() {
             applyFilters();
         }
     });
-    
+
     // Handle select changes via event delegation
     document.addEventListener('change', (e) => {
         if (e.target.id === 'status-filter' || e.target.id === 'date-filter') {
@@ -52,7 +52,7 @@ function setupEventDelegation() {
             applyFilters();
         }
     });
-    
+
     console.log('✅ Event delegation setup complete');
 }
 
@@ -63,7 +63,7 @@ if (document.querySelector('.admin-workspace')) {
 } else {
     console.log('⏳ Waiting for admin layout to be ready...');
     document.addEventListener('adminLayoutReady', init);
-    
+
     // Fallback: try again after a short delay
     setTimeout(() => {
         if (document.querySelector('.admin-workspace')) {
@@ -80,10 +80,10 @@ async function loadOrders() {
     console.log('📋 loadOrders function called...');
     try {
         console.log('📋 Loading orders from backend API...');
-        
+
         // Use the test endpoint without authentication
         console.log('� Fetching from /api/orders-test (no auth required)...');
-        
+
         const response = await fetch('http://localhost:5000/api/orders-test', {
             method: 'GET',
             headers: {
@@ -112,7 +112,7 @@ async function loadOrders() {
                 status: ordersCache[0].status
             } : 'No orders');
         }
-        
+
         renderOrders();
         console.log('📋 renderOrders called');
     } catch (error) {
@@ -127,10 +127,10 @@ function renderOrders() {
     console.log('📊 renderOrders called...');
     console.log('📋 Orders cache length:', ordersCache.length);
     console.log('📋 Filtered orders length:', filteredOrders.length);
-    
+
     const tbody = document.querySelector('.admin-table tbody');
     console.log('🔍 Table tbody found:', !!tbody);
-    
+
     if (!tbody) {
         console.error('❌ Table tbody not found! Looking for alternatives...');
         const altTbody = document.querySelector('tbody');
@@ -148,8 +148,8 @@ function renderOrders() {
     console.log('📊 Orders to render:', ordersToRender.length);
 
     if (ordersToRender.length === 0) {
-        const message = filteredOrders.length === 0 && ordersCache.length > 0 ? 
-            'No orders match your filters.' : 
+        const message = filteredOrders.length === 0 && ordersCache.length > 0 ?
+            'No orders match your filters.' :
             'No orders placed yet.';
         tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:40px; color:#666;">${message}</td></tr>`;
         console.log('📋 No orders to display, showing message:', message);
@@ -265,7 +265,7 @@ function attachEventListeners() {
             const order = ordersCache.find(o => o._id === id);
             if (order) {
                 const itemsText = order.items.map(i => `${i.quantity}x ${i.name}`).join('\n');
-                alert(`Order Full Details\n\nID: ${order.orderId || order._id}\nCustomer: ${order.customerName}\nPhone: ${order.phone}\nAmount: ₹${order.totalAmount}\nStatus: ${order.status}\n\nItems:\n${itemsText}`);
+                alert(`Order Full Details\n\nID: ${order.orderId || order._id}\nCustomer: ${order.customerName}\nPhone: ${order.phone}\nAddress: ${order.deliveryAddress ? order.deliveryAddress : 'Not Provided'}\nAmount: ₹${order.totalAmount}\nStatus: ${order.status}\n\nItems:\n${itemsText}`);
             }
         });
     });
@@ -274,7 +274,7 @@ function attachEventListeners() {
 // Filter functions
 function attachFilterListeners() {
     console.log('🔧 Attaching filter listeners...');
-    
+
     // Wait a bit for DOM to be ready
     setTimeout(() => {
         // Add real-time search
@@ -289,7 +289,7 @@ function attachFilterListeners() {
         // Check if other elements exist
         const statusFilter = document.getElementById('status-filter');
         const dateFilter = document.getElementById('date-filter');
-        
+
         console.log('🔍 Element check:', {
             searchInput: !!searchInput,
             statusFilter: !!statusFilter,
@@ -300,7 +300,7 @@ function attachFilterListeners() {
 
 function applyFilters() {
     console.log('🔍 applyFilters function called!');
-    
+
     const searchTerm = document.getElementById('search-order')?.value.toLowerCase() || '';
     const statusFilter = document.getElementById('status-filter')?.value || 'all';
     const dateFilter = document.getElementById('date-filter')?.value || '';
@@ -309,14 +309,14 @@ function applyFilters() {
 
     filteredOrders = ordersCache.filter(order => {
         // Search filter
-        const matchesSearch = !searchTerm || 
+        const matchesSearch = !searchTerm ||
             (order.orderId && order.orderId.toLowerCase().includes(searchTerm)) ||
             (order._id && order._id.toLowerCase().includes(searchTerm)) ||
             (order.customerName && order.customerName.toLowerCase().includes(searchTerm)) ||
             (order.phone && order.phone.includes(searchTerm));
 
         // Status filter
-        const matchesStatus = statusFilter === 'all' || 
+        const matchesStatus = statusFilter === 'all' ||
             (order.status && order.status.toLowerCase() === statusFilter);
 
         // Date filter
@@ -345,12 +345,12 @@ function clearFilters() {
     document.getElementById('search-order').value = '';
     document.getElementById('status-filter').value = 'all';
     document.getElementById('date-filter').value = '';
-    
+
     // Clear filtered orders
     filteredOrders = [];
-    
+
     console.log('🧹 Filters cleared');
-    
+
     // Re-render all orders
     renderOrders();
 }
@@ -362,7 +362,7 @@ window.testFilters = testFilters;
 
 function testFilters() {
     console.log('🧪 Testing filter functionality...');
-    
+
     // Check if elements exist
     const elements = {
         searchInput: document.getElementById('search-order'),
@@ -371,9 +371,9 @@ function testFilters() {
         filterBtn: document.querySelector('button[onclick="applyFilters()"]'),
         clearBtn: document.querySelector('button[onclick="clearFilters()"]')
     };
-    
+
     console.log('🔍 Elements found:', elements);
-    
+
     // Test applyFilters function directly
     console.log('🧪 Testing applyFilters function...');
     try {
@@ -382,7 +382,7 @@ function testFilters() {
     } catch (error) {
         console.error('❌ applyFilters function error:', error);
     }
-    
+
     // Test with sample data
     console.log('🧪 Testing with sample data...');
     console.log('📊 Orders cache:', ordersCache.length);

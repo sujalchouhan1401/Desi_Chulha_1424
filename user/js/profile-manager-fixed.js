@@ -39,12 +39,12 @@ class ProfileManager {
     async loadOrdersFromAPI() {
         const orderList = document.querySelector('.order-list');
         const emptyState = document.getElementById('orders-empty-state');
-        
+
         if (!orderList) return;
-        
+
         try {
             console.log('📋 Loading user orders from backend...');
-            
+
             // Show loading state
             orderList.innerHTML = '<div style="text-align: center; padding: 20px;">Loading orders...</div>';
 
@@ -66,7 +66,7 @@ class ProfileManager {
 
             const allOrders = await response.json();
             console.log('📋 All orders loaded:', allOrders.length);
-            
+
             // Filter orders to show only user-specific ones
             // For now, filter by guest users or specific test patterns
             // In production, this would filter by actual user ID
@@ -74,7 +74,7 @@ class ProfileManager {
                 // Show orders that match current user or guest orders
                 const currentUserPhone = localStorage.getItem('desi_user_phone') || '9876543210';
                 const currentUserEmail = this.userData.email || '';
-                
+
                 // Filter logic:
                 // 1. Show orders with matching phone number
                 // 2. Show orders with matching email (if available)
@@ -82,13 +82,13 @@ class ProfileManager {
                 const isUserOrder = order.phone === currentUserPhone;
                 const isGuestOrder = order.customerName.includes('Guest') || order.phone === '9876543210';
                 const isTestOrder = order.customerName.includes('Test') || order.customerName.includes('Direct') || order.customerName.includes('Final');
-                
+
                 // Show user orders and guest orders, but hide test orders
                 return isUserOrder || (isGuestOrder && !isTestOrder);
             });
-            
+
             console.log('📋 Filtered user orders:', userOrders.length);
-            
+
             // Store orders for details modal
             this.orders = userOrders;
 
@@ -374,9 +374,35 @@ class ProfileManager {
         localStorage.setItem('desi_user_addresses', JSON.stringify(this.addresses));
         this.renderAddresses();
     }
+
+    logout() {
+        // Clear all user profile data
+        localStorage.removeItem('desi_user_profile');
+        localStorage.removeItem('desi_user_addresses');
+        localStorage.removeItem('desi_user_phone');
+        localStorage.removeItem('desi_auth_token');
+
+        // Clear cart & session data
+        localStorage.removeItem('desi_chulha_cart');
+        localStorage.removeItem('desi_chulha_order_type');
+        localStorage.removeItem('desi_chulha_promo');
+        localStorage.removeItem('desi_chulha_orders');
+        localStorage.removeItem('desi_chulha_coins');
+        localStorage.removeItem('desi_chulha_coin_history');
+
+        // Redirect to login/index
+        window.location.href = '../index.html';
+    }
 }
 
 // Initialize profile manager when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     window.profileManager = new ProfileManager();
 });
+
+// Expose logout globally so any page's logout button can call it
+window.logout = function () {
+    if (window.profileManager && typeof window.profileManager.logout === 'function') {
+        window.profileManager.logout();
+    }
+};

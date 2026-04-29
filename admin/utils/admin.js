@@ -65,7 +65,10 @@ async function initLayout(pathPrefix) {
             </aside>
             <main class="admin-main-content">
                 <header class="admin-topbar">
-                    <h2 class="topbar-title" id="admin-page-title">Dashboard</h2>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <button id="mobile-menu-btn" style="background:none;border:none;font-size:1.5rem;cursor:pointer;display:none;"><i class="fas fa-bars"></i></button>
+                        <h2 class="topbar-title" id="admin-page-title">Dashboard</h2>
+                    </div>
                     <div class="topbar-actions">
                         <div class="notification-icon"><i class="fas fa-bell"></i></div>
                         <div class="profile-icon"><i class="fas fa-user-circle"></i></div>
@@ -75,8 +78,38 @@ async function initLayout(pathPrefix) {
                     ${originalContent}
                 </div>
             </main>
+            <div id="sidebar-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:90;"></div>
         </div>
     `;
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.getElementById('admin-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    if (window.innerWidth <= 768) {
+        mobileMenuBtn.style.display = 'block';
+    }
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 768) {
+            mobileMenuBtn.style.display = 'block';
+        } else {
+            mobileMenuBtn.style.display = 'none';
+            sidebar.classList.remove('show');
+            overlay.style.display = 'none';
+        }
+    });
+
+    mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('show');
+        overlay.style.display = sidebar.classList.contains('show') ? 'block' : 'none';
+    });
+
+    overlay.addEventListener('click', () => {
+        sidebar.classList.remove('show');
+        overlay.style.display = 'none';
+    });
 
     // Dispatch event to let page-specific scripts know they can now safely interact with the DOM
     document.dispatchEvent(new CustomEvent('adminLayoutReady'));
